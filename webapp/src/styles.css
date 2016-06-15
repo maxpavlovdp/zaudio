@@ -1,0 +1,49 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1;
+    color: #666;
+    background-color: #000;
+    user-select: none;
+}
+#container {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background: #0FF;
+    overflow: auto;
+}
+.pedal {
+    width: 10rem;
+    height: 150px;
+    margin: 10px;
+    border: 2px solid #3b3d45;
+    appearance: none;
+    left: calc(50% - 5rem);
+    bottom: 13.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 3rem;
+    color: #666;
+    border-radius: 3rem;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 250ms ease-out;
+}
+.gas-pedal {
+    cursor: n-resize;
+}
+.stop-pedal {
+    cursor: pointer;
+}

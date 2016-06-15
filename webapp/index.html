@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="src\styles.css">
+        <link rel="stylesheet" href="src\tachometer.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <section class="tachometer-container">
+            <div class="tachometer">
+                <div class="inner-ring"></div>
+                <div class="outer-ring"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+                </div>
+                <div class="digit-ring"><span class="digit">0</span><span class="digit">20</span><span class="digit">40</span><span class="digit">60</span><span class="digit">80</span><span class="digit">100</span><span class="digit">120</span><span class="digit">140</span><span class="digit">160</span>
+                </div>
+                <div class="details">
+                    <p class="label">RPM</p>
+                    <p class="speed"></p>
+                    <p class="unit"></p>
+                </div>
+                <div class="progress"></div>
+                <footer>
+                    <div class="stat current-frequency">
+                        <label>Frequency</label>
+                        <p></p>
+                    </div>
+                    <div class="stat">
+                        <label>Wave form</label>
+                        <p class="waveform">Sine</p>
+                    </div>
+                </footer>
+                <footer class="visualizer">
+                    <canvas id="visualizer" width="350" height="100"></canvas>
+                </footer>
+            </div>
+            <div class="overlay"></div>
+        </section>
+        <button class="stop-pedal pedal">Stop</button>
+        <button class="gas-pedal pedal">Accel</button>
+        <script type="text/javascript" src="src\jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="src\esound.js"></script>
+        <script type="text/javascript" src="src\app.js"></script>
+    </body>
+</html>
