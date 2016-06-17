@@ -10,6 +10,8 @@ $('.gas-pedal').on('mousewheel', function(e) {
     eSound.accelerate(mouseRpm);
 });
 
+// TODO: Lets use only gas (accelerator) pedal. Instead of clicking stop pedal lets use mouse hover off.
+// KISS principle will drive us to success :)
 $('.stop-pedal').on('click', function(e) {
     eSound.stop();
 });
