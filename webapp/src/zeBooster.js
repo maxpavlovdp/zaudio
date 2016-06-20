@@ -1,7 +1,7 @@
 'use strict';
-var eSound = {};
+var zeBooster = {};
 
-eSound.init = function() {
+zeBooster.init = function() {
     var contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
     this.context = new contextClass();
     this.gainValue = 0.1;
@@ -18,7 +18,7 @@ eSound.init = function() {
     this.tachometer.init();
 };
 
-eSound.start = function() {
+zeBooster.start = function() {
     var self = this;
     if (typeof this.oscillator != 'undefined') this.oscillator.disconnect();
 
@@ -36,21 +36,21 @@ eSound.start = function() {
     this.animationID = window.setInterval(function() {
         var v = self.oscillator.frequency.value;
         $(".current-frequency p").html(parseInt(self.oscillator.frequency.value) + 'Hz');
-        eSound.tachometer.setStatValue((v / 5).toFixed(1));
+        zeBooster.tachometer.setStatValue((v / 5).toFixed(1));
     }, 50);
 };
 
-eSound.accelerate = function(gasVal) {
+zeBooster.accelerate = function(gasVal) {
     var duration = 0.1;
     this.oscillator.frequency.setTargetAtTime(gasVal, this.context.currentTime + duration, 1.3);
 };
 
-eSound.stop = function() {
+zeBooster.stop = function() {
     this.oscillator.frequency.setTargetAtTime(0, this.context.currentTime + 0.1, 0.3);
 };
 
-eSound.tachometer = {};
-eSound.tachometer.init = function() {
+zeBooster.tachometer = {};
+zeBooster.tachometer.init = function() {
     this.ticks = $('.tick');
     this.digits = $('.digit');
     this.details = $('.details');
@@ -88,7 +88,7 @@ eSound.tachometer.init = function() {
     });
 };
 
-eSound.tachometer.setStatValue = function(value) {
+zeBooster.tachometer.setStatValue = function(value) {
     var angle = -120 + 240 * (value / this.digitValueMax);
     this.progress.css({
         'transform': 'rotate(' + angle + 'deg)'
@@ -96,14 +96,14 @@ eSound.tachometer.setStatValue = function(value) {
     this.details.find('.speed').text((value * 100).toFixed(0));
 };
 
-eSound.tachometer.deg2rad = function(angle) {
+zeBooster.tachometer.deg2rad = function(angle) {
     return angle * (Math.PI / 180);
 }
-eSound.tachometer.rad2deg = function(angle) {
+zeBooster.tachometer.rad2deg = function(angle) {
     return angle * (180 / Math.PI);
 }
 
-eSound.oscillograph = function() {
+zeBooster.oscillograph = function() {
     var self = this;
     var WIDTH = this.canvas.width;
     var HEIGHT = this.canvas.height;
