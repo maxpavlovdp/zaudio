@@ -2,6 +2,7 @@
 var zeBooster = {};
 
 zeBooster.init = function() {
+    //Depends on web browser
     var contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
     this.context = new contextClass();
     this.gainValue = 0.1;
@@ -29,6 +30,7 @@ zeBooster.start = function() {
     this.oscillator.frequency.value = 0;
     this.oscillator.connect(this.gainNode);
     this.oscillator.type = 'sine';
+    // We have sound
     this.oscillator.start(0);
     this.oscillator.connect(this.analyser);
     this.oscillograph();
@@ -42,6 +44,7 @@ zeBooster.start = function() {
 
 zeBooster.accelerate = function(gasVal) {
     var duration = 0.1;
+    // Change sound waves
     this.oscillator.frequency.setTargetAtTime(gasVal, this.context.currentTime + duration, 1.3);
 };
 
