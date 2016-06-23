@@ -5,17 +5,8 @@
         <link rel="stylesheet" href="src\styles.css">
         <link rel="stylesheet" href="src\tachometer.css">
         <!--Todo: task for Walacos. Replace next line by offline js -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-        <script type="text/javascript">
-            google.load("jquery", "1.11.0");
-            google.setOnLoadCallback(jQueryIsLoaded);
-            function jQueryIsLoaded() {
-                alert('jQuery от Google загружен');
-            }
-            if (typeof jQuery == 'undefined') {
-                document.write(unescape("%3Cscript src='/Users/walakos/ze-booster/webapp/src/jquery-3.0.0.js' type='text/javascript'%3E%3C/script%3E"));
-            }
-        </script>
+        <script type="text/javascript" src='/Users/walakos/ze-booster/webapp/src/jquery-3.0.0.js'></script>
+
     </head>
     <body>
         <section class="tachometer-container">
