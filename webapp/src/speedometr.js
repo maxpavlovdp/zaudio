@@ -1,5 +1,5 @@
 'use strict';
-var speedometer = {
+var speedometr = {
     init: function () {
         this.ticks = $('.tick');
         this.digits = $('.digit');

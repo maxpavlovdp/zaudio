@@ -1,18 +1,7 @@
 'use strict';
-// jQuery import
+// jQuery
 $.getScript('src/zeBoosterCore.js', function () {
-
-    //Object name is equal to file name
     var zeBoosterInitializer = {
-        init: function () {
-            zeBoosterInitializer.configureMouseWheel();
-            zeBoosterInitializer.configureStopSound();
-            zeBoosterInitializer.configureSoundChanger();
-
-            zeBoosterCore.init();
-            zeBoosterCore.start();
-        },
-
         configureMouseWheel: function () {
             var mouseRpm = 0;
             $('.gas-pedal').on('mousewheel', function (e) {
@@ -42,6 +31,15 @@ $.getScript('src/zeBoosterCore.js', function () {
                 $(this).html(waves[waveNumbr]);
                 console.log(this);
             });
+        },
+
+        init: function () {
+            zeBoosterInitializer.configureMouseWheel();
+            zeBoosterInitializer.configureStopSound();
+            zeBoosterInitializer.configureSoundChanger();
+
+            zeBoosterCore.init();
+            zeBoosterCore.start();
         }
     };
 
