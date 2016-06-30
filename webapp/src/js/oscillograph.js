@@ -6,6 +6,7 @@ var oscillograph = function (soundControl) {
     var bufferLength = soundControl.analyser.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
     soundControl.canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
+
     function draw() {
         var drawVisual = requestAnimationFrame(draw);
         soundControl.analyser.getByteTimeDomainData(dataArray);
