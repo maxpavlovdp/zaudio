@@ -14,7 +14,7 @@ var zeBoosterCore = {
         this.analyser.minDecibels = -90;
         this.analyser.maxDecibels = -10;
         this.analyser.smoothingTimeConstant = 0.85;
-        speedometr.init();
+        speedometer.init();
     },
 
     start: function () {
@@ -36,7 +36,7 @@ var zeBoosterCore = {
         this.animationID = window.setInterval(function () {
             var v = self.oscillator.frequency.value;
             $(".current-frequency p").html(parseInt(self.oscillator.frequency.value) + 'Hz');
-            speedometr.setStatValue((v / 5).toFixed(1));
+            speedometer.setStatValue((v / 5).toFixed(1));
         }, 50);
     },
 
