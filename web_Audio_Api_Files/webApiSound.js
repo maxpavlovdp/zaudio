@@ -6,7 +6,7 @@ var audioCtx = new AudioContext();
 //загрузка файла в буфер из сети
 
 var request = new XMLHttpRequest();
-request.open("GET", url, true);
+request.open("GET", '../sound/Racing_Engine_Sound/electro_traction.wav', true);
 request.responseType = "arraybuffer";
  
 var loader = this;
@@ -32,21 +32,21 @@ request.onload = function() {
 
 //создание узла буфера (семплера) - таких надо будет 6
 
-var sourceNode = audioContext.createBufferSource();
+var sourceNode = audioCtx.createBufferSource();
 
 //подключение узла - некоторых узлов обработки согласно предварительному плану тут пока не хватает
 // в этом я буду также нуждаться в вашей помощи
 
-sourceNode.connect(audioContext.destination);
+sourceNode.connect(audioCtx.destination);
 sourceNode.start(0);
 sourceNode.stop();
 
 //привязка изменения скорости воспроизведения к контроллеру
 //здесь не знаю как правильно сделать, ведь контроллером должен стать не слайдер, а колесико мышки
 
-throttleSlider.onMove = function(val){
-    sourceNode.source.playbackRate.value = val;
-};
+//throttleSlider.onMove = function(val){
+    sourceNode.source.playbackRate.value = 10;
+//};
 
 //закольцовывание аудиофрагмента
 
