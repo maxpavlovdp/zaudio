@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="src/styles.css">
-        <link rel="stylesheet" href="src/speedometr.css">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/speedometr.css">
+</head>
 
-    <head>
-        <script type="text/javascript" src='src/js/lib/jquery-3.0.0.js'></script>
-        <script type="text/javascript" src="src/js/lib/jquery.mousewheel.min.js"></script>
+<head>
+    <script type="text/javascript" src='src/js/lib/jquery-3.0.0.js'></script>
+    <script type="text/javascript" src="src/js/lib/jquery.mousewheel.min.js"></script>
 
-        <script type="text/javascript" src="src/js/zeBoosterInitializer.js"></script>
-        <script type="text/javascript" src="src/js/zeBoosterCore.js"></script>
-        <script type="text/javascript" src="src/js/speedometer.js"></script>
-        <script type="text/javascript" src="src/js/oscillograph.js"></script>
-    </head>
+    <script type="text/javascript" src="src/js/zeBoosterInitializer.js"></script>
+    <script type="text/javascript" src="src/js/zeBoosterCore.js"></script>
+    <script type="text/javascript" src="src/js/speedometer.js"></script>
+    <script type="text/javascript" src="src/js/oscillograph.js"></script>
+</head>
 
-    <body>
-        <section class="tachometer-container">
-            <div class="tachometer">
-                <div class="inner-ring"></div>
-                <div class="outer-ring"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-                </div>
-                <div class="digit-ring">
-                    <span class="digit">0</span>
-                    <span class="digit">20</span>
-                    <span class="digit">40</span>
-                    <span class="digit">60</span>
-                    <span class="digit">80</span>
-                    <span class="digit">100</span>
-                    <span class="digit">120</span>
-                    <span class="digit">140</span>
-                    <span class="digit">160</span>
-                </div>
-                <div class="details">
-                    <p class="label">RPM</p>
-                    <p class="speed"></p>
-                    <p class="unit"></p>
-                </div>
-                <div class="progress"></div>
-                <footer>
-                    <div class="stat current-frequency">
-                        <label>Frequency</label>
-                        <p></p>
-                    </div>
-                    <div class="stat">
-                        <label>Wave form</label>
-                        <p class="waveform">Sine</p>
-                    </div>
-                </footer>
-                <footer class="visualizer">
-                    <canvas id="visualizer" width="350" height="100"></canvas>
-                </footer>
+<body>
+<section class="tachometer-container">
+    <div class="tachometer">
+        <div class="inner-ring"></div>
+        <div class="outer-ring"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                class="tick"></span><span class="tick"></span>
+        </div>
+        <div class="digit-ring">
+            <span class="digit">0</span>
+            <span class="digit">20</span>
+            <span class="digit">40</span>
+            <span class="digit">60</span>
+            <span class="digit">80</span>
+            <span class="digit">100</span>
+            <span class="digit">120</span>
+            <span class="digit">140</span>
+            <span class="digit">160</span>
+        </div>
+        <div class="details">
+            <p class="label">RPM</p>
+            <p class="speed"></p>
+            <p class="unit"></p>
+        </div>
+        <div class="progress"></div>
+        <footer>
+            <div class="stat current-frequency">
+                <label>Frequency</label>
+                <p></p>
             </div>
-            <div class="overlay"></div>
-        </section>
+            <div class="stat">
+                <label>Wave form</label>
+                <p class="waveform">Sine</p>
+            </div>
+        </footer>
+        <footer class="visualizer">
+            <canvas id="visualizer" width="350" height="100"></canvas>
+        </footer>
+    </div>
+    <div class="overlay"></div>
+</section>
 
-        <button class="stop-pedal pedal">Stop</button>
-        <button class="gas-pedal pedal">Accel</button>
-    </body>
+</body>
 </html>

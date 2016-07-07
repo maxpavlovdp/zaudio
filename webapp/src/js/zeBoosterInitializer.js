@@ -1,12 +1,13 @@
 'use strict';
 var zeBoosterInitializer = {
     init: function () {
+        zeBoosterCore.init();
+        zeBoosterCore.start();
+
         zeBoosterInitializer.configureMouseWheel();
         zeBoosterInitializer.configureStopSound();
         zeBoosterInitializer.configureSoundChanger();
-
-        zeBoosterCore.init();
-        zeBoosterCore.start();
+        zeBoosterInitializer.configureActivationSound();
     },
 
     configureMouseWheel: function () {
@@ -17,6 +18,16 @@ var zeBoosterInitializer = {
             if (mouseRpm > 800) mouseRpm = 800;
             zeBoosterCore.accelerate(mouseRpm);
         });
+    },
+
+    configureActivationSound: function () {
+        $('.tachometer-container')
+            .mouseover(function () {
+                zeBoosterCore.accelerate(150);
+            })
+            .mouseout(function(){
+                zeBoosterCore.stop()
+            })
     },
 
     // Will be replaced by hover off
