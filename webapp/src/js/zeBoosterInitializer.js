@@ -5,8 +5,9 @@ $(document).ready(function() {
 });
 
 var zeBoosterInitializer = (function () {
-    var init = function () {
+    var activationBpm = 120
 
+    var init = function () {
         configureMouseWheel();
         configureActivationSound();
         configureSoundChanger();
@@ -18,17 +19,21 @@ var zeBoosterInitializer = (function () {
     var configureMouseWheel = function () {
         var mouseRpm = 0;
         $('.tachometer-container').on('mousewheel', function (e) {
-            mouseRpm += e.deltaY * 10;
+            mouseRpm += e.deltaY * 2;
             if (mouseRpm < 0) mouseRpm = 0;
             if (mouseRpm > 800) mouseRpm = 800;
-            zeBoosterCore.accelerate(mouseRpm);
+            if (mouseRpm > activationBpm) {
+                zeBoosterCore.accelerate(mouseRpm);
+            } else {
+                zeBoosterCore.accelerate(activationBpm);
+            }
         });
     };
 
     var configureActivationSound = function () {
         $('.tachometer-container')
             .mouseover(function () {
-                zeBoosterCore.accelerate(120);
+                zeBoosterCore.accelerate(activationBpm);
             })
             .mouseout(function () {
                 zeBoosterCore.stop()
