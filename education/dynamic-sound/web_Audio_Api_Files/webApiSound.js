@@ -1,9 +1,9 @@
-//создание аудиоконтекста
+//audiocontext creation
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioCtx = new AudioContext();
 
-//загрузка файла в буфер из сети
+//uploading files tu audiobufer from web source
 
 var request = new XMLHttpRequest();
 request.open("GET", '../sound/Racing_Engine_Sound/electro_traction.mp3', true);
@@ -30,29 +30,27 @@ request.onload = function() {
     );
 };
 
-//создание узла буфера (семплера) - таких надо будет 6
+//creation of buffer node - 6 needed
 
 var sourceNode = audioCtx.createBufferSource();
 
-//подключение узла - некоторых узлов обработки согласно предварительному плану тут пока не хватает
-// в этом я буду также нуждаться в вашей помощи
+//connecting source node to processing nodes - I will need your help there
 
 sourceNode.connect(audioCtx.destination);
 sourceNode.start(0);
 sourceNode.stop();
 
-//привязка изменения скорости воспроизведения к контроллеру
-//здесь не знаю как правильно сделать, ведь контроллером должен стать не слайдер, а колесико мышки
+//connecting playback speed to mouse wheel moving
 
 //throttleSlider.onMove = function(val){
 //    sourceNode.source.playbackRate.value = 10;
 //};
 
-//закольцовывание аудиофрагмента
+//looping audio sample
 
 //sourceNode.source.loop = true;
 
-//назначение старта и финиша закольцованного фрагмента
+//assigntment loop start nad finish
 
 //engineAudioSource.source.loopStart = 0.5;
 //engineAudioSource.source.loopEnd = 1.5;
