@@ -3,10 +3,13 @@
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioCtx = new AudioContext();
 
-//uploading files tu audiobufer from web source
+//uploading files to audiobufer from web source
 
 var request = new XMLHttpRequest();
-request.open("GET", '../sound/Racing_Engine_Sound/electro_traction.mp3', true);
+request.open("GET", '../sound/Racing_Engine_Sound/Engine_on.mp3', true);
+request.open("GET", '../sound/Racing_Engine_Sound/Acceleration.mp3', true);
+request.open("GET", '../sound/Racing_Engine_Sound/Recuperation.mp3', true);
+request.open("GET", '../sound/Racing_Engine_Sound/Engine_off.mp3', true);
 request.responseType = "arraybuffer";
  
 var loader = this;
@@ -30,11 +33,12 @@ request.onload = function() {
     );
 };
 
-//creation of buffer node - 6 needed
+//creation of buffer node
 
 var sourceNode = audioCtx.createBufferSource();
 
-//connecting source node to processing nodes - I will need your help there
+//connecting source node to destination
+// later it wiil be needed to connect it to processing nodes
 
 sourceNode.connect(audioCtx.destination);
 sourceNode.start(0);
