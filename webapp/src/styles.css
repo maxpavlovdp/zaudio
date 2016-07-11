@@ -41,9 +41,3 @@ body {
     outline: none;
     transition: background-color 250ms ease-out;
 }
-.gas-pedal {
-    cursor: n-resize;
-}
-.stop-pedal {
-    cursor: pointer;
-}

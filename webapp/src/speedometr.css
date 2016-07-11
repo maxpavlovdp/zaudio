@@ -6,10 +6,12 @@
     box-sizing: border-box;
 }
 .tachometer-container {
+    border: 9px;
+    border-color: white;
     width: 48rem;
     height: 48rem;
     position: relative;
-    background-color: #000;
+    background-color: #8b8b8b;
 }
 .tachometer-container::before {
     content: "";
