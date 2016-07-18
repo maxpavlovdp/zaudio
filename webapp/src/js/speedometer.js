@@ -1,6 +1,6 @@
 'use strict';
 var speedometer = {
-    init: function () {
+    init: function (oscillator) {
         this.ticks = $('.tick');
         this.digits = $('.digit');
         this.details = $('.details');
@@ -36,6 +36,12 @@ var speedometer = {
                 'transform': 'translate(' + x + 'px, ' + y + 'px)'
             });
         });
+
+        window.setInterval(function () {
+            var v = oscillator.frequency.value;
+            $(".current-frequency p").html(parseInt(oscillator.frequency.value) + 'Hz');
+            speedometer.setStatValue((v / 5).toFixed(1));
+        }, 50);
     },
 
     setStatValue: function (value) {

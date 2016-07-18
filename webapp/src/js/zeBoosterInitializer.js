@@ -10,10 +10,8 @@ var zeBoosterInitializer = (function () {
     var init = function () {
         configureMouseWheel();
         configureActivationSound();
-        configureSoundChanger();
 
         zeBoosterCore.init();
-        zeBoosterCore.start();
     };
 
     var configureMouseWheel = function () {
@@ -38,19 +36,6 @@ var zeBoosterInitializer = (function () {
             .mouseout(function () {
                 zeBoosterCore.stop()
             })
-    };
-
-    //Will be replaced by accelerate/regeneration sound
-    var configureSoundChanger = function () {
-        var waveNumbr = 0;
-        var waves = ['sine', 'square', 'sawtooth', 'triangle'];
-        $('.waveform').on('click', function (e) {
-            waveNumbr++;
-            if (waveNumbr > 3) waveNumbr = 0;
-            zeBoosterCore.oscillator.type = waves[waveNumbr];
-            $(this).html(waves[waveNumbr]);
-            console.log(this);
-        });
     };
 
     return {init: init};
