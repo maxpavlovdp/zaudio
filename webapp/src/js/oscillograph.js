@@ -1,17 +1,17 @@
 // Needed for dev purposes
-var oscillograph = function (webAudioContext, oscillator) {
+var oscillograph = function (webAudioContext, audioNode) {
 
     var waveNumbr = 0;
     var waves = ['sine', 'square', 'sawtooth', 'triangle'];
     $('.waveform').on('click', function (e) {
         waveNumbr++;
         if (waveNumbr > 3) waveNumbr = 0;
-        oscillator.type = waves[waveNumbr];
+        audioNode.type = waves[waveNumbr];
         $(this).html(waves[waveNumbr]);
     });
 
     var analyser = webAudioContext.createAnalyser();
-    oscillator.connect(analyser);
+    audioNode.connect(analyser);
 
     analyser.minDecibels = -90;
     analyser.maxDecibels = -10;
