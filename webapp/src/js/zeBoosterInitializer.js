@@ -17,7 +17,8 @@ var zeBoosterInitializer = (function () {
     var configureMouseWheel = function () {
         var mouseRpm = 0;
         $('.tachometer-container').on('mousewheel', function (e) {
-            mouseRpm += e.deltaY * 2;
+            mouseRpm += e.deltaY;
+            //console.log(mouseRpm);
             if (mouseRpm < 0) mouseRpm = 0;
             if (mouseRpm > 800) mouseRpm = 800;
             if (mouseRpm > activationBpm) {
@@ -34,7 +35,7 @@ var zeBoosterInitializer = (function () {
                 zeBoosterCore.accelerate(activationBpm);
             })
             .mouseout(function () {
-                zeBoosterCore.stop()
+                zeBoosterCore.stop();
             })
     };
 

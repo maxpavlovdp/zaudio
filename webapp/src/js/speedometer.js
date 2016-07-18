@@ -1,6 +1,6 @@
 'use strict';
 var speedometer = {
-    init: function (oscillator) {
+    init: function (playbackRate) {
         this.ticks = $('.tick');
         this.digits = $('.digit');
         this.details = $('.details');
@@ -38,9 +38,8 @@ var speedometer = {
         });
 
         window.setInterval(function () {
-            var v = oscillator.frequency.value;
-            $(".current-frequency p").html(parseInt(oscillator.frequency.value) + 'Hz');
-            speedometer.setStatValue((v / 5).toFixed(1));
+            var v = playbackRate.value;
+            speedometer.setStatValue((v*100).toFixed(1));
         }, 50);
     },
 
@@ -49,7 +48,6 @@ var speedometer = {
         this.progress.css({
             'transform': 'rotate(' + angle + 'deg)'
         });
-        this.details.find('.speed').text((value * 100).toFixed(0));
     },
 
     deg2rad: function (angle) {

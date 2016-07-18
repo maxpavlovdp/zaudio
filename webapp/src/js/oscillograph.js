@@ -1,15 +1,6 @@
 // Needed for dev purposes
 var oscillograph = function (webAudioContext, audioNode) {
 
-    var waveNumbr = 0;
-    var waves = ['sine', 'square', 'sawtooth', 'triangle'];
-    $('.waveform').on('click', function (e) {
-        waveNumbr++;
-        if (waveNumbr > 3) waveNumbr = 0;
-        audioNode.type = waves[waveNumbr];
-        $(this).html(waves[waveNumbr]);
-    });
-
     var analyser = webAudioContext.createAnalyser();
     audioNode.connect(analyser);
 

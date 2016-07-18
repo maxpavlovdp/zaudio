@@ -1,39 +1,28 @@
 'use strict';
 
 var zeBoosterCore = (function () {
-    //Depends on web browser
     var webAudioContext;
     var audioSource;
 
     var init = function () {
+        //Depends on web browser
         webAudioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 
-        var gainNode = webAudioContext.createGain();
-        // Plug to browser loud speaker
-        gainNode.connect(webAudioContext.destination);
-
-        configureAudioFromOscillator(gainNode);
-        //configureAudioFromMp3(gainNode);
-
+        audioSource = configureAudio();
         configureUI()
     };
 
     function configureUI() {
         oscillograph(webAudioContext, audioSource);
-        speedometer.init(audioSource);
+        speedometer.init(audioSource.playbackRate);
     }
 
-    function configureAudioFromOscillator(gainNode) {
-        audioSource = webAudioContext.createOscillator();
-        audioSource.frequency.value = 0;
-        audioSource.connect(gainNode);
-        audioSource.type = 'sine';
-        // We have sound
-        audioSource.start(0);
-    }
+    function configureAudio() {
+        var gainNode = webAudioContext.createGain();
+        // Plug to browser loud speaker
+        gainNode.connect(webAudioContext.destination);
 
-    function configureAudioFromMp3(gainNode) {
-        var source = webAudioContext.createBufferSource();
+        var audioSource = webAudioContext.createBufferSource();
         var request = new XMLHttpRequest();
 
         request.open('GET', 'src/sound/acceleration.mp3', true);
@@ -46,10 +35,10 @@ var zeBoosterCore = (function () {
             webAudioContext.decodeAudioData(audioData, function (buffer) {
                     var myBuffer = buffer;
                     var songLength = buffer.duration;
-                    source.buffer = myBuffer;
-                    source.playbackRate.value = 1;
-                    source.connect(gainNode);
-                    source.loop = true;
+                    audioSource.buffer = myBuffer;
+                    audioSource.playbackRate.value = 0;
+                    audioSource.connect(gainNode);
+                    audioSource.loop = true;
 
                     //loopstartControl.setAttribute('max', Math.floor(songLength));
                     //loopendControl.setAttribute('max', Math.floor(songLength));
@@ -62,19 +51,23 @@ var zeBoosterCore = (function () {
         };
         request.send();
 
+        audioSource.start(0);
 
-        source.start();
+        return audioSource;
     }
 
 
     var accelerate = function (gasVal) {
-        var duration = 0.1;
-        // Change sound waves
-        audioSource.frequency.setTargetAtTime(gasVal, webAudioContext.currentTime + duration, 1.3);
+        var feedbackDelay = 0.1;
+        var accelerationPerformance = 3;
+
+        audioSource.playbackRate.setTargetAtTime(gasVal / 500, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
     };
 
+
     var stop = function () {
-        audioSource.frequency.setTargetAtTime(0, webAudioContext.currentTime + 0.1, 0.3);
+        var decelerationPerformance = 0.3;
+        audioSource.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
     };
 
     return {init: init, accelerate: accelerate, stop: stop}
