@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 var zeBoosterInitializer = (function () {
-    var activationBpm = 120;
+    var activationBpm = 250;
 
     var init = function () {
         configureMouseWheel();
