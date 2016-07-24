@@ -25,7 +25,7 @@ var zeBoosterCore = (function () {
         var audioSource = webAudioContext.createBufferSource();
         var request = new XMLHttpRequest();
 
-        request.open('GET', 'src/sound/accelerationV2.ogg', true);
+        request.open('GET', 'src/sound/acceleration.ogg', true);
 
         request.responseType = 'arraybuffer';
 
