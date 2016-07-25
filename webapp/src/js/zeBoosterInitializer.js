@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 var zeBoosterInitializer = (function () {
-    var activationBpm = 250;
+    var idlingLevel = 350;
 
     var init = function () {
         configureMouseWheel();
@@ -21,20 +21,20 @@ var zeBoosterInitializer = (function () {
             //console.log(mouseRpm);
             if (mouseRpm < 0) mouseRpm = 0;
             if (mouseRpm > 800) mouseRpm = 800;
-            if (mouseRpm > activationBpm) {
+            if (mouseRpm > idlingLevel) {
                 zeBoosterCore.accelerate(mouseRpm);
             } else {
-                zeBoosterCore.accelerate(activationBpm);
+                zeBoosterCore.accelerate(idlingLevel);
             }
         });
     };
 
     var configureActivationSound = function () {
         $('.tachometer-container')
-            .mouseover(function () {
-                zeBoosterCore.accelerate(activationBpm);
+            .mouseenter(function () {
+                zeBoosterCore.start(idlingLevel);
             })
-            .mouseout(function () {
+            .mouseleave(function () {
                 zeBoosterCore.stop();
             })
     };

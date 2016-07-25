@@ -37,6 +37,7 @@ var speedometer = {
             });
         });
 
+        // todo: fix performance impact
         window.setInterval(function () {
             var v = playbackRate.value;
             speedometer.setStatValue((v*100).toFixed(1));
@@ -44,6 +45,7 @@ var speedometer = {
     },
 
     setStatValue: function (value) {
+        //console.log(value);
         var angle = -120 + 240 * (value / this.digitValueMax);
         this.progress.css({
             'transform': 'rotate(' + angle + 'deg)'
