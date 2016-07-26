@@ -21,6 +21,9 @@ var zeBoosterCore = (function () {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
+        // seems like it must looks like that and when I change gain value here - volume changes.
+        // Now, it needs to connect value to some controller.
+        gainNode.gain.value = 1.5;
 
         var audioSource = webAudioContext.createBufferSource();
         var request = new XMLHttpRequest();
