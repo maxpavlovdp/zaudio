@@ -7,7 +7,7 @@ var speedometer = {
         this.progress = $('.progress');
         this.outerRingRadius = 164;
         this.digitRingRadius = 145;
-        this.digitValueMax = 160;
+        this.digitValueMax = 240;
         var self = this;
         this.ticks.each(function (i) {
             var angle = 210 - i * 5;
