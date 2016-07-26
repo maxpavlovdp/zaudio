@@ -67,7 +67,7 @@ var zeBoosterCore = (function () {
 
 
     var start = function (idlingLevel) {
-        zeSound = configureAudio('src/sound/accelerationV3.ogg', true);
+        zeSound = configureAudio('src/sound/acceleration.ogg', true);
         engineOnSound = configureAudio('src/sound/engineOn.ogg', false);
 
         engineOnSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
