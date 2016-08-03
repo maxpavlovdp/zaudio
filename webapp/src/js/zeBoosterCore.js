@@ -10,7 +10,7 @@ var zeBoosterCore = (function () {
     var init = function () {
         //Depends on web browser
         webAudioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
-        console.log("zeBoosterCore initiated")
+        console.log("init finished")
     };
 
     function configureUI() {
@@ -33,6 +33,7 @@ var zeBoosterCore = (function () {
 
         request.responseType = 'arraybuffer';
 
+        var loadStartTime = webAudioContext.currentTime
         request.onload = function () {
             var audioData = request.response;
 
@@ -48,7 +49,12 @@ var zeBoosterCore = (function () {
                     "Error with decoding audio data" + e.err
                 });
 
-            console.log( url + " sound loaded")
+            var loadTime = webAudioContext.currentTime - loadStartTime
+
+            console.log(url + " sound loaded for " + loadTime * 1000 + " millis")
+
+            //audioSource.start();
+            //audioSource.onended = onended
         };
         request.send();
 
@@ -75,6 +81,8 @@ var zeBoosterCore = (function () {
         //engineOnSound.onended = function () {
         //}
         zeSound.playbackRate.setTargetAtTime(idlingLevel / mouseWheelKoef, webAudioContext.currentTime + 1.7, 0);
+
+        console.log("start finished")
     };
 
     var stop = function () {
@@ -83,6 +91,8 @@ var zeBoosterCore = (function () {
         engineOnSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
         //zeSound.stop(webAudioContext.currentTime + 2)
         //engineOnSound.stop(webAudioContext.currentTime + 2)
+
+        console.log("stop finished")
     };
 
     return {init: init, accelerate: accelerate, stop: stop, start: start}
