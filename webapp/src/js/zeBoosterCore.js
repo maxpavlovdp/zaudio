@@ -10,15 +10,25 @@ var zeBoosterCore = (function () {
     var init = function () {
         //Depends on web browser
         webAudioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
-        console.log("init finished")
+
+        zeSound = configureAudio('src/sound/acceleration.ogg', true);
+        var onended = function() {
+            zeSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
+        }
+
+        engineOnSound = configureAudio('src/sound/engineOn.ogg', false, onended);
+
+        console.log("init")
     };
 
     function configureUI() {
         oscillograph(webAudioContext, zeSound);
         speedometer.init(zeSound.playbackRate);
+
+        console.log("UI configured")
     }
 
-    function configureAudio(url, isLoop) {
+    function configureAudio(url, isLoop, onended) {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
@@ -53,18 +63,16 @@ var zeBoosterCore = (function () {
 
             console.log(url + " sound loaded for " + loadTime * 1000 + " millis")
 
-            //audioSource.start();
-            //audioSource.onended = onended
+            audioSource.start();
+            audioSource.onended = onended
         };
         request.send();
-
-        audioSource.start();
 
         return audioSource;
     }
 
     var accelerate = function (gasVal) {
-        configureUI();
+        //configureUI();
         var feedbackDelay = 0.1;
         var accelerationPerformance = 3;
 
@@ -73,26 +81,22 @@ var zeBoosterCore = (function () {
 
 
     var start = function (idlingLevel) {
-        zeSound = configureAudio('src/sound/acceleration.ogg', true);
-        engineOnSound = configureAudio('src/sound/engineOn.ogg', false);
 
         engineOnSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
-        //Todo: replace "webAudioContext.currentTime + 1.7" by previous finish event logic
-        //engineOnSound.onended = function () {
-        //}
-        zeSound.playbackRate.setTargetAtTime(idlingLevel / mouseWheelKoef, webAudioContext.currentTime + 1.7, 0);
 
-        console.log("start finished")
+        console.log("started")
     };
 
     var stop = function () {
         var decelerationPerformance = 0.3;
-        zeSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
-        engineOnSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
-        //zeSound.stop(webAudioContext.currentTime + 2)
-        //engineOnSound.stop(webAudioContext.currentTime + 2)
+        zeSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.2, decelerationPerformance);
+        console.log(zeSound)
 
-        console.log("stop finished")
+        //engineOnSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.2, decelerationPerformance);
+        //zeSound.stop(webAudioContext.currentTime)
+        //engineOnSound.stop(webAudioContext.currentTime)
+
+        console.log("stopped")
     };
 
     return {init: init, accelerate: accelerate, stop: stop, start: start}
