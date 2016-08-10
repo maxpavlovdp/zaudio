@@ -9,8 +9,8 @@ var stop = document.querySelector('.stop');
 var playbackControl = document.querySelector('.playback-rate-control');
 var playbackValue = document.querySelector('.playback-rate-value');
 
-var eoSound;
-var aSound;
+var engineOnSound;
+var accelerationSound;
 
 // use XHR to load an audio track, and
 // decodeAudioData to decode it and stick it in a buffer.
@@ -52,37 +52,36 @@ function getData(soundUrl, looped, onended) {
 }
 
 function loadSounds() {
-    eoSound = getData('engineOn.ogg', false);
-    aSound = getData('acceleration.ogg', true);
+    engineOnSound = getData('engineOn.ogg', false);
+    accelerationSound = getData('acceleration.ogg', true);
 }
 
 play.onclick = function () {
-    eoSound.start()
-    aSound.start()
+    engineOnSound.start()
 
-    eoSound.playbackRate.value = 1;
-    aSound.playbackRate.value = 1;
+
+    engineOnSound.onended = function() {
+        accelerationSound.start()
+        accelerationSound.playbackRate.value = 1;
+    }
+
+    engineOnSound.playbackRate.value = 1;
 }
 
 stop.onclick = function () {
-    eoSound.stop(0);
-    aSound.stop(0);
+    engineOnSound.stop(0);
+    accelerationSound.stop(0);
 
     loadSounds()
 }
 
 playbackControl.oninput = function () {
-    eoSound.playbackRate.value = playbackControl.value;
-    aSound.playbackRate.value = playbackControl.value;
+    accelerationSound.playbackRate.value = playbackControl.value;
     playbackValue.innerHTML = playbackControl.value;
 }
 
 // dump script to pre element
 
 pre.innerHTML = myScript.innerHTML;
-
-loadSounds()
-
-
 
 loadSounds()
