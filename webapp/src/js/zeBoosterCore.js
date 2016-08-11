@@ -69,15 +69,15 @@ var zeBoosterCore = (function () {
     }
 
     var accelerate = function (gasVal) {
-        configureUI();
+
         var feedbackDelay = 0.1;
         var accelerationPerformance = 3;
 
         zeSound.playbackRate.setTargetAtTime(gasVal / mouseWheelKoef, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
     };
 
-
-    var start = function (idlingLevel) {
+    var start = function () {
+        configureUI();
         engineOnSound.start()
         engineOnSound.onended = function () {
             zeSound.start()

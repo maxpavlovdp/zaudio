@@ -32,7 +32,7 @@ var zeBoosterInitializer = (function () {
     var configureActivationSound = function () {
         $('.tachometer-container')
             .mouseenter(function () {
-                zeBoosterCore.start(idlingLevel);
+                zeBoosterCore.start();
             })
             .mouseleave(function () {
                 zeBoosterCore.stop();
