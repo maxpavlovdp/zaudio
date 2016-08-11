@@ -11,15 +11,15 @@ var zeBoosterCore = (function () {
         //Depends on web browser
         webAudioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 
-        zeSound = configureAudio('src/sound/acceleration.ogg', true);
-        var onended = function() {
-            zeSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
-        }
+        loadAllSounds()
 
-        engineOnSound = configureAudio('src/sound/engineOn.ogg', false, onended);
-
-        console.log("init")
+        console.log("initiated")
     };
+
+    function loadAllSounds() {
+        zeSound = loadAudio('src/sound/acceleration.ogg', true);
+        engineOnSound = loadAudio('src/sound/engineOn.ogg', false, onended);
+    }
 
     function configureUI() {
         oscillograph(webAudioContext, zeSound);
@@ -28,7 +28,7 @@ var zeBoosterCore = (function () {
         console.log("UI configured")
     }
 
-    function configureAudio(url, isLoop, onended) {
+    function loadAudio(url, isLoop) {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
@@ -62,9 +62,6 @@ var zeBoosterCore = (function () {
             var loadTime = webAudioContext.currentTime - loadStartTime
 
             console.log(url + " sound loaded for " + loadTime * 1000 + " millis")
-
-            audioSource.start();
-            audioSource.onended = onended
         };
         request.send();
 
@@ -81,20 +78,27 @@ var zeBoosterCore = (function () {
 
 
     var start = function (idlingLevel) {
+        engineOnSound.start()
+        engineOnSound.onended = function () {
+            zeSound.start()
+            zeSound.playbackRate.value = 1
+        }
 
-        engineOnSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
+        engineOnSound.playbackRate.value = 1
 
         console.log("started")
     };
 
     var stop = function () {
-        var decelerationPerformance = 0.3;
-        zeSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.2, decelerationPerformance);
-        console.log(zeSound)
+        engineOnSound.onended = null
+        engineOnSound.stop()
+        try {
+            zeSound.stop()
+        } catch (e) {
+            // For case when user does fast mouse enter/exit. We do nothing with error.
+        }
 
-        //engineOnSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.2, decelerationPerformance);
-        //zeSound.stop(webAudioContext.currentTime)
-        //engineOnSound.stop(webAudioContext.currentTime)
+        loadAllSounds()
 
         console.log("stopped")
     };
