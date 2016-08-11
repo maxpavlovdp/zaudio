@@ -69,7 +69,7 @@ var zeBoosterCore = (function () {
     }
 
     var accelerate = function (gasVal) {
-        //configureUI();
+        configureUI();
         var feedbackDelay = 0.1;
         var accelerationPerformance = 3;
 
