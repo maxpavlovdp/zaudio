@@ -13,18 +13,23 @@ var zeBoosterCore = (function () {
         console.log("zeBoosterCore initiated")
     };
 
-    function configureUI() {
-        oscillograph(webAudioContext, zeSound);
-        speedometer.init(zeSound.playbackRate);
+    function setVolume(value){
+        zeSound.gainNode.gain.value = value;
+        engineOnSound.gainNode.gain.value = value;
     }
 
-    function configureAudio(url, isLoop) {
+    function configureUI() {
+        oscillograph(webAudioContext, zeSound.audioSource);
+        speedometer.init(zeSound.audioSource.playbackRate);
+    }
+
+    function configureAudio(url, volume, isLoop) {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
         // seems like it must looks like that and when I change gain value here - volume changes.
         // Now, it needs to connect value to some controller.
-        gainNode.gain.value = 1.5;
+        gainNode.gain.value = volume;
 
         var audioSource = webAudioContext.createBufferSource();
         var request = new XMLHttpRequest();
@@ -54,7 +59,10 @@ var zeBoosterCore = (function () {
 
         audioSource.start();
 
-        return audioSource;
+        return {
+            audioSource: audioSource,
+            gainNode: gainNode
+        };
     }
 
     var accelerate = function (gasVal) {
@@ -62,28 +70,28 @@ var zeBoosterCore = (function () {
         var feedbackDelay = 0.1;
         var accelerationPerformance = 3;
 
-        zeSound.playbackRate.setTargetAtTime(gasVal / mouseWheelKoef, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
+        zeSound.audioSource.playbackRate.setTargetAtTime(gasVal / mouseWheelKoef, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
     };
 
+    var start = function (idlingLevel,volume) {
+        zeSound = configureAudio('src/sound/acceleration.ogg',volume, true);
+        engineOnSound = configureAudio('src/sound/engineOn.ogg',volume, false);
 
-    var start = function (idlingLevel) {
-        zeSound = configureAudio('src/sound/acceleration.ogg', true);
-        engineOnSound = configureAudio('src/sound/engineOn.ogg', false);
-
-        engineOnSound.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
+        engineOnSound.audioSource.playbackRate.setTargetAtTime(1, webAudioContext.currentTime, 0);
         //Todo: replace "webAudioContext.currentTime + 1.7" by previous finish event logic
         //engineOnSound.onended = function () {
         //}
-        zeSound.playbackRate.setTargetAtTime(idlingLevel / mouseWheelKoef, webAudioContext.currentTime + 1.7, 0);
+        zeSound.audioSource.playbackRate.setTargetAtTime(idlingLevel / mouseWheelKoef, webAudioContext.currentTime + 1.7, 0);
+
     };
 
     var stop = function () {
         var decelerationPerformance = 0.3;
-        zeSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
-        engineOnSound.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
+        zeSound.audioSource.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
+        engineOnSound.audioSource.playbackRate.setTargetAtTime(0, webAudioContext.currentTime + 0.1, decelerationPerformance);
         //zeSound.stop(webAudioContext.currentTime + 2)
         //engineOnSound.stop(webAudioContext.currentTime + 2)
     };
 
-    return {init: init, accelerate: accelerate, stop: stop, start: start}
+    return {init: init, accelerate: accelerate, stop: stop, start: start, setVolume: setVolume}
 })();
