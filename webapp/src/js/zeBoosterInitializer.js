@@ -13,7 +13,7 @@ var zeBoosterInitializer = (function () {
         initActivationSound();
         initVolumeControl();
 
-        zeBoosterCore.init();
+        zeBoosterCore.init(volumeControl.val());
     };
 
     var initVolumeControl = function () {
@@ -21,7 +21,6 @@ var zeBoosterInitializer = (function () {
         volumeControl.on('input', function () {
             zeBoosterCore.setVolume(this.value);
         });
-        zeBoosterCore.setVolume(volumeControl.val())
     };
 
     var initMouseWheel = function () {
