@@ -21,20 +21,25 @@ var zeBoosterCore = (function () {
         engineOnSound = loadAudio('src/sound/engineOn.ogg', false, onended);
     }
 
+    function setVolume(value){
+        zeSound.gainNode.gain.value = value;
+        engineOnSound.gainNode.gain.value = value;
+    }
+
     function configureUI() {
-        oscillograph(webAudioContext, zeSound);
-        speedometer.init(zeSound.playbackRate);
+        oscillograph(webAudioContext, zeSound.audioSource);
+        speedometer.init(zeSound.audioSource.playbackRate);
 
         console.log("UI configured")
     }
 
-    function loadAudio(url, isLoop) {
+    function loadAudio(url, volume, isLoop) {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
         // seems like it must looks like that and when I change gain value here - volume changes.
         // Now, it needs to connect value to some controller.
-        gainNode.gain.value = 1.5;
+        gainNode.gain.value = volume;
 
         var audioSource = webAudioContext.createBufferSource();
         var request = new XMLHttpRequest();
@@ -65,7 +70,12 @@ var zeBoosterCore = (function () {
         };
         request.send();
 
-        return audioSource;
+        //audioSource.start();
+
+        return {
+            audioSource: audioSource,
+            gainNode: gainNode
+        };
     }
 
     var accelerate = function (gasVal) {
@@ -73,27 +83,27 @@ var zeBoosterCore = (function () {
         var feedbackDelay = 0.1;
         var accelerationPerformance = 3;
 
-        zeSound.playbackRate.setTargetAtTime(gasVal / mouseWheelKoef, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
+        zeSound.audioSource.playbackRate.setTargetAtTime(gasVal / mouseWheelKoef, webAudioContext.currentTime + feedbackDelay, accelerationPerformance);
     };
 
     var start = function () {
         configureUI();
-        engineOnSound.start()
-        engineOnSound.onended = function () {
-            zeSound.start()
-            zeSound.playbackRate.value = 1
+        engineOnSound.audioSourcestart()
+        engineOnSound.audioSource.onended = function () {
+            zeSound.audioSource.start()
+            zeSound.audioSource.playbackRate.value = 1
         }
 
-        engineOnSound.playbackRate.value = 1
+        engineOnSound.audioSource.playbackRate.value = 1
 
         console.log("started")
     };
 
     var stop = function () {
-        engineOnSound.onended = null
-        engineOnSound.stop()
+        engineOnSound.audioSource.onended = null
+        engineOnSound.audioSource.stop()
         try {
-            zeSound.stop()
+            zeSound.audioSource.stop()
         } catch (e) {
             // For case when user does fast mouse enter/exit. We do nothing with error.
         }
@@ -103,5 +113,5 @@ var zeBoosterCore = (function () {
         console.log("stopped")
     };
 
-    return {init: init, accelerate: accelerate, stop: stop, start: start}
+    return {init: init, accelerate: accelerate, stop: stop, start: start, setVolume: setVolume}
 })();
