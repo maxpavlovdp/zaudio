@@ -5,6 +5,8 @@ var zeBoosterCore = (function () {
     var zeSound;
     var engineOnSound;
 
+    var volume;
+
     var mouseWheelKoef = 500;
 
     var init = function () {
@@ -12,33 +14,33 @@ var zeBoosterCore = (function () {
         webAudioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
 
         loadAllSounds()
+        configureUI()
 
         console.log("initiated")
     };
 
     function loadAllSounds() {
-        zeSound = loadAudio('src/sound/acceleration.ogg', true);
-        engineOnSound = loadAudio('src/sound/engineOn.ogg', false, onended);
+        zeSound = loadAudio('src/sound/acceleration.ogg', volume, true);
+        engineOnSound = loadAudio('src/sound/engineOn.ogg', volume, false);
     }
 
     function setVolume(value){
-        zeSound.gainNode.gain.value = value;
-        engineOnSound.gainNode.gain.value = value;
+        volume = value
+        console.log("volume is set to " + value)
     }
 
     function configureUI() {
         oscillograph(webAudioContext, zeSound.audioSource);
         speedometer.init(zeSound.audioSource.playbackRate);
 
-        console.log("UI configured")
+        console.log("UI is configured")
     }
 
     function loadAudio(url, volume, isLoop) {
         var gainNode = webAudioContext.createGain();
         // Plug to browser loud speaker
         gainNode.connect(webAudioContext.destination);
-        // seems like it must looks like that and when I change gain value here - volume changes.
-        // Now, it needs to connect value to some controller.
+
         gainNode.gain.value = volume;
 
         var audioSource = webAudioContext.createBufferSource();
@@ -49,6 +51,7 @@ var zeBoosterCore = (function () {
         request.responseType = 'arraybuffer';
 
         var loadStartTime = webAudioContext.currentTime
+
         request.onload = function () {
             var audioData = request.response;
 
@@ -70,8 +73,6 @@ var zeBoosterCore = (function () {
         };
         request.send();
 
-        //audioSource.start();
-
         return {
             audioSource: audioSource,
             gainNode: gainNode
@@ -87,8 +88,7 @@ var zeBoosterCore = (function () {
     };
 
     var start = function () {
-        configureUI();
-        engineOnSound.audioSourcestart()
+        engineOnSound.audioSource.start()
         engineOnSound.audioSource.onended = function () {
             zeSound.audioSource.start()
             zeSound.audioSource.playbackRate.value = 1

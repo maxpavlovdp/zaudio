@@ -9,22 +9,22 @@ var zeBoosterInitializer = (function () {
         volumeControl;
 
     var init = function () {
-        volumeControl = $('.volume-control');
-
-        configureMouseWheel();
-        configureActivationSound();
+        initMouseWheel();
+        initActivationSound();
         initVolumeControl();
 
         zeBoosterCore.init();
     };
 
     var initVolumeControl = function () {
+        volumeControl = $('.volume-control');
         volumeControl.on('input', function () {
             zeBoosterCore.setVolume(this.value);
         });
+        zeBoosterCore.setVolume(volumeControl.val())
     };
 
-    var configureMouseWheel = function () {
+    var initMouseWheel = function () {
         var mouseRpm = 0;
         $('.tachometer-container').on('mousewheel', function (e) {
             mouseRpm += e.deltaY;
@@ -39,10 +39,10 @@ var zeBoosterInitializer = (function () {
         });
     };
 
-    var configureActivationSound = function () {
+    var initActivationSound = function () {
         $('.tachometer-container')
             .mouseenter(function () {
-                zeBoosterCore.start(idlingLevel, volumeControl.val());
+                zeBoosterCore.start();
             })
             .mouseleave(function () {
                 zeBoosterCore.stop();
