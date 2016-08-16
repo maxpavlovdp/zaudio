@@ -37,7 +37,6 @@ var zeBoosterCore = (function () {
     }
 
     function configureUI() {
-        oscillograph(webAudioContext, zeSound);
         speedometer.init(zeSound.playbackRate);
 
         console.log("UI is configured")
