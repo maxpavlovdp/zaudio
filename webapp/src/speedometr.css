@@ -5,13 +5,26 @@
     padding: 0;
     box-sizing: border-box;
 }
-.tachometer-container {
+
+.hover-container {
+    background-color: rgba(139, 139, 139, 0.09);
     border: 9px;
     border-color: white;
     width: 48rem;
     height: 48rem;
     position: relative;
-    background-color: #8b8b8b;
+}
+.hover-container:hover .tachometer-container {
+    display: block;
+}
+.tachometer-container {
+    display: none;
+    border: 9px;
+    border-color: white;
+    width: 48rem;
+    height: 48rem;
+    position: relative;
+    background-color: rgba(139, 139, 139, 0);
 }
 .tachometer-container::before {
     content: "";

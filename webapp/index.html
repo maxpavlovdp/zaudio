@@ -16,56 +16,59 @@
 </head>
 
 <body>
-<section class="tachometer-container">
-    <input class="volume-control" type="range" orient="vertical" min="0" max="10" step="1" value="2">
-    <div class="tachometer">
-        <div class="inner-ring"></div>
-        <div class="outer-ring"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
-                class="tick"></span><span class="tick"></span>
+<div class="hover-container">
+    <section class="tachometer-container">
+        <input class="volume-control" type="range" orient="vertical" min="0" max="10" step="1" value="2">
+        <div class="tachometer">
+            <div class="inner-ring"></div>
+            <div class="outer-ring"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span><span
+                    class="tick"></span><span class="tick"></span>
+            </div>
+            <div class="digit-ring">
+                <span class="digit">0</span>
+                <span class="digit">20</span>
+                <span class="digit">40</span>
+                <span class="digit">60</span>
+                <span class="digit">80</span>
+                <span class="digit">100</span>
+                <span class="digit">120</span>
+                <span class="digit">140</span>
+                <span class="digit">160</span>
+                <span class="digit">180</span>
+                <span class="digit">200</span>
+                <span class="digit">220</span>
+                <span class="digit">240</span>
+            </div>
+            <div class="details">
+                <p class="speed"></p>
+                <p class="unit"></p>
+            </div>
+            <div class="progress"></div>
+            <footer class="visualizer">
+                <canvas id="visualizer" width="480" height="100"></canvas>
+            </footer>
         </div>
-        <div class="digit-ring">
-            <span class="digit">0</span>
-            <span class="digit">20</span>
-            <span class="digit">40</span>
-            <span class="digit">60</span>
-            <span class="digit">80</span>
-            <span class="digit">100</span>
-            <span class="digit">120</span>
-            <span class="digit">140</span>
-            <span class="digit">160</span>
-            <span class="digit">180</span>
-            <span class="digit">200</span>
-            <span class="digit">220</span>
-            <span class="digit">240</span>
-        </div>
-        <div class="details">
-            <p class="speed"></p>
-            <p class="unit"></p>
-        </div>
-        <div class="progress"></div>
-        <footer class="visualizer">
-            <canvas id="visualizer" width="480" height="100"></canvas>
-        </footer>
-    </div>
-    <div class="overlay"></div>
-</section>
+        <div class="overlay"></div>
+    </section>
+</div>
+
 
 </body>
 </html>
