@@ -1,15 +1,17 @@
 'use strict';
 // Entry point to start play with web audio toy :)
-$(document).ready(function() {
+$(document).ready(function () {
     zeBoosterInitializer.init()
 });
 
 var zeBoosterInitializer = (function () {
-    var idlingLevel = 350,
+    var idlingLevel = 400,
         volumeControl;
 
     var init = function () {
-        initMouseWheel();
+        initPedal();
+        initSound()
+
         initActivationSound();
         initVolumeControl();
 
@@ -23,20 +25,32 @@ var zeBoosterInitializer = (function () {
         });
     };
 
-    var initMouseWheel = function () {
-        var mouseRpm = 0;
+    var initPedal = function () {
+        var pedalPosition = 0;
         $('.tachometer-container').on('mousewheel', function (e) {
-            mouseRpm += e.deltaY;
-            //console.log(mouseRpm);
-            if (mouseRpm < 0) mouseRpm = 0;
-            if (mouseRpm > 800) mouseRpm = 800;
-            if (mouseRpm > idlingLevel) {
-                zeBoosterCore.accelerate(mouseRpm);
+            pedalPosition += e.deltaY;
+            if (pedalPosition < 0) pedalPosition = 0;
+            if (pedalPosition > 800) pedalPosition = 800;
+
+            //console.log("Mouse wheel position:" + pedalPosition);
+            $('.pedal-control').val(pedalPosition).change()
+        });
+    };
+
+    var initSound = function () {
+        $('.pedal-control').change(function () {
+            var pedalPosition = $('.pedal-control').val()
+            //console.log("Pedal position: " + pedalPosition)
+
+            if (pedalPosition > idlingLevel) {
+                zeBoosterCore.accelerate(pedalPosition);
             } else {
                 zeBoosterCore.accelerate(idlingLevel);
             }
-        });
-    };
+        })
+
+
+    }
 
     var initActivationSound = function () {
         $('.tachometer-container')

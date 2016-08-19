@@ -56,3 +56,11 @@ input[type=range][orient=vertical] {
     z-index: 100;
     top: 20px;
 }
+
+.pedal-control {
+    pointer-events: none;
+    position: inherit;
+    left: 224px;
+    z-index: 100;
+    top: 245px;
+}
