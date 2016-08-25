@@ -10,7 +10,7 @@ var speedometer = {
         this.digitValueMax = 160;
         var self = this;
         this.ticks.each(function (i) {
-            var angle = 210 - i * 3.33;
+            var angle = 210 - i * 3.075;
             var theta = self.deg2rad(angle);
             var radius = self.outerRingRadius + (i % 6 ? 0 : 4);
             var x = Math.cos(theta) * radius;
@@ -26,7 +26,7 @@ var speedometer = {
             });
         });
         this.digits.each(function (i) {
-            var angle = 210 - i * 20;
+            var angle = 210 - i * 18.4;
             var theta = self.deg2rad(angle);
             var x = Math.cos(theta) * self.digitRingRadius;
             var y = Math.sin(theta) * -self.digitRingRadius;
