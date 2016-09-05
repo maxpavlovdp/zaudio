@@ -19,4 +19,8 @@ describe('EduComponent', () => {
   it('should have its component name as default className', () => {
     expect(component.props.className).to.equal('edu-component');
   });
+
+  it('2+2=4', ()=> {
+    expect(2 + 2).to.equal(4)
+  })
 });

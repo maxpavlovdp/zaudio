@@ -7,6 +7,7 @@ https://github.com/react-webpack-generators/generator-react-webpack#readme
 -        https://mridgers.github.io/clink/ - Plugin for windows’ CMD
 
 1. react/redux dev tool for chrome
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
 2. yeoman for scafolding (react full stack)
 3. https://mridgers.github.io/clink/
 
