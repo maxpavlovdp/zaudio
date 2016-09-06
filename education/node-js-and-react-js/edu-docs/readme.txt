@@ -13,5 +13,3 @@ https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopl
 
 This is the link for the TodoApp that we built: http://jsbin.com/tayujiboyo/edit?js,output
 Try to refactor the todo click action, so it won’t depend on store anymore
-
-Just to remind you, I really recommend going through the videos Getting Started with Redux.
