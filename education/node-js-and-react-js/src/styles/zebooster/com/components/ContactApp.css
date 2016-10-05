@@ -1,0 +1,57 @@
+body {
+  background: #fff;
+  padding: 20px;
+}
+
+.sidepanel {
+  float: left;
+  width: 40%;
+
+input {
+  box-sizing: border-box;
+  display: block;
+  padding: 5px 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #ddf;
+  background-color: transparent;
+}
+}
+
+.main {
+  width: 59%;
+  margin-left: 40%;
+  padding-left: 30px;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+li > a {
+  display: block;
+  padding: 5px 10px;
+  color: #000;
+  text-decoration: none;
+
+&:hover {
+   background-color: #eef;
+ }
+
+img {
+  width: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+}
+
+li.active {
+  background-color: #ddf;
+}
+}
+
+img {
+  border-radius: 10px;
+}
