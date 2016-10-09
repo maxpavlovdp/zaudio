@@ -27,7 +27,7 @@ class Pedal extends React.Component {
     }
 
     render (){
-        return <input ref="element" className="pedal-control" type="range" min="0" max="240" step="1" defaultValue={this.state.gas} onInput={this.handleSpeed} disabled={!this.state.isEnable} />;
+        return <input ref="element" className="pedal-control" type="range" min="0" max="1" step="0.001" defaultValue={this.state.gas} onInput={this.handleSpeed} disabled={!this.state.isEnable} />;
     }
 }
 
