@@ -9,5 +9,6 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
+          - cd ./education/node-js-and-react-js
           - npm install
           - npm test
