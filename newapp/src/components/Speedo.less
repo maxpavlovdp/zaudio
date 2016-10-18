@@ -1,0 +1,99 @@
+@edge-color: #000;
+@edge-fill-color: #929292;
+@bg-color: #fff;
+@text-color: #000;
+@pointer-color: #000;
+
+svg.speedo {
+    border: 1px solid black;
+    height: 400px;
+    width: 400px;
+    .edge {
+        fill: @bg-color;
+        height: 100%;
+        stroke-dasharray: 4,2;
+        stroke-width: 1;
+        stroke: @edge-color;
+        width: 100%;
+    }
+    .edge-in {
+      fill: @edge-fill-color;
+      height: 100%;
+      stroke-dasharray: 4,2;
+      stroke-width: 1px;
+      stroke: @edge-color;
+      transform: translate(-9px, 200px) rotate(-45deg);
+      width: 100%;
+    }
+}
+
+.center-origin {
+  height: 400px;
+  transform-origin: 50% 50%;
+  transform: rotate(0deg);
+  width: 400px;
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+.pointer {
+  fill-rule: evenOdd;
+  fill: @pointer-color;
+  height: 100%;
+  stroke-dasharray: none;
+  stroke-width: 0.5;
+  stroke: @edge-color;
+  transform: translate(122px, 294px) rotate(132deg);
+  width: 100%;
+}
+
+.speed-figure {
+  div {
+    font-family: "Audiowide", serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    color: @text-color;
+  }
+}
+
+.speed-figure-0 {
+    transform: translate(75px,311px);
+}
+.speed-figure-20 {
+    transform: translate(34px,256px);
+}
+.speed-figure-40 {
+    transform: translate(17px,192px);
+}
+.speed-figure-60 {
+    transform: translate(28px,130px);
+}
+.speed-figure-80 {
+    transform: translate(60px,82px);
+}
+.speed-figure-100 {
+    transform: translate(106px,44px);
+}
+.speed-figure-120 {
+    transform: translate(184px,27px);
+}
+.speed-figure-140 {
+    transform: translate(264px,44px);
+}
+.speed-figure-160 {
+    transform: translate(311px,82px);
+}
+.speed-figure-180 {
+    transform: translate(341px,130px);
+}
+.speed-figure-200 {
+    transform: translate(350px,192px);
+}
+.speed-figure-220 {
+    transform: translate(339px,256px);
+}
+.speed-figure-240 {
+    transform: translate(299px,310px);
+}
