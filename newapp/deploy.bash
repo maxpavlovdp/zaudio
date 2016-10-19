@@ -6,12 +6,12 @@ git config --global user.name "Deploy user"
 git config --global push.default simple
 
 eval "$(ssh-agent -s)"
-ssh-add ./deploy
+
 mkdir -p ~/.ssh
 touch ~/.ssh/known_hosts
+ssh-add ./deploy
 ssh-keyscan github.com >> ~/.ssh/known_hosts
-less ~/.ssh/known_hosts
-git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
+git clone git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
 rm -rf *
