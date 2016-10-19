@@ -7,13 +7,14 @@ git config --global push.default simple
 
 eval "$(ssh-agent -s)"
 ssh-add ./deploy
-ls -la ~/.ssh/
-#echo -e "Host github.com (192.30.253.112)\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-#git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
-#
-#cd ./jetaudio
-#rm -rf *
-#cp -r ../public/* .
-#git add **
-#git commit -m "deploy from bitbucket pipeline"
-#git push
+mkdir -p ~/.ssh
+touch ~/.ssh/known_hosts
+echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/known_hosts
+git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
+
+cd ./jetaudio
+rm -rf *
+cp -r ../public/* .
+git add **
+git commit -m "deploy from bitbucket pipeline"
+git push
