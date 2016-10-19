@@ -9,7 +9,8 @@ eval "$(ssh-agent -s)"
 ssh-add ./deploy
 mkdir -p ~/.ssh
 touch ~/.ssh/known_hosts
-echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/known_hosts
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+less ~/.ssh/known_hosts
 git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
