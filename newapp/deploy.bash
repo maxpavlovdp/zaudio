@@ -7,7 +7,7 @@ git config --global push.default simple
 
 eval "$(ssh-agent -s)"
 ssh-add ./deploy
-echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+echo -e "Host github.com (192.30.253.112)\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
