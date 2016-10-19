@@ -13,3 +13,10 @@ pipelines:
           - cd ./education/node-js-and-react-js
           - npm install
           - npm test
+  branches:
+    - develop:
+      - step:
+        - script:
+          - npm install
+          - webpack -p
+          - ./deploy.bash
