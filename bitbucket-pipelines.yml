@@ -14,9 +14,9 @@ pipelines:
           - npm install
           - npm test
   branches:
-    - develop:
+    develop:
       - step:
-        - script:
+          script:
           - npm install
           - webpack -p
           - ./deploy.bash
