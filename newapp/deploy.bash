@@ -9,6 +9,7 @@ eval "$(ssh-agent -s)"
 
 mkdir -p ~/.ssh
 touch ~/.ssh/known_hosts
+chmod 600 ./deploy
 ssh-add ./deploy
 ls ~/.ssh
 ssh-keyscan github.com >> ~/.ssh/known_hosts
