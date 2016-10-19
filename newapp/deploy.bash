@@ -7,6 +7,7 @@ git config --global push.default simple
 
 eval "$(ssh-agent -s)"
 ssh-add ./deploy
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone --depth 1  git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
