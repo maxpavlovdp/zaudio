@@ -10,6 +10,7 @@ eval "$(ssh-agent -s)"
 mkdir -p ~/.ssh
 touch ~/.ssh/known_hosts
 ssh-add ./deploy
+ls ~/.ssh
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 git clone git@github.com:maxpavlovdp/jetaudio.git
 
