@@ -19,5 +19,6 @@ pipelines:
           script:
           - cd ./newapp
           - npm install
+          - npm install webpack
           - webpack -p
           - ./deploy.bash
