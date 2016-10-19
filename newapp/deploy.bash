@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+set -x
 git config --global user.email "maxpavlov.dp@gmail.com"
 git config --global user.name "Deploy user"
 git config --global push.default simple
 
-git clone https://github.com/maxpavlovdp/jetaudio.git
+git clone --depth 1  https://github.com/maxpavlovdp/jetaudio.git
 cd ./jetaudio
 rm -rf *
 cp -r ../public/* .
