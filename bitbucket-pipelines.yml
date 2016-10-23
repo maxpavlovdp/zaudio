@@ -14,7 +14,7 @@ pipelines:
           - npm install
           - npm test
   branches:
-    develop:
+    master:
       - step:
           script:
           - cd ./newapp
