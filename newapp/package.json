@@ -1,30 +1,66 @@
 {
+  "private": true,
   "name": "ze-booster",
-  "version": "1.0.0",
-  "description": "0.1.0",
+  "version": "0.0.1",
+  "description": "ELECTRIC VIHECLE SOUND GENERATOR PLATFORM",
   "main": "index.js",
   "scripts": {
-    "devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8090 --host 127.0.0.1"
+    "clean": "rimraf dist/*",
+    "copy": "copyfiles -f ./src/index.html ./src/favicon.ico ./dist",
+    "dist": "npm run copy & webpack --env=dist",
+    "lint": "eslint ./src",
+    "posttest": "npm run lint",
+    "release:major": "npm version major && npm publish && git push --follow-tags",
+    "release:minor": "npm version minor && npm publish && git push --follow-tags",
+    "release:patch": "npm version patch && npm publish && git push --follow-tags",
+    "serve": "node server.js --env=dev",
+    "serve:dist": "node server.js --env=dist",
+    "start": "node server.js --env=dev",
+    "test": "karma start",
+    "test:watch": "karma start --autoWatch=true --singleRun=false"
   },
-  "author": "",
+  "author": "ZE Booster team",
   "license": "ISC",
   "dependencies": {
     "bezier-easing": "^2.0.3",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "core-js": "^2.0.0",
+    "normalize.css": "^4.0.0"
   },
   "devDependencies": {
+    "react-hot-loader": "^1.2.9",
     "autoprefixer-loader": "^3.2.0",
     "babel": "^6.5.2",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+
+    "open": "0.0.5",
+    "rimraf": "^2.4.3",
+
+    "isparta-instrumenter-loader": "^1.0.0",
+    "phantomjs-prebuilt": "^2.0.0",
+    "null-loader": "^0.1.1",
+    "karma": "^1.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-coverage": "^1.0.0",
+    "karma-mocha": "^1.0.0",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-webpack": "^1.7.0",
+    "chai": "^3.2.0",
+    "mocha": "^3.0.0",
+    "react-addons-test-utils": "^15.0.0",
+
     "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
+
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.0"

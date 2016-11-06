@@ -1,44 +1,32 @@
-var webpack = require('webpack');
+'use strict';
 
-module.exports = {
-    entry: "./src/main.js",
-    output: {
-        path: __dirname + '/public/build/',
-        publicPath: "build/",
-        filename: "bundle.js"
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loader: "babel",
-                exclude: [/node_modules/, /bower_components/, /public/],
-                query: {
-                    presets: ['es2015', 'react']
-                }
-            },
-            {
-                test: /\.jsx$/,
-                loader: "babel",
-                exclude: [/node_modules/, /bower_components/, /public/],
-                query: {
-                    presets: ['es2015', 'react']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: "style!css!autoprefixer",
-                exclude: [/node_modules/, /public/]
-            },
-            {
-                test: /\.less$/,
-                loader: "style!css!autoprefixer!less",
-                exclude: [/node_modules/, /public/]
-            },
-            {
-                test: /\.ogg$/,
-                loader: "file?name=sound/[name].[ext]"
-            }
-        ]
-    }
-};
+const path = require('path');
+const args = require('minimist')(process.argv.slice(2));
+
+// List of allowed environments
+const allowedEnvs = ['dev', 'dist', 'test'];
+
+// Set the correct environment
+let env;
+if (args._.length > 0 && args._.indexOf('start') !== -1) {
+  env = 'test';
+} else if (args.env) {
+  env = args.env;
+} else {
+  env = 'dev';
+}
+process.env.REACT_WEBPACK_ENV = env;
+
+/**
+ * Build the webpack configuration
+ * @param  {String} wantedEnv The wanted environment
+ * @return {Object} Webpack config
+ */
+function buildConfig(wantedEnv) {
+  let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
+  let validEnv = isValid ? wantedEnv : 'dev';
+  let config = require(path.join(__dirname, 'cfg/' + validEnv));
+  return config;
+}
+
+module.exports = buildConfig(env);
