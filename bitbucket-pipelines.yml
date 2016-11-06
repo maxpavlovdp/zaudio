@@ -10,7 +10,7 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - cd ./education/node-js-and-react-js
+          - cd ./newapp
           - npm install
           - npm test
   branches:
