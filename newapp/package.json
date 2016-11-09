@@ -41,6 +41,7 @@
     "open": "0.0.5",
     "rimraf": "^2.4.3",
     "minimist": "^1.2.0",
+    "copyfiles": "^1.0.0",
 
     "eslint": "^3.0.0",
     "eslint-loader": "^1.0.0",

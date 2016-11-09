@@ -17,7 +17,7 @@ git clone git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
 rm -rf *
-cp -r ../public/* .
+cp -r ../dist/* .
 git add **
 git commit -m "deploy from bitbucket pipeline"
 git push
