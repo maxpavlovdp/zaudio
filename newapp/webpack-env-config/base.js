@@ -16,7 +16,7 @@ module.exports = {
   devtool: 'eval',
   output: {
     path: path.join(__dirname, '/../dist/build'),
-    filename: 'app.js',
+    filename: 'bundle.js',
     publicPath: defaultSettings.publicPath
   },
   resolve: {
