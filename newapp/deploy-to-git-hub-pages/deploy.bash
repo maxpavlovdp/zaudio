@@ -13,7 +13,7 @@ chmod 600 ./deploy_rsa
 ssh-add ./deploy_rsa
 
 ssh-keyscan github.com >> ~/.ssh/known_hosts
-git clone --depth=1 git@github.com:maxpavlovdp/jetaudio.git
+git clone git@github.com:maxpavlovdp/jetaudio.git
 
 cd ./jetaudio
 rm -rf *

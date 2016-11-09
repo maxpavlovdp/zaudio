@@ -21,5 +21,5 @@ pipelines:
           - npm install webpack -g
           - npm run test
           - npm run dist
-          - cd ./deployToGitHubPages
+          - cd ./deploy-to-git-hub-pages
           - ./deploy.bash
