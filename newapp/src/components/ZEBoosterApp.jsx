@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CarSimulator from './CarSimulator.jsx'
-import CarSoundEngine from './../CarSoundEngine.js'
+import CarSoundEngine from './CarSoundEngine.js'
 
 let acceleration                 =  require("../sound/acceleration.ogg"),
     engineOn                     =  require("../sound/engineOn.ogg"),
