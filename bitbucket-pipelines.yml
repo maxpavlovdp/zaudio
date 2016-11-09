@@ -19,5 +19,7 @@ pipelines:
           - cd ./newapp
           - npm install
           - npm install webpack -g
+          - npm run test
           - npm run dist
+          - cd ./deployToGitHubPages
           - ./deploy.bash
