@@ -3,10 +3,6 @@ set -x
 
 cd "$(dirname "$0")"
 
-# Build project
-cd ../
-npm run dist
-
 eval "$(ssh-agent -s)"
 
 # Configure github pages access
