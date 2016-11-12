@@ -9,17 +9,15 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - cd ./newapp
+          - cd ./webapp
           - npm install
           - npm test
   branches:
     BOOST-103_testingFrameworkConfiguration:
       - step:
           script:
-          - cd ./newapp
+          - cd ./webapp
           - npm install
           - npm install webpack -g
           - npm run test
-          - npm run dist
-          - cd ./deploy-to-git-hub-pages
-          - ./deploy.bash
+          - ./deploy-to-git-hub-pages/deploy.bash

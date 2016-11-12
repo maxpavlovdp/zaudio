@@ -5,9 +5,6 @@ let srcPath = path.join(__dirname, '/../src/');
 
 let baseConfig = require('./base');
 
-// Add needed plugins here
-let BowerWebpackPlugin = require('bower-webpack-plugin');
-
 module.exports = {
   devtool: 'eval',
   module: {
@@ -41,16 +38,10 @@ module.exports = {
   resolve: {
     extensions: [ '', '.js', '.jsx' ],
     alias: {
-      actions: srcPath + 'actions/',
       helpers: path.join(__dirname, '/../test/helpers'),
       components: srcPath + 'components/',
       sound: srcPath + 'sound/',
       config: srcPath + 'config/' + process.env.REACT_WEBPACK_ENV
     }
-  },
-  plugins: [
-    new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
-    })
-  ]
+  }
 };
