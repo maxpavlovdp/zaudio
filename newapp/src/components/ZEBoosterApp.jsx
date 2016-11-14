@@ -3,25 +3,6 @@ import React from 'react';
 import CarSimulator from './CarSimulator.jsx'
 import CarSoundEngine from './../CarSoundEngine.js'
 
-let acceleration = require("../sounds/v1/acceleration.ogg"),
-    engineOn = require("../sounds/v1/engineOn.ogg");
-var soundSchemeV1 = {
-    start: {
-        link: engineOn
-    },
-    main: [
-        {
-            link: acceleration,
-            speed: {
-                margins: [0, 140],
-                volume: [[0, 1], [240, 1.5]]
-            },
-            loop: true
-        }
-    ]
-};
-
-
 let acceleration100FunLoop = require("../sounds/v2/acceleration100+FunLoop.ogg"),
     acceleration160CrazyLoop = require("../sounds/v2/acceleration160+CrazyLoop.ogg"),
     accelerationLoop = require("../sounds/v2/accelerationLoop.ogg"),
@@ -78,6 +59,24 @@ var soundSchemeV2 = {
     stop: {
         link: engineOffSample
     }
+};
+
+let acceleration = require("../sounds/v1/acceleration.ogg"),
+    engineOn = require("../sounds/v1/engineOn.ogg");
+var soundSchemeV1 = {
+    start: {
+        link: engineOn
+    },
+    main: [
+        {
+            link: acceleration,
+            speed: {
+                margins: [0, 140],
+                volume: [[0, 1], [240, 1.5]]
+            },
+            loop: true
+        }
+    ]
 };
 
 
