@@ -3,6 +3,7 @@
 
 #All idea files
 .idea/**
+ze-booster.iml
 
 # All logs
 **/*.log
