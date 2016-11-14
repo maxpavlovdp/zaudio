@@ -8,7 +8,7 @@ image: node:4.6.0
 pipelines:
   default:
     - step:
-        script: # Modify the commands below to build your repository.
+        script: # Just build app using webpack
           - cd ./webapp
           - npm install
           - npm install webpack -g
@@ -16,7 +16,7 @@ pipelines:
   branches:
     BOOST-98_soundDesignDevelopment:
       - step:
-          script:
+          script: # Deploy to git hub pages
           - cd ./webapp
           - npm install
           - npm install webpack -g
