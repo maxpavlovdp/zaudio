@@ -9,11 +9,15 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
+          - cd ./webapp
+          - npm install
+          - npm install webpack -g
+          - webpack -p
   branches:
     BOOST-98_soundDesignDevelopment:
       - step:
           script:
-          - cd ./newapp
+          - cd ./webapp
           - npm install
           - npm install webpack -g
           - webpack -p
