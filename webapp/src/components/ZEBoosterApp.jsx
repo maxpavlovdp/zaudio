@@ -3,6 +3,28 @@ import React from 'react';
 import CarSimulator from './CarSimulator.jsx'
 import CarSoundEngine from './../CarSoundEngine.js'
 
+let engineOnSampleV3 = require("../sounds/v3/engineOnSampleV3.ogg"),
+    engineOffSampleV3 = require("../sounds/v3/engineOffSampleV3.ogg"),
+    idlingLoopV3 = require("../sounds/v3/idlingLoopV3.ogg");
+var soundSchemeV3 = {
+    start: {
+        link: engineOnSampleV3
+    },
+    main: [
+        {
+            link: idlingLoopV3,
+            speed: {
+                margins: [0, 250],
+                volume: [[0, 0.4], [150, 1]]
+            },
+            loop: true
+        },
+    ],
+    stop: {
+        link: engineOffSampleV3
+    }
+};
+
 let acceleration100FunLoop = require("../sounds/v2/acceleration100+FunLoop.ogg"),
     acceleration160CrazyLoop = require("../sounds/v2/acceleration160+CrazyLoop.ogg"),
     accelerationLoop = require("../sounds/v2/accelerationLoop.ogg"),
@@ -87,6 +109,8 @@ class ZEB extends React.Component {
 
     render() {
         return <div>
+            <h1>V3</h1>
+            <CarSimulator soundgen={new CarSoundEngine(soundSchemeV3)}/>
             <h1>V2</h1>
             <CarSimulator soundgen={new CarSoundEngine(soundSchemeV2)}/>
             <h1>V1</h1>
