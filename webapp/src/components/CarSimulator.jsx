@@ -4,6 +4,7 @@ import BezierEasing from 'bezier-easing';
 
 import Speedometer from './Speedo.jsx'
 import Pedal from './Pedal.jsx';
+import ModeIndicator from './ModeIndicator';
 import StartStop from './StartStop.jsx';
 
 import './CarSimulator.less';
@@ -87,6 +88,7 @@ class CarSimulator extends React.Component {
                     <div className="controls">
                         <StartStop speedChange={this.handleStartStop}/>
                         <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed} />
+                        <ModeIndicator />
                     </div>
                 </div>;
     }
