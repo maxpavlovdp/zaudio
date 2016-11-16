@@ -1,7 +1,7 @@
 import BezierEasing from 'bezier-easing';
 
 import AppConstants from './AppConstants'
-import __ZEBCONFIG__ from './config'
+import __ZEBCONFIG__ from './config/config'
 
 class CarSoundEngine {
 

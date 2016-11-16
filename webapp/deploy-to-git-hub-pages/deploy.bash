@@ -18,7 +18,7 @@ git clone git@github.com:maxpavlovdp/jetaudio.git
 cd ./jetaudio
 rm -rf *
 # Copy prod config
-cp ../../public/prodConfig.js ../../public/config.js
+cp ././../src/config/prodConfig.js ../../public/config.js
 cp -r ../../public/* .
 git add **
 git commit -m "deploy from bitbucket pipeline"
