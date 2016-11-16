@@ -1,5 +1,8 @@
 import BezierEasing from 'bezier-easing';
 
+import AppConstants from './AppConstants'
+import __ZEBCONFIG__ from './config'
+
 class CarSoundEngine {
 
     constructor(config = {}) {
@@ -82,13 +85,17 @@ class CarSoundEngine {
                 afterSrartSounds.forEach((sound) => {
                     sound.gainNode.gain.value = 0;
                     sound.audioSource.start();
-                    console.log("start " + sound.link)
+                    if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                        console.log("start " + sound.link)
+                    }
                     sound.started = true;
                 });
                 resolve();
             });
             this.config.start.audioSource.start();
-            console.log("start " + this.config.start.link)
+            if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                console.log("start " + this.config.start.link)
+            }
             this.config.start.audioSource.started = true;
 
             this.started = true;
@@ -101,7 +108,9 @@ class CarSoundEngine {
             for (let o in this.config) {
                 if ('audioSource' in this.config[o]) {
                     this.config[o].audioSource.stop();
-                    console.log("stop " + this.config[o].link)
+                    if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                        console.log("stop " + this.config[o].link)
+                    }
                     this.config[o].started = false;
                     delete this.config[o].audioSource;
                 } else if (this.config[o] instanceof Array) {
@@ -109,7 +118,9 @@ class CarSoundEngine {
                         if ('audioSource' in el) {
                             el.started = false;
                             el.audioSource.stop();
-                            console.log("stop " + el.link);
+                            if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                                console.log("stop " + el.link);
+                            }
                             delete el.audioSource;
                         }
                     });
@@ -121,7 +132,9 @@ class CarSoundEngine {
                     resolve();
                 });
                 this.config.stop.audioSource.start();
-                console.log("start " + this.config.stop.link)
+                if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                    console.log("start " + this.config.stop.link)
+                }
                 this.config.stop.audioSource.started = true;
                 this.started = false;
             } else {
@@ -173,7 +186,9 @@ class CarSoundEngine {
                             this.createSound(el);
                             el.gainNode.gain.value = el.speed.volume[0][1];
                             el.audioSource.start();
-                            console.log("start " + el.link)
+                            if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                                console.log("start " + el.link)
+                            }
                             el.started = true;
                         }
                     } else {
@@ -183,13 +198,17 @@ class CarSoundEngine {
                             } else {
                                 this.createSound(el);
                                 el.audioSource.start();
-                                console.log("start " + el.link)
+                                if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                                    console.log("start " + el.link)
+                                }
                                 el.started = true;
                             }
                         }  else {
                             if (el.started) {
                                 el.audioSource.stop();
-                                console.log("stop " + el.link)
+                                if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                                    console.log("stop " + el.link)
+                                }
                                 el.started = false;
                             }
                         }
@@ -197,7 +216,9 @@ class CarSoundEngine {
                 } else {
                     if (el.started) {
                         el.audioSource.stop();
-                        console.log("stop " + el.link)
+                        if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                            console.log("stop " + el.link)
+                        }
                         el.started = false;
                     }
                 }
