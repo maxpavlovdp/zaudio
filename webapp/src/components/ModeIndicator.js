@@ -10,8 +10,7 @@ class ModeIndicator extends React.Component {
 
     render() {
         return (
-            <input ref="modeIndicator" disabled="true" className="mode-indicator" type="range" min="-3" max="5" step="0.01"
-                   defaultValue={0}/>
+            <input ref="modeIndicator" disabled="true" className="mode-indicator" value={this.props.chargeBattery} type="range" min="-16000" max="35000" step="0.01"/>
         );
     }
 }

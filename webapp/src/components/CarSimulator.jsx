@@ -7,6 +7,8 @@ import Pedal from './Pedal.jsx';
 import ModeIndicator from './ModeIndicator';
 import StartStop from './StartStop.jsx';
 
+import CarMovementCalcutator from '../CarMovementCalcutator'
+
 import './CarSimulator.less';
 
 class CarSimulator extends React.Component {
@@ -15,34 +17,38 @@ class CarSimulator extends React.Component {
         this.handleSpeed = this.handleSpeed.bind(this);
         this.handleStartStop = this.handleStartStop.bind(this);
         this.state = {
-            speed : 0,
-            power : 0,
-            pedalIsEnable : false,
-            timer : null
+            speed: 0,
+            power: 0,
+            chargeBattery: 0,
+            pedalIsEnable: false,
+            timer: null
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.s = this.props.soundgen.init()
 
     }
 
-    handleStartStop (status) {
-        if(!status) {
+    handleStartStop(status) {
+        if (!status) {
             this.s.then(sg => {
                 sg.start().then(() => {
                     var fps = 30;
                     var timer = setInterval(() => {
                         const   Mass = 2590;
                         let speed = this.state.speed * 1000 / 3600,
-                            power = this.state.power * 8 / (speed+1),
-                            antiPower = 0.24*1.29*2.34*Math.pow(speed, 2) + 0.015*Mass + 0.08*power,
+                            power = this.state.power * 8 / (speed + 1),
+                            antiPower = CarMovementCalcutator.calculateAntiPower(speed, power, Mass),
                             recuperationPower = 0,
-                            def = (power-antiPower) / Mass;
+                            def = (power - antiPower) / Mass;
 
-                        if(def < -0.01501){
-                            recuperationPower = -def*50000+3000;
-                            def = (power-antiPower-recuperationPower) / Mass;
+                        if (def < -0.01501) {
+                            recuperationPower = -def * 50000 + 3000;
+                            def = (power - antiPower - recuperationPower) / Mass;
+                            this.state.chargeBattery = -recuperationPower
+                        } else {
+                            this.state.chargeBattery = this.state.power
                         }
 
                         let newSpeed = (speed + def/fps) * 3600 / 1000;
@@ -60,7 +66,7 @@ class CarSimulator extends React.Component {
                     });
                 });
             });
-        } else{
+        } else {
             this.s.then(sg => {
                 sg.stop().then(() => {
                     clearInterval(this.state.timer);
@@ -75,24 +81,23 @@ class CarSimulator extends React.Component {
         }
     }
 
-    handleSpeed (power) {
+    handleSpeed(power) {
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);
         this.setState({
-            power: easing(power)*35000
+            power: easing(power) * 35000
         });
     }
 
-    render () {
-        return  <div className="car">
-                    <Speedometer speed={this.state.speed} />
-                    <div className="controls">
-                        <StartStop speedChange={this.handleStartStop}/>
-                        <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed} />
-                        <ModeIndicator />
-                    </div>
-                </div>;
+    render() {
+        return <div className="car">
+            <Speedometer speed={this.state.speed}/>
+            <div className="controls">
+                <StartStop speedChange={this.handleStartStop}/>
+                <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
+                <ModeIndicator chargeBattery={this.state.chargeBattery}/>
+            </div>
+        </div>;
     }
 }
 
 export default CarSimulator
-
