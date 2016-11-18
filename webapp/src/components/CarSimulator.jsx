@@ -5,9 +5,10 @@ import BezierEasing from 'bezier-easing';
 import Speedometer from './Speedo.jsx'
 import Pedal from './Pedal.jsx';
 import ModeIndicator from './ModeIndicator';
+import AccelerationIndicator from './AccelerationIndicator';
 import StartStop from './StartStop.jsx';
 
-import CarMovementCalcutator from '../CarMovementCalcutator'
+import CarMathUtil from '../CarMovementCalcutator'
 
 import './CarSimulator.less';
 
@@ -20,6 +21,7 @@ class CarSimulator extends React.Component {
             speed: 0,
             power: 0,
             chargeBattery: 0,
+            acceleration: 0,
             pedalIsEnable: false,
             timer: null
         };
@@ -37,9 +39,9 @@ class CarSimulator extends React.Component {
                     var fps = 30;
                     var timer = setInterval(() => {
                         const   Mass = 2590;
-                        let speed = this.state.speed * 1000 / 3600,
+                        let speed = CarMathUtil.kmHToMs(this.state.speed),
                             power = this.state.power * 8 / (speed + 1),
-                            antiPower = CarMovementCalcutator.calculateAntiPower(speed, power, Mass),
+                            antiPower = CarMathUtil.calculateAntiPower(speed, power, Mass),
                             recuperationPower = 0,
                             def = (power - antiPower) / Mass;
 
@@ -51,7 +53,8 @@ class CarSimulator extends React.Component {
                             this.state.chargeBattery = this.state.power
                         }
 
-                        let newSpeed = (speed + def/fps) * 3600 / 1000;
+                        let newSpeed = CarMathUtil.msToKmH(speed + def/fps);
+                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000/fps)
 
                         this.setState({
                             speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed
@@ -95,6 +98,7 @@ class CarSimulator extends React.Component {
                 <StartStop speedChange={this.handleStartStop}/>
                 <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator chargeBattery={this.state.chargeBattery}/>
+                <AccelerationIndicator acceleration={this.state.acceleration}/>
             </div>
         </div>;
     }
