@@ -36,7 +36,7 @@ class CarSimulator extends React.Component {
                 sg.start().then(() => {
                     var fps = 30;
                     var timer = setInterval(() => {
-                        const   Mass = 2590;
+                        const Mass = 2590;
                         let speed = this.state.speed * 1000 / 3600,
                             power = this.state.power * 8 / (speed + 1),
                             antiPower = CarMovementCalcutator.calculateAntiPower(speed, power, Mass),
@@ -46,12 +46,18 @@ class CarSimulator extends React.Component {
                         if (def < -0.01501) {
                             recuperationPower = -def * 50000 + 3000;
                             def = (power - antiPower - recuperationPower) / Mass;
-                            this.state.chargeBattery = -recuperationPower
+
+                            this.setState({
+                                chargeBattery: -recuperationPower
+                            })
                         } else {
-                            this.state.chargeBattery = this.state.power
+                            this.setState({
+
+                                chargeBattery: this.state.power
+                            })
                         }
 
-                        let newSpeed = (speed + def/fps) * 3600 / 1000;
+                        let newSpeed = (speed + def / fps) * 3600 / 1000;
 
                         this.setState({
                             speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed
