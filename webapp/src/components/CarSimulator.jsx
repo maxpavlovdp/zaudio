@@ -48,9 +48,14 @@ class CarSimulator extends React.Component {
                         if (def < -0.01501) {
                             recuperationPower = -def * 50000 + 3000;
                             def = (power - antiPower - recuperationPower) / Mass;
-                            this.state.chargeBattery = -recuperationPower
+
+                            this.setState({
+                                chargeBattery: -recuperationPower
+                            })
                         } else {
-                            this.state.chargeBattery = this.state.power
+                            this.setState({
+                                chargeBattery: this.state.power
+                            })
                         }
 
                         let newSpeed = CarMathUtil.msToKmH(speed + def/fps);
