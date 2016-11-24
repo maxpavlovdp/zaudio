@@ -12,10 +12,10 @@ class CarSoundEngine {
 
         this.config = config;
     }
-    init() {
+    init(volume) {
         this.gainNode = CarSoundEngine.webAudioContext.createGain();
         this.gainNode.connect(CarSoundEngine.webAudioContext.destination);
-        this.gainNode.gain.value = 1;
+        this.gainNode.gain.value = volume;
         this.started = false;
 
 
@@ -25,6 +25,11 @@ class CarSoundEngine {
                 resolve(this);
             });
         });
+    }
+
+    changeVolume(volume) {
+        this.gainNode.gain.value = volume
+        console.log("volume in car sim: " +volume)
     }
 
     initConfig(){
@@ -58,7 +63,7 @@ class CarSoundEngine {
 
     createSound(sound, onended) {
         sound.gainNode = CarSoundEngine.webAudioContext.createGain();
-        sound.gainNode.connect(CarSoundEngine.webAudioContext.destination);
+        sound.gainNode.connect(this.gainNode);
         if(sound.speed && sound.speed.volume){
             sound.gainNode.gain.value = sound.speed.volume[0][1];
         }
