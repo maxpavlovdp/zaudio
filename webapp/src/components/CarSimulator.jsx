@@ -2,12 +2,13 @@ import React from 'react';
 
 import BezierEasing from 'bezier-easing';
 
-import Speedometer from './Speedo.jsx';
-import Pedal from './Pedal.jsx';
-import VolumeInputRange from './VolumeInputRange';
-import ModeIndicator from './ModeIndicator';
-import AccelerationIndicator from './AccelerationIndicator';
-import StartStop from './StartStop.jsx';
+import Speedometer from './indicators/Speedo.jsx';
+import ModeIndicator from './indicators/ModeIndicator';
+import AccelerationIndicator from './indicators/AccelerationIndicator';
+
+import Pedal from './controls/Pedal.jsx';
+import VolumeInputRange from './controls/VolumeInputRange';
+import StartStop from './controls/StartStop.jsx';
 
 import CarMathUtil from '../CarMovementCalcutator';
 
@@ -29,8 +30,7 @@ class CarSimulator extends React.Component {
     }
 
     componentDidMount() {
-        // console.log(VolumeInputRange.getVolume)
-        this.s = this.props.soundgen.init(1)
+        this.s = this.props.soundgen.init()
     }
 
     handleStartStop(status) {

@@ -2,6 +2,7 @@ import BezierEasing from 'bezier-easing';
 
 import AppConstants from './AppConstants'
 import __ZEBCONFIG__ from './config/config'
+import {defaultVolume} from './components/controls/VolumeInputRange'
 
 class CarSoundEngine {
 
@@ -12,12 +13,11 @@ class CarSoundEngine {
 
         this.config = config;
     }
-    init(volume) {
+    init() {
         this.gainNode = CarSoundEngine.webAudioContext.createGain();
         this.gainNode.connect(CarSoundEngine.webAudioContext.destination);
-        this.gainNode.gain.value = volume;
+        this.gainNode.gain.value = defaultVolume
         this.started = false;
-
 
 
         return new Promise((resolve, reject) => {
@@ -29,7 +29,6 @@ class CarSoundEngine {
 
     changeVolume(volume) {
         this.gainNode.gain.value = volume
-        console.log("volume in car sim: " +volume)
     }
 
     initConfig(){
