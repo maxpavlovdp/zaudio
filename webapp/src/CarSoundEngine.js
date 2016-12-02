@@ -2,6 +2,7 @@ import BezierEasing from 'bezier-easing';
 
 import AppConstants from './AppConstants'
 import __ZEBCONFIG__ from './config/config'
+import {getVolume} from './components/controls/VolumeControl'
 
 class CarSoundEngine {
 
@@ -15,9 +16,8 @@ class CarSoundEngine {
     init() {
         this.gainNode = CarSoundEngine.webAudioContext.createGain();
         this.gainNode.connect(CarSoundEngine.webAudioContext.destination);
-        this.gainNode.gain.value = 1;
+        this.gainNode.gain.value = getVolume()
         this.started = false;
-
 
 
         return new Promise((resolve, reject) => {
@@ -25,6 +25,10 @@ class CarSoundEngine {
                 resolve(this);
             });
         });
+    }
+
+    changeVolume(volume) {
+        this.gainNode.gain.value = volume
     }
 
     initConfig(){
@@ -58,7 +62,7 @@ class CarSoundEngine {
 
     createSound(sound, onended) {
         sound.gainNode = CarSoundEngine.webAudioContext.createGain();
-        sound.gainNode.connect(CarSoundEngine.webAudioContext.destination);
+        sound.gainNode.connect(this.gainNode);
         if(sound.speed && sound.speed.volume){
             sound.gainNode.gain.value = sound.speed.volume[0][1];
         }

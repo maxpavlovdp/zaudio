@@ -2,13 +2,15 @@ import React from 'react';
 
 import BezierEasing from 'bezier-easing';
 
-import Speedometer from './Speedo.jsx'
-import Pedal from './Pedal.jsx';
-import ModeIndicator from './ModeIndicator';
-import AccelerationIndicator from './AccelerationIndicator';
-import StartStop from './StartStop.jsx';
+import Speedometer from './indicators/Speedo.jsx';
+import ModeIndicator from './indicators/ModeIndicator';
+import AccelerationIndicator from './indicators/AccelerationIndicator';
 
-import CarMathUtil from '../CarMovementCalcutator'
+import Pedal from './controls/Pedal.jsx';
+import VolumeInputRange from './controls/VolumeControl';
+import StartStop from './controls/StartStop.jsx';
+
+import CarMathUtil from '../CarMovementCalcutator';
 
 import './CarSimulator.less';
 
@@ -29,7 +31,6 @@ class CarSimulator extends React.Component {
 
     componentDidMount() {
         this.s = this.props.soundgen.init()
-
     }
 
     handleStartStop(status) {
@@ -104,6 +105,7 @@ class CarSimulator extends React.Component {
                 <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
+                <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
         </div>;
     }
