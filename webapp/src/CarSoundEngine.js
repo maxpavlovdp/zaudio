@@ -2,7 +2,7 @@ import BezierEasing from 'bezier-easing';
 
 import AppConstants from './AppConstants'
 import __ZEBCONFIG__ from './config/config'
-import {defaultVolume} from './components/controls/VolumeInputRange'
+import {getVolume} from './components/controls/VolumeControl'
 
 class CarSoundEngine {
 
@@ -16,7 +16,7 @@ class CarSoundEngine {
     init() {
         this.gainNode = CarSoundEngine.webAudioContext.createGain();
         this.gainNode.connect(CarSoundEngine.webAudioContext.destination);
-        this.gainNode.gain.value = defaultVolume
+        this.gainNode.gain.value = getVolume()
         this.started = false;
 
 

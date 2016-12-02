@@ -7,7 +7,7 @@ import ModeIndicator from './indicators/ModeIndicator';
 import AccelerationIndicator from './indicators/AccelerationIndicator';
 
 import Pedal from './controls/Pedal.jsx';
-import VolumeInputRange from './controls/VolumeInputRange';
+import VolumeInputRange from './controls/VolumeControl';
 import StartStop from './controls/StartStop.jsx';
 
 import CarMathUtil from '../CarMovementCalcutator';
