@@ -20,7 +20,7 @@ class StartStop extends React.Component {
     }
 
     render (){
-        return <button className="start-stop-button" onClick={this.handleClick}>{this.state.isOn ? 'Stop' : 'Start'}</button>;
+        return <button className="start-stop-button" onClick={this.handleClick}>{this.state.isOn ? 'Stop' : 'Start'}</button>
     }
 }
 
