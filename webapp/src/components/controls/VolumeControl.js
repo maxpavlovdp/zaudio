@@ -41,7 +41,7 @@ export default class VolumeInputRange extends React.Component {
                 <input className="volume-input-range" onChange={this.handleVolumeChange} value={this.state.volume}
                        type="range" min="0"
                        max="1" step="0.01"/>
-                <div className="volume-input-text">Volume</div>
+                <div className="volume-input-name">Volume</div>
             </div>
         );
     }
