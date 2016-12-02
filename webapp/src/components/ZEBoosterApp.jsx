@@ -162,7 +162,7 @@ class ZEB extends React.Component {
             <CarSimulator soundgen={new CarSoundEngine(soundSchemeV2)}/>
             <h1>V1</h1>
             <CarSimulator soundgen={new CarSoundEngine(soundSchemeV1)}/>
-        </div>;
+        </div>
     }
 }
 

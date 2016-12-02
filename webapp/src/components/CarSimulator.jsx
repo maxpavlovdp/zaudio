@@ -107,7 +107,7 @@ class CarSimulator extends React.Component {
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
-        </div>;
+        </div>
     }
 }
 
