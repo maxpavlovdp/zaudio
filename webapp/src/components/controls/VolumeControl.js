@@ -5,7 +5,8 @@ const defaultVolume = 0.3
 export function getVolume() {
     let savedVolume = cookie.load('volume')
     if (savedVolume) {
-        return savedVolume
+        // console.log(savedVolume)
+        return savedVolume == 0 ? 0.1 : savedVolume
     } else {
         return defaultVolume
     }
@@ -17,7 +18,6 @@ export default class VolumeInputRange extends React.Component {
         super(props)
         this.handleVolumeChange = this.handleVolumeChange.bind(this)
     }
-
 
 
     componentWillMount() {
