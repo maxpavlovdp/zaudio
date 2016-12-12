@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-.hover-container {
+.car-container {
     background-color: rgba(139, 139, 139, 0.09);
     border: 9px;
     border-color: white;
@@ -14,7 +14,7 @@
     height: 48rem;
     position: relative;
 }
-.hover-container:hover .tachometer-container {
+.car-container:hover .tachometer-container {
     display: block;
 }
 .tachometer-container {

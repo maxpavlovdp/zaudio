@@ -19,14 +19,34 @@ class CarSimulator extends React.Component {
         super(props);
         this.handleSpeed = this.handleSpeed.bind(this);
         this.handleStartStop = this.handleStartStop.bind(this);
+
+        this.handleMouseEnter = this.handleMouseEnter.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this)
         this.state = {
             speed: 0,
             power: 0,
             chargeBattery: 0,
             acceleration: 0,
             pedalIsEnable: false,
-            timer: null
+            timer: null,
+            carStyle: displayNone
+
         };
+    }
+
+    handleMouseEnter(e) {
+        this.setState({
+            carStyle: displayBlock
+        })
+        this.handleStartStop(false)
+        console.log("enter " + this.carStyle)
+    }
+
+    handleMouseLeave(e) {
+        this.setState({
+            carStyle: displayNone
+        })
+        console.log("leav")
     }
 
     componentDidMount() {
@@ -39,7 +59,7 @@ class CarSimulator extends React.Component {
                 sg.start().then(() => {
                     var fps = 30;
                     var timer = setInterval(() => {
-                        const   Mass = 2590;
+                        const Mass = 2590;
                         let speed = CarMathUtil.kmHToMs(this.state.speed),
                             power = this.state.power * 8 / (speed + 1),
                             antiPower = CarMathUtil.calculateAntiPower(speed, power, Mass),
@@ -59,8 +79,8 @@ class CarSimulator extends React.Component {
                             })
                         }
 
-                        let newSpeed = CarMathUtil.msToKmH(speed + def/fps);
-                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000/fps)
+                        let newSpeed = CarMathUtil.msToKmH(speed + def / fps);
+                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000 / fps)
 
                         this.setState({
                             speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed
@@ -98,17 +118,27 @@ class CarSimulator extends React.Component {
     }
 
     render() {
-        return <div className="car">
-            <Speedometer speed={this.state.speed}/>
-            <div className="controls">
-                <StartStop speedChange={this.handleStartStop}/>
-                <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
-                <ModeIndicator chargeBattery={this.state.chargeBattery}/>
-                <AccelerationIndicator acceleration={this.state.acceleration}/>
-                <VolumeInputRange soundgen={this.props.soundgen}/>
+        return <div className="car-container" onMouseEnter={this.handleMouseEnter}
+                    onMouseLeave={this.handleMouseLeave}>
+            <div className="car" style={this.state.carStyle}>
+                <Speedometer speed={this.state.speed}/>
+                <div className="controls">
+                    <StartStop speedChange={this.handleStartStop}/>
+                    <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
+                    <ModeIndicator chargeBattery={this.state.chargeBattery}/>
+                    <AccelerationIndicator acceleration={this.state.acceleration}/>
+                    <VolumeInputRange soundgen={this.props.soundgen}/>
+                </div>
             </div>
         </div>
     }
+}
+
+const displayNone = {
+    display: 'none'
+}
+const displayBlock = {
+    display: 'block'
 }
 
 export default CarSimulator
