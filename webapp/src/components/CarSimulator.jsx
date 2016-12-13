@@ -39,14 +39,26 @@ class CarSimulator extends React.Component {
             carStyle: displayBlock
         })
         this.handleStartStop(false)
-        console.log("enter " + this.carStyle)
     }
 
     handleMouseLeave(e) {
         this.setState({
             carStyle: displayNone
         })
-        console.log("leav")
+
+        this.s.then(sg => {
+            sg.stopAllSounds()
+
+            clearInterval(this.state.timer);
+            this.setState({
+                speed: 0,
+                power: 0,
+                pedalIsEnable: false,
+                timer: null,
+                acceleration: 0,
+                chargeBattery: 0
+            });
+        });
     }
 
     componentDidMount() {
@@ -109,6 +121,7 @@ class CarSimulator extends React.Component {
             });
         }
     }
+
 
     handleSpeed(power) {
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);

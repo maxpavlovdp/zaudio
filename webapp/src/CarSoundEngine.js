@@ -108,28 +108,7 @@ class CarSoundEngine {
 
     stop() {
         return new Promise((resolve, reject) => {
-
-            for (let o in this.config) {
-                if ('audioSource' in this.config[o]) {
-                    this.config[o].audioSource.stop();
-                    if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                        console.log("stop " + this.config[o].link)
-                    }
-                    this.config[o].started = false;
-                    delete this.config[o].audioSource;
-                } else if (this.config[o] instanceof Array) {
-                    this.config[o].forEach((el) => {
-                        if ('audioSource' in el) {
-                            el.started = false;
-                            el.audioSource.stop();
-                            if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                                console.log("stop " + el.link);
-                            }
-                            delete el.audioSource;
-                        }
-                    });
-                }
-            }
+            this.stopAllSounds()
 
             if(this.config.stop) {
                 this.createSound(this.config.stop, () => {
@@ -142,13 +121,36 @@ class CarSoundEngine {
                 this.config.stop.audioSource.started = true;
                 this.started = false;
             } else {
+                // TODO: check why this code needed. Cant reach this line in debugger
                 this.started = false;
                 resolve();
             }
         });
     }
 
-
+    stopAllSounds() {
+        for (let o in this.config) {
+            if ('audioSource' in this.config[o]) {
+                this.config[o].audioSource.stop();
+                if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                    console.log("stop " + this.config[o].link)
+                }
+                this.config[o].started = false;
+                delete this.config[o].audioSource;
+            } else if (this.config[o] instanceof Array) {
+                this.config[o].forEach((el) => {
+                    if ('audioSource' in el) {
+                        el.started = false;
+                        el.audioSource.stop();
+                        if(__ZEBCONFIG__.env === AppConstants.DEV) {
+                            console.log("stop " + el.link);
+                        }
+                        delete el.audioSource;
+                    }
+                });
+            }
+        }
+    }
 
     setPlaybackRate(speed, def, power, recuperationPower) {
         speed = speed > 0 ? speed : 0;
