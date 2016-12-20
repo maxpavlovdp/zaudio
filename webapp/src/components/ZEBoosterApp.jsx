@@ -12,11 +12,11 @@ class ZEB extends React.Component {
         return <div>
             <Link to={'/focusGroup'}>Focus Group</Link>
             <h1>V3</h1>
-            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
+            <CarSimulator soundGenerator={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
             <h1>V2</h1>
-            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v2/schemeV2.jsx").ssv2)}/>
+            <CarSimulator soundGenerator={new CarSoundEngine(require("../sounds/v2/schemeV2.jsx").ssv2)}/>
             <h1>V1</h1>
-            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v1/schemeV1.jsx").ssv1)}/>
+            <CarSimulator soundGenerator={new CarSoundEngine(require("../sounds/v1/schemeV1.jsx").ssv1)}/>
         </div>
     }
 }

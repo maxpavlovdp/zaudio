@@ -18,20 +18,27 @@ class CarSimulator extends React.Component {
     constructor(props) {
         super(props);
         this.handleSpeed = this.handleSpeed.bind(this);
-        this.handleStartStop = this.handleStartStop.bind(this);
+        this.handlePush = this.handlePush.bind(this)
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this)
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
-        this.state = {
+    }
+
+    componentWillMount() {
+        this.resetIndicatorsAndControls()
+    }
+
+    resetIndicatorsAndControls() {
+        this.setState({
             speed: 0,
             power: 0,
             chargeBattery: 0,
             acceleration: 0,
             pedalIsEnable: false,
+            buttonIsStart: true,
             timer: null,
             carStyle: displayNone
-
-        };
+        })
     }
 
     handleMouseEnter(e) {
@@ -42,32 +49,29 @@ class CarSimulator extends React.Component {
     }
 
     handleMouseLeave(e) {
-        this.setState({
-            carStyle: displayNone
-        })
-
-        this.s.then(sg => {
-            sg.stopAllSounds()
-
+        this.soundGenerator.then(sg => {
             clearInterval(this.state.timer);
-            this.setState({
-                speed: 0,
-                power: 0,
-                pedalIsEnable: false,
-                timer: null,
-                acceleration: 0,
-                chargeBattery: 0
-            });
+            sg.stopAllSounds()
+            this.resetIndicatorsAndControls()
         });
+
+
+    }
+
+    handlePush() {
+        this.handleStartStop(this.state.buttonIsStart)
+        this.setState({
+            buttonIsStart: !this.state.buttonIsStart
+        })
     }
 
     componentDidMount() {
-        this.s = this.props.soundgen.init()
+        this.soundGenerator = this.props.soundGenerator.init()
     }
 
     handleStartStop(status) {
         if (!status) {
-            this.s.then(sg => {
+            this.soundGenerator.then(sg => {
                 sg.start().then(() => {
                     var fps = 30;
                     var timer = setInterval(() => {
@@ -98,7 +102,7 @@ class CarSimulator extends React.Component {
                             speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed
                         });
 
-                        this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
+                        this.props.soundGenerator.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
                     }, 1000 / fps);
 
                     this.setState({
@@ -108,7 +112,7 @@ class CarSimulator extends React.Component {
                 });
             });
         } else {
-            this.s.then(sg => {
+            this.soundGenerator.then(sg => {
                 sg.stop().then(() => {
                     clearInterval(this.state.timer);
                     this.setState({
@@ -136,11 +140,11 @@ class CarSimulator extends React.Component {
             <div className="car" style={this.state.carStyle}>
                 <Speedometer speed={this.state.speed}/>
                 <div className="controls">
-                    <StartStop speedChange={this.handleStartStop}/>
+                    <StartStop buttonIsStart={!this.state.buttonIsStart} pushHandler={this.handlePush}/>
                     <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                     <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                     <AccelerationIndicator acceleration={this.state.acceleration}/>
-                    <VolumeInputRange soundgen={this.props.soundgen}/>
+                    <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
                 </div>
             </div>
         </div>

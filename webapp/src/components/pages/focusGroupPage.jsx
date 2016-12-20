@@ -8,6 +8,6 @@ export default class FocusGroupPage extends React.Component {
     }
 
     render() {
-        return <CarSimulator soundgen={new CarSoundEngine(require("../../sounds/v3/schemeV3.jsx").ssv3)}/>
+        return <CarSimulator soundGenerator={new CarSoundEngine(require("../../sounds/v3/schemeV3.jsx").ssv3)}/>
     }
 }

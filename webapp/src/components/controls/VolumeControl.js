@@ -28,7 +28,7 @@ export default class VolumeInputRange extends React.Component {
 
 
     handleVolumeChange(e) {
-        this.props.soundgen.changeVolume(e.target.value)
+        this.props.soundGenerator.changeVolume(e.target.value)
         this.setState({
             volume: e.target.value
         })
