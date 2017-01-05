@@ -22,6 +22,12 @@ class CarSimulator extends React.Component {
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this)
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
+
+        this.handleWheel = this.handleWheel.bind(this)
+    }
+
+    componentDidMount() {
+        this.soundGenerator = this.props.soundGenerator.init()
     }
 
     componentWillMount() {
@@ -37,8 +43,21 @@ class CarSimulator extends React.Component {
             pedalIsEnable: false,
             buttonIsStart: true,
             timer: null,
-            carStyle: displayNone
+            carStyle: displayNone,
+            pedalPosition: 0
+
         })
+    }
+
+    handleWheel(e) {
+        e.preventDefault()
+        console.log("wheel " + e.deltaY)
+        this.setState({
+            pedalPosition: -e.deltaY/200
+        })
+
+        this.handleSpeed(this.state.pedalPosition)
+
     }
 
     handleMouseEnter(e) {
@@ -54,8 +73,6 @@ class CarSimulator extends React.Component {
             sg.stopAllSounds()
             this.resetIndicatorsAndControls()
         });
-
-
     }
 
     handlePush() {
@@ -63,10 +80,6 @@ class CarSimulator extends React.Component {
         this.setState({
             buttonIsStart: !this.state.buttonIsStart
         })
-    }
-
-    componentDidMount() {
-        this.soundGenerator = this.props.soundGenerator.init()
     }
 
     handleStartStop(status) {
@@ -135,19 +148,21 @@ class CarSimulator extends React.Component {
     }
 
     render() {
-        return <div className="car-container" onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}>
-            <div className="car" style={this.state.carStyle}>
-                <Speedometer speed={this.state.speed}/>
-                <div className="controls">
-                    <StartStop buttonIsStart={!this.state.buttonIsStart} pushHandler={this.handlePush}/>
-                    <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
-                    <ModeIndicator chargeBattery={this.state.chargeBattery}/>
-                    <AccelerationIndicator acceleration={this.state.acceleration}/>
-                    <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
+        return (
+            <div className="car-container" onWheel={this.handleWheel} onMouseEnter={this.handleMouseEnter}
+                 onMouseLeave={this.handleMouseLeave}>
+                <div className="car" style={this.state.carStyle}>
+                    <Speedometer speed={this.state.speed}/>
+                    <div className="controls">
+                        <StartStop buttonIsStart={!this.state.buttonIsStart} pushHandler={this.handlePush}/>
+                        <Pedal isEnable={this.state.pedalIsEnable} pedalPosition={this.state.pedalPosition} speedHandler={this.handleSpeed}/>
+                        <ModeIndicator chargeBattery={this.state.chargeBattery}/>
+                        <AccelerationIndicator acceleration={this.state.acceleration}/>
+                        <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
+                    </div>
                 </div>
             </div>
-        </div>
+        );
     }
 }
 
