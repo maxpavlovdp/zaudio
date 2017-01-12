@@ -54,19 +54,20 @@ class CarSimulator extends React.Component {
         e.preventDefault()
 
         const WHEEL_COEF = 800
-        console.log("wheel position: " + e.deltaY)
 
-        var newPedalPos = this.state.pedalPos += e.deltaY/WHEEL_COEF
-        console.log("new power: " + newPedalPos)
+        var newPedalPos = this.state.pedalPos += -e.deltaY / WHEEL_COEF
 
         if (newPedalPos > 1) newPedalPos = 1
         if (newPedalPos < 0) newPedalPos = 0
 
-        this.handleSpeed(newPedalPos)
-
         this.setState({
             pedalPos: newPedalPos
         })
+
+        if (this.state.pedalIsEnable) {
+            this.handleSpeed(newPedalPos)
+            this._pedal.updatePedalPos(newPedalPos)
+        }
     }
 
     handleMouseEnter(e) {
@@ -82,6 +83,7 @@ class CarSimulator extends React.Component {
             sg.stopAllSounds()
             this.resetIndicatorsAndControls()
         });
+        this._pedal.updatePedalPos(0)
     }
 
     handlePush() {
@@ -149,13 +151,10 @@ class CarSimulator extends React.Component {
     }
 
     handleSpeed(pedalPosition) {
-        console.log("power: " + pedalPosition)
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);
         this.setState({
             power: easing(pedalPosition) * 35000,
         });
-
-        console.log("easing result: " + easing(pedalPosition) * 35000)
     }
 
     render() {
@@ -166,14 +165,16 @@ class CarSimulator extends React.Component {
                     <Speedometer speed={this.state.speed}/>
                     <div className="controls">
                         <StartStop buttonIsStart={!this.state.buttonIsStart} pushHandler={this.handlePush}/>
-                        <Pedal isEnable={this.state.pedalIsEnable} pedalPos={this.state.pedalPos}
+                        <Pedal ref={(pedal) => {
+                            this._pedal = pedal;
+                        }} isEnable={this.state.pedalIsEnable}
                                speedHandler={this.handleSpeed}/>
                         <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                         <AccelerationIndicator acceleration={this.state.acceleration}/>
                         <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
                     </div>
                     {__ZEBCONFIG__.env == 'DEV' ?
-                        <SoundBar soundgen={this.props.soundGenerator} speed={this.state.speed}/>: ''
+                        <SoundBar soundgen={this.props.soundGenerator} speed={this.state.speed}/> : ''
                     }
                 </div>
             </div>

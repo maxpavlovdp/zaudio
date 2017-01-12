@@ -6,9 +6,15 @@ class Pedal extends React.Component {
         this.handleSpeed = this.handleSpeed.bind(this);
         this.state = {
             isEnable: this.props.isEnable,
-            pedalPos: this.props.pedalPos
+            pedalPos: 0
 
         };
+    }
+
+    updatePedalPos(pedalPos) {
+        this.setState({
+            pedalPos: pedalPos
+        })
     }
 
     handleSpeed(e) {
@@ -28,14 +34,6 @@ class Pedal extends React.Component {
                 isEnable: nextProps.isEnable,
             });
         }
-
-        if (this.state.isEnable) {
-            this.setState({
-                //TODO: implement flux to handle pedal position from input slider and from wheel
-                // pedalPos: nextProps.pedalPos
-            })
-        }
-
     }
 
     render() {
