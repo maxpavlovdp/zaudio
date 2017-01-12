@@ -6,6 +6,8 @@ import Speedometer from './indicators/Speedo.jsx';
 import ModeIndicator from './indicators/ModeIndicator';
 import AccelerationIndicator from './indicators/AccelerationIndicator';
 
+import SoundBar from './indicators/SoundBar.jsx';
+
 import Pedal from './controls/Pedal.jsx';
 import VolumeInputRange from './controls/VolumeControl';
 import StartStop from './controls/StartStop.jsx';
@@ -107,6 +109,9 @@ class CarSimulator extends React.Component {
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
+            {__ZEBCONFIG__.env == 'DEV' ?
+                <SoundBar soundgen={this.props.soundgen} speed={this.state.speed}/>: ''
+            }
         </div>
     }
 }
