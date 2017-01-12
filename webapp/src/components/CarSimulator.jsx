@@ -6,6 +6,8 @@ import Speedometer from './indicators/Speedo.jsx';
 import ModeIndicator from './indicators/ModeIndicator';
 import AccelerationIndicator from './indicators/AccelerationIndicator';
 
+import SoundBar from './indicators/SoundBar.jsx';
+
 import Pedal from './controls/Pedal.jsx';
 import VolumeInputRange from './controls/VolumeControl';
 import StartStop from './controls/StartStop.jsx';
@@ -139,7 +141,6 @@ class CarSimulator extends React.Component {
         }
     }
 
-
     handleSpeed(power) {
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);
         this.setState({
@@ -160,6 +161,9 @@ class CarSimulator extends React.Component {
                         <AccelerationIndicator acceleration={this.state.acceleration}/>
                         <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
                     </div>
+                    {__ZEBCONFIG__.env == 'DEV' ?
+                        <SoundBar soundgen={this.props.soundGenerator} speed={this.state.speed}/>: ''
+                    }
                 </div>
             </div>
         );
