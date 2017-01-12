@@ -46,20 +46,27 @@ class CarSimulator extends React.Component {
             buttonIsStart: true,
             timer: null,
             carStyle: displayNone,
-            pedalPosition: 0
-
+            pedalPos: 0
         })
     }
 
     handleWheel(e) {
         e.preventDefault()
-        console.log("wheel " + e.deltaY)
+
+        const WHEEL_COEF = 800
+        console.log("wheel position: " + e.deltaY)
+
+        var newPedalPos = this.state.pedalPos += e.deltaY/WHEEL_COEF
+        console.log("new power: " + newPedalPos)
+
+        if (newPedalPos > 1) newPedalPos = 1
+        if (newPedalPos < 0) newPedalPos = 0
+
+        this.handleSpeed(newPedalPos)
+
         this.setState({
-            pedalPosition: -e.deltaY/200
+            pedalPos: newPedalPos
         })
-
-        this.handleSpeed(this.state.pedalPosition)
-
     }
 
     handleMouseEnter(e) {
@@ -141,11 +148,14 @@ class CarSimulator extends React.Component {
         }
     }
 
-    handleSpeed(power) {
+    handleSpeed(pedalPosition) {
+        console.log("power: " + pedalPosition)
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);
         this.setState({
-            power: easing(power) * 35000
+            power: easing(pedalPosition) * 35000,
         });
+
+        console.log("easing result: " + easing(pedalPosition) * 35000)
     }
 
     render() {
@@ -156,7 +166,8 @@ class CarSimulator extends React.Component {
                     <Speedometer speed={this.state.speed}/>
                     <div className="controls">
                         <StartStop buttonIsStart={!this.state.buttonIsStart} pushHandler={this.handlePush}/>
-                        <Pedal isEnable={this.state.pedalIsEnable} pedalPosition={this.state.pedalPosition} speedHandler={this.handleSpeed}/>
+                        <Pedal isEnable={this.state.pedalIsEnable} pedalPos={this.state.pedalPos}
+                               speedHandler={this.handleSpeed}/>
                         <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                         <AccelerationIndicator acceleration={this.state.acceleration}/>
                         <VolumeInputRange soundGenerator={this.props.soundGenerator}/>
