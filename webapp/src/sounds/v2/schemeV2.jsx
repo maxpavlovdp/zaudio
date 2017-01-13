@@ -1,5 +1,5 @@
-let acceleration100FunLoop = require("./acceleration100+FunLoop.ogg"),
-    acceleration160CrazyLoop = require("./acceleration160+CrazyLoop.ogg"),
+let acceleration100FunLoop = require("./acceleration100FunLoop.ogg"),
+    acceleration160CrazyLoop = require("./acceleration160CrazyLoop.ogg"),
     accelerationLoop = require("./accelerationLoop.ogg"),
     engineOffSample = require("./engineOffSample.ogg"),
     engineOnSample = require("./engineOnSample.ogg"),
