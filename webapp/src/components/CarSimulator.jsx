@@ -24,10 +24,12 @@ class CarSimulator extends React.Component {
         this.state = {
             speed: 0,
             power: 0,
+            carState: {},
             chargeBattery: 0,
             acceleration: 0,
             pedalIsEnable: false,
-            timer: null
+            timer: null,
+            carStatus: 'stopped'
         };
     }
 
@@ -37,8 +39,14 @@ class CarSimulator extends React.Component {
 
     handleStartStop(status) {
         if (!status) {
+            this.setState({
+                carStatus: 'starting'
+            });
             this.s.then(sg => {
                 sg.start().then(() => {
+                    this.setState({
+                        carStatus: 'started'
+                    });
                     var fps = 30;
                     var timer = setInterval(() => {
                         const   Mass = 2590;
@@ -64,11 +72,15 @@ class CarSimulator extends React.Component {
                         let newSpeed = CarMathUtil.msToKmH(speed + def/fps);
                         this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000/fps)
 
+                        let carState = {speed: newSpeed, def: def, power: this.state.power, recuperationPower: recuperationPower}
+
                         this.setState({
-                            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed
+                            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
+                            carState:  carState
                         });
 
-                        this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
+                        //this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
+                        this.props.soundgen.handleSound(carState);
                     }, 1000 / fps);
 
                     this.setState({
@@ -78,14 +90,19 @@ class CarSimulator extends React.Component {
                 });
             });
         } else {
+            this.setState({
+                carStatus: 'stopping'
+            });
             this.s.then(sg => {
                 sg.stop().then(() => {
                     clearInterval(this.state.timer);
                     this.setState({
                         speed: 0,
                         power: 0,
+                        carState: {},
                         pedalIsEnable: false,
-                        timer: null
+                        timer: null,
+                        carStatus: 'stopped'
                     });
                 });
             });
@@ -103,14 +120,14 @@ class CarSimulator extends React.Component {
         return <div className="car">
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
-                <StartStop speedChange={this.handleStartStop}/>
+                <StartStop speedChange={this.handleStartStop} carStatus={this.state.carStatus}/>
                 <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
             {__ZEBCONFIG__.env == 'DEV' ?
-                <SoundBar soundgen={this.props.soundgen} speed={this.state.speed}/>: ''
+                <SoundBar soundgen={this.props.soundgen} speed={this.state.speed} carState={this.state.carState} />: ''
             }
         </div>
     }
