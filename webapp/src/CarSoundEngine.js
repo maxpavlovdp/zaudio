@@ -35,7 +35,7 @@ class CarSoundEngine {
         return new Promise((resolve, reject) => {
             var links = [];
             for (let o in this.config) {
-                if ('link' in this.config[o]) {
+                if (typeof this.config[o] == 'object' && 'link' in this.config[o]) {
                     let s = this.loadSound(this.config[o].link);
                     links.push(s);
                     s.then(buffer => {
@@ -76,10 +76,12 @@ class CarSoundEngine {
     }
 
     start() {
+        this.status = 'starting';
         return new Promise((resolve, reject) => {
             this.sounds = {};
             let afterSrartSounds = this.config.main.filter( (sound) => {
-                return sound.speed.margins[0] === 0 && !sound.recuperation;
+                var speedMargins = 'speed' in sound ? sound.speed.margins : sound.margins.speed;
+                return speedMargins[0] === 0 && !sound.recuperation;
             });
             afterSrartSounds.forEach((sound) => {
                 this.createSound(sound)
@@ -94,6 +96,7 @@ class CarSoundEngine {
                     }
                     sound.started = true;
                 });
+                this.status = 'started';
                 resolve();
             });
             this.config.start.audioSource.start();
@@ -107,48 +110,149 @@ class CarSoundEngine {
     }
 
     stop() {
-        return new Promise((resolve, reject) => {
+        if(this.status == 'started') {
+            return new Promise((resolve, reject) => {
 
-            for (let o in this.config) {
-                if ('audioSource' in this.config[o]) {
-                    this.config[o].audioSource.stop();
-                    if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                        console.log("stop " + this.config[o].link)
-                    }
-                    this.config[o].started = false;
-                    delete this.config[o].audioSource;
-                } else if (this.config[o] instanceof Array) {
-                    this.config[o].forEach((el) => {
-                        if ('audioSource' in el) {
-                            el.started = false;
-                            el.audioSource.stop();
-                            if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                                console.log("stop " + el.link);
-                            }
-                            delete el.audioSource;
+                for (let o in this.config) {
+                    if (typeof this.config[o] == 'object' && 'audioSource' in this.config[o]) {
+                        this.config[o].audioSource.stop();
+                        if (__ZEBCONFIG__.env === AppConstants.DEV) {
+                            console.log("stop " + this.config[o].link)
                         }
-                    });
+                        this.config[o].started = false;
+                        delete this.config[o].audioSource;
+                    } else if (this.config[o] instanceof Array) {
+                        this.config[o].forEach((el) => {
+                            if ('audioSource' in el) {
+                                el.started = false;
+                                el.audioSource.stop();
+                                if (__ZEBCONFIG__.env === AppConstants.DEV) {
+                                    console.log("stop " + el.link);
+                                }
+                                delete el.audioSource;
+                            }
+                        });
+                    }
                 }
-            }
 
-            if(this.config.stop) {
-                this.createSound(this.config.stop, () => {
+                if (this.config.stop) {
+                    this.createSound(this.config.stop, () => {
+                        resolve();
+                    });
+                    this.config.stop.audioSource.start();
+                    if (__ZEBCONFIG__.env === AppConstants.DEV) {
+                        console.log("start " + this.config.stop.link)
+                    }
+                    this.config.stop.audioSource.started = true;
+                    this.started = false;
+                } else {
+                    this.started = false;
                     resolve();
-                });
-                this.config.stop.audioSource.start();
-                if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                    console.log("start " + this.config.stop.link)
                 }
-                this.config.stop.audioSource.started = true;
-                this.started = false;
-            } else {
-                this.started = false;
-                resolve();
-            }
-        });
+            });
+        }
     }
 
+    calculatePolyline(polyline,x){
+        var dot1 = null,
+            dot2 = null;
+        for (let i = 0; i < polyline.length; i++) {
+            if (x > polyline[i][0]){
+                dot1 = polyline[i];
+                if(i == polyline.length) {
+                    break;
+                }
+            } else {
+                dot2 = polyline[i];
+                if(i == 0) {
+                    break;
+                }
+            }
 
+            if(dot1 && dot2) break;
+        }
+
+        var y = null;
+        if(dot1 && dot2) {
+            var k = (dot2[1]-dot1[1])/(dot2[0]-dot1[0]),
+                b = dot1[1] - k*dot1[0];
+            y = k*x+b;
+        }
+        if(dot1 && !dot2) {
+            y = dot1[1];
+        }
+        if(!dot1 && dot2) {
+            y = dot2[1];
+        }
+        return y;
+    }
+
+    handleSound(carState){
+        if('version' in this.config && this.config.version >= 4){
+            this.handleSound_(carState);
+        } else {
+            this.setPlaybackRate(carState.speed, carState.def, carState.power, carState.recuperationPower);
+        }
+    }
+
+    handleSound_(carState){
+        carState.speed = carState.speed > 0 ? carState.speed : 0;
+        if (this.started) {
+            this.config.main.forEach((sound) => {
+
+                var volume = 0;
+                if('volume' in sound && typeof sound.volume == 'object') {
+                    var speedVolume = 'speed' in sound.volume && typeof sound.volume.speed == 'object' ? this.calculatePolyline(sound.volume.speed, carState.speed) : 0;
+                    var powerVolume = 'power' in sound.volume && typeof sound.volume.power == 'object' ? this.calculatePolyline(sound.volume.power, carState.power) : 0;
+                    var defVolume = 'def' in sound.volume && typeof sound.volume.def == 'object' ? this.calculatePolyline(sound.volume.def, carState.def) : 0;
+                    var recuperationPowerVolume = 'recuperationPower' in sound.volume && typeof sound.volume.recuperationPower == 'object' ? this.calculatePolyline(sound.volume.recuperationPower, carState.recuperationPower) : 0;
+                    volume = speedVolume + powerVolume + defVolume + recuperationPowerVolume;
+                } else {
+                    volume = 1;
+                }
+
+                var pbr = 0;
+                if('pbr' in sound && typeof sound.pbr == 'object') {
+                    var speedPBR = 'speed' in sound.pbr && typeof sound.pbr.speed == 'object' ? this.calculatePolyline(sound.pbr.speed, carState.speed) : 0;
+                    var powerPBR = 'power' in sound.pbr && typeof sound.pbr.power == 'object' ? this.calculatePolyline(sound.pbr.power, carState.power) : 0;
+                    var defPBR = 'def' in sound.pbr && typeof sound.pbr.def == 'object' ? this.calculatePolyline(sound.pbr.def, carState.def) : 0;
+                    var recuperationPowerPBR = 'recuperationPower' in sound.pbr && typeof sound.pbr.recuperationPower == 'object' ? this.calculatePolyline(sound.pbr.recuperationPower, carState.recuperationPower) : 0;
+                    pbr = speedPBR + powerPBR + defPBR + recuperationPowerPBR;
+                } else {
+                    pbr = 1;
+                }
+
+                if('margins' in sound && typeof sound.margins == 'object') {
+                    if('speed' in sound.margins && !(carState.speed >= sound.margins.speed[0] && carState.speed <= sound.margins.speed[1])){
+                        volume = 0;
+                    }
+                }
+
+                if(sound.recuperation && carState.recuperationPower <= 0) {
+                    volume = 0;
+                }
+
+                if(volume > 0){
+                    if(!sound.started){
+                        this.createSound(sound);
+                        sound.audioSource.start();
+                        sound.started = true;
+                    }
+                } else {
+                    if (sound.started) {
+                        sound.audioSource.stop();
+                        sound.started = false;
+                    }
+                }
+
+                if (sound.started) {
+                    sound.gainNode.gain.value = volume;
+                    sound.audioSource.playbackRate.value = pbr;
+                }
+
+            });
+        }
+    }
 
     setPlaybackRate(speed, def, power, recuperationPower) {
         speed = speed > 0 ? speed : 0;
