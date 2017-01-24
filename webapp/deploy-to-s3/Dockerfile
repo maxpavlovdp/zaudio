@@ -14,4 +14,3 @@ run apt-get install python2.7 -y
 run curl -O https://bootstrap.pypa.io/get-pip.py
 run python2.7 get-pip.py
 run pip install awscli
-
