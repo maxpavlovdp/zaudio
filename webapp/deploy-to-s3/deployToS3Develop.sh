@@ -13,5 +13,8 @@ echo "[default]" >> ~/.aws/config
 echo "region=eu-central-1" >> ~/.aws/config
 echo "output=json" >> ~/.aws/config
 
+bucketName=zas-develop-branch
 cp ../src/config/prodConfig.js ../public/config.js
-aws s3 sync --delete ../public/ s3://zas-develop-branch
+aws s3 sync --delete ../public/ s3://$bucketName
+
+aws s3api put-bucket-policy --bucket $bucketName --policy ./developBucketPolicy.json
