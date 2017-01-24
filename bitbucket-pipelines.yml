@@ -18,4 +18,4 @@ pipelines:
     BOOST-151_DeployToS3:
       - step:
           script: # Deploy to git hub pages
-          - ./webapp/deploy-to-s3/deployToS3Develop.bash
+           - ./webapp/deploy-to-s3/deployToS3Develop.sh
