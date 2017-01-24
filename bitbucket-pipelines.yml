@@ -15,12 +15,7 @@ pipelines:
           - webpack -p
           - npm test
   branches:
-    BOOST-98_soundDesignDevelopment:
+    BOOST-151_DeployToS3:
       - step:
           script: # Deploy to git hub pages
-          - cd ./webapp
-          - npm install
-          - npm install webpack -g
-#          - npm test
-          - webpack -p
-          - ./deploy-to-git-hub-pages/deploy.bash
+          - ./deploy-to-s3/deployToS3Develop.bash
