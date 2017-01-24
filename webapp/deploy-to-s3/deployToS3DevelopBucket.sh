@@ -7,4 +7,4 @@ cd "$(dirname "$0")"
 bucketName=zas-develop-branch
 aws s3 sync --delete ../public/ "s3://$bucketName"
 
-aws s3api put-bucket-policy --bucket "$bucketName" --policy file://developBucketPolicy.json
+aws s3api put-bucket-policy --bucket "$bucketName" --policy file://"$bucketName-policy.json"
