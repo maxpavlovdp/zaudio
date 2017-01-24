@@ -26,7 +26,7 @@ pipelines:
            - ./deploy-to-git-hub-pages/deploy.bash
     BOOST-151_DeployToS3:
       - step:
-          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-on-demand-branch/index.htm
+          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-on-demand-branch/index.html
            - cd ./webapp
            - npm install
            - npm install webpack -g
@@ -35,7 +35,7 @@ pipelines:
            - ./deploy-to-s3/deployToS3OnDemandBucket.sh
     BOOST-98_soundDesignDevelopment:
       - step:
-          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-boost-98-branch/index.htm
+          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-boost-98-branch/index.html
            - cd ./webapp
            - npm install
            - npm install webpack -g
@@ -44,7 +44,7 @@ pipelines:
            - ./deploy-to-s3/deployToS3Boost-98Bucket.sh
     develop:
       - step:
-          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-develop-branch/index.htm
+          script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-develop-branch/index.html
            - cd ./webapp
            - npm install
            - npm install webpack -g
