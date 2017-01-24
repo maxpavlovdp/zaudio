@@ -1,0 +1,18 @@
+{
+  "Statement":[
+    {
+      "Sid":"PublicReadGetObject",
+      "Effect":"Allow",
+      "Principal":"*",
+      "Action":"s3:*",
+      "Resource":"arn:aws:s3:::zas-boost-98-branch/*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": [
+            "78.9.182.146/32"
+          ]
+        }
+      }
+    }
+  ]
+}
