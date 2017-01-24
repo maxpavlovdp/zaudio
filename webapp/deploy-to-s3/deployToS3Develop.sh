@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-yum install python27 -y
+apt-get install python2.7
 curl -O https://bootstrap.pypa.io/get-pip.py
 python27 get-pip.py
 pip install awscli
