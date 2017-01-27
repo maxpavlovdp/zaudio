@@ -1,0 +1,11 @@
+{
+  "Statement":[
+    {
+      "Sid":"PublicReadGetObject",
+      "Effect":"Allow",
+      "Principal":"*",
+      "Action":"s3:*",
+      "Resource":"arn:aws:s3:::zas-boost-98-branch/*"
+    }
+  ]
+}
