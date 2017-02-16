@@ -24,7 +24,7 @@ pipelines:
            - npm test
            - webpack -p
            - ./deploy-to-git-hub-pages/deploy.bash
-    BOOST-151_DeployToS3:
+    BOOST-108_MouseEnterLeaveUXBehaviour:
       - step:
           script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-on-demand-branch/index.html
            - cd ./webapp
