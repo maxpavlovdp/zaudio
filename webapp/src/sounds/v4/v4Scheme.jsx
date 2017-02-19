@@ -31,33 +31,33 @@ var soundSchemeV4 = {
         {
             link: V4_0_30,
             margins: {
-                speed: [0, 30]
+                speed: [0, 240]
             },
             pbr: {
-                speed: [[0, 0], [60, 1], [240, 2.2]]
+                speed: [[0, 0], [10, 1], [240, 2.2]]
             },
             volume: {
-                speed: [[0, 0], [60, 0], [75, 0.7]]
+                speed: [[0, 0], [10, 0.5], [75, 0.7]]
             },
             loop: true
         },
         {
             link: V4_30_60,
             margins: {
-                speed: [30, 60]
+                speed: [30, 240]
             },
             pbr: {
-                speed: [[0, 0], [100, 1], [240, 1.9]]
+                speed: [[0, 0], [35, 1], [240, 1.9]]
             },
             volume: {
-                speed: [[0, 0], [100, 0], [130, 1.3]]
+                speed: [[0, 0], [35, 1], [130, 1.3]]
             },
             loop: true
         },
         {
             link: V4_60_100,
             margins: {
-                speed: [60, 100]
+                speed: [60, 240]
             },
             pbr: {
                 speed: [[0, 0], [60, 1], [240, 2.2]]
@@ -70,13 +70,13 @@ var soundSchemeV4 = {
         {
             link: V4_100_160,
             margins: {
-                speed: [100, 160]
+                speed: [100, 240]
             },
             pbr: {
-                speed: [[0, 0], [160, 1], [240, 1.5]]
+                speed: [[0, 0], [100, 1], [240, 1.5]]
             },
             volume: {
-                speed: [[0, 0], [160, 0], [170, 1.7]]
+                speed: [[0, 0], [100, 0], [170, 1.7]]
             },
             loop: true
         },
@@ -96,7 +96,7 @@ var soundSchemeV4 = {
         {
             link: V4_RECUPERATION,
             margins: {
-                speed: [100, 240]
+                speed: [10, 240]
             },
             pbr: {
                 speed: [[0, 1], [240, 1.7]]
