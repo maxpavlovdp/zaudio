@@ -11,8 +11,10 @@ class ZEB extends React.Component {
     render() {
         return <div>
             <Link to={'/focusGroup'}>Focus Group</Link>
+            <h1>V4</h1>
+            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v4/v4Scheme.jsx").ssv4)}/>
             <h1>V4 Example</h1>
-            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4)}/>
+            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4example)}/>
             <h1>V3</h1>
             <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
             <h1>V2</h1>

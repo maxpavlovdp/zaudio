@@ -128,4 +128,4 @@ var soundSchemeV4 = {
     }
 };
 
-module.exports.ssv4 = soundSchemeV4;
+module.exports.ssv4example = soundSchemeV4;
