@@ -1,7 +1,10 @@
 import React from 'react';
-import CarSimulator from './CarSimulator.jsx'
-import CarSoundEngine from './../CarSoundEngine.js'
-import {Link} from 'react-router'
+import CarSimulator from './CarSimulator.jsx';
+import CarSoundEngine from './../CarSoundEngine.js';
+import {Link} from 'react-router';
+
+import {connect} from 'react-redux';
+
 
 class ZEB extends React.Component {
     constructor(props) {
@@ -9,6 +12,7 @@ class ZEB extends React.Component {
     }
 
     render() {
+        console.log(this.props.testStore)
         return <div>
             <Link to={'/focusGroup'}>Focus Group</Link>
             <h1>V4 Example</h1>
@@ -23,4 +27,9 @@ class ZEB extends React.Component {
     }
 }
 
-export default ZEB;
+export default connect(
+    state => ({
+        testStore: state
+    }),
+    dispatch => ({})
+)(ZEB);
