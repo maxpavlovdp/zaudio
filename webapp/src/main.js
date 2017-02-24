@@ -9,11 +9,8 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
 
-const initialState = [
-    "some state value 1",
-    "some state value 2"
-]
-function reduceFunc(state = initialState, action) {
+
+function reduceFunc(state = ["one", "two"], action) {
     return state;
 }
 const store = createStore(reduceFunc)

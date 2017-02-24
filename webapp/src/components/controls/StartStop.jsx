@@ -20,6 +20,7 @@ class StartStop extends React.Component {
     }
 
     render (){
+        console.log(this.props.store)
         return <button className="start-stop-button" disabled={this.props.carStatus == 'starting' || this.props.carStatus == 'stopping' ? true : false} onClick={this.handleClick}>{this.state.isOn ? 'Stop' : 'Start'}</button>
     }
 }

@@ -12,11 +12,10 @@ class ZEB extends React.Component {
     }
 
     render() {
-        console.log(this.props.testStore)
         return <div>
             <Link to={'/focusGroup'}>Focus Group</Link>
             <h1>V4 Example</h1>
-            <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4)}/>
+            <CarSimulator store={this.props.store} soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4)}/>
             <h1>V3</h1>
             <CarSimulator soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
             <h1>V2</h1>
@@ -28,8 +27,7 @@ class ZEB extends React.Component {
 }
 
 export default connect(
-    state => ({
-        testStore: state
-    }),
-    dispatch => ({})
+    store => ({
+        store: store
+    })
 )(ZEB);
