@@ -5,22 +5,10 @@ import {Router, Route, hashHistory} from 'react-router';
 import ZEBoosterApp from './components/ZEBoosterApp.jsx';
 import FocusGroupPage from './components/pages/focusGroupPage.jsx';
 
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-
-
-
-function reduceFunc(state = ["one", "two"], action) {
-    return state;
-}
-const store = createStore(reduceFunc)
-
 render((
-        <Provider store={store}>
-            <Router history={hashHistory}>
-                <Route path="/" component={ZEBoosterApp}/>
-                <Route path="/focusGroup" component={FocusGroupPage}/>
-            </Router>
-        </Provider>
+        <Router history={hashHistory}>
+            <Route path="/" component={ZEBoosterApp}/>
+            <Route path="/focusGroup" component={FocusGroupPage}/>
+        </Router>
     ), document.getElementById('content')
 );

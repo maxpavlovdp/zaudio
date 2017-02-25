@@ -118,9 +118,10 @@ class CarSimulator extends React.Component {
 
     render() {
         return <div className="car">
+            <h1>{this.props.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
-                <StartStop store={this.props.store} speedChange={this.handleStartStop} carStatus={this.state.carStatus}/>
+                <StartStop carName = {this.props.name} store={this.props.store} speedChange={this.handleStartStop} carStatus={this.state.carStatus}/>
                 <Pedal isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator chargeBattery={this.state.chargeBattery}/>
                 <AccelerationIndicator acceleration={this.state.acceleration}/>

@@ -4,7 +4,7 @@ import AppConstants from './AppConstants'
 import __ZEBCONFIG__ from './config/config'
 import {getVolume} from './components/controls/VolumeControl'
 
-class CarSoundEngine {
+class   CarSoundEngine {
 
     constructor(config = {}) {
         if(!('webAudioContext' in CarSoundEngine && CarSoundEngine.webAudioContext instanceof AudioContext)) {
