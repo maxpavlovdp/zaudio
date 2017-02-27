@@ -25,8 +25,6 @@ class ZEB extends React.Component {
                     }
                 })
                 return newState
-            default:
-                return state
         }
     }
 

@@ -42,6 +42,10 @@ class CarSimulator extends React.Component {
             this.setState({
                 carStatus: 'starting'
             });
+            this.props.store.dispatch({
+                type: "BUTTON_CLICKED",
+                clickedBtn: {name: this.props.name, isOn: true}
+            })
             this.s.then(sg => {
                 sg.start().then(() => {
                     this.setState({
@@ -104,6 +108,11 @@ class CarSimulator extends React.Component {
                         timer: null,
                         carStatus: 'stopped'
                     });
+
+                    this.props.store.dispatch({
+                        type: "BUTTON_CLICKED",
+                        clickedBtn: {name: this.props.name, isOn: false}
+                    })
                 });
             });
         }
