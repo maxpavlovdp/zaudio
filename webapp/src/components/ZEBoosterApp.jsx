@@ -16,7 +16,6 @@ class ZEB extends React.Component {
             case 'REGISTER_START_BTN':
                 return [...state, action.newBtn]
             case 'BUTTON_CLICKED':
-                console.log(state)
                 var newState = []
                 state.forEach((element, index) => {
                     if (element.name === action.clickedBtn.name) {

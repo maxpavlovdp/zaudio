@@ -8,19 +8,24 @@ class StartStop extends React.Component {
             isOn: false,
             otherPlayed: false
         };
-        this.props.store.dispatch({type: "REGISTER_START_BTN", newBtn: {name: this.props.carName, isOn: false}})
-        this.props.store.subscribe(()=> {
-            this.props.store.getState().forEach((element) => {
-                if(element.name != this.props.carName) {
-                    console.log("store changed. Do something!")
-                }
+    }
+
+    componentDidMount() {
+        let toggleOtherSSBtns = (store = this.props.store)=> {
+            let otherPlayed = store.getState().find(e => (e.isOn && e.name != this.props.carName))
+
+            this.setState({
+                otherPlayed: otherPlayed ? true : false
             })
-        })
+        };
+
+        this.props.store.dispatch({type: "REGISTER_START_BTN", newBtn: {name: this.props.carName, isOn: false}})
+        this.props.store.subscribe(toggleOtherSSBtns)
     }
 
     handleClick() {
         this.setState({
-            isOn: this.state.isOn ? false : true
+            isOn: !this.state.isOn
         });
 
         if ('speedChange' in this.props && typeof this.props.speedChange === 'function') {
@@ -35,7 +40,7 @@ class StartStop extends React.Component {
 
     render() {
         return <button className="start-stop-button"
-                       disabled={this.props.carStatus == 'starting' || this.props.carStatus == 'stopping' || this.state.otherPlayed ? true : false}
+                       disabled={this.props.carStatus == 'starting' || this.props.carStatus == 'stopping' || this.state.otherPlayed}
                        onClick={this.handleClick}>{this.state.isOn ? 'Stop' : 'Start'}</button>
     }
 }
