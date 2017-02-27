@@ -49,5 +49,5 @@ pipelines:
            - npm install
            - npm install webpack -g
            - webpack -p
-           - cp ./src/config/prodConfig.js ./public/config.js
+           - cp ./src/config/devConfig.js ./public/config.js
            - ./deploy-to-s3/deployToS3DevelopBucket.sh
