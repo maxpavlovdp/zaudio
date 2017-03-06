@@ -1,4 +1,5 @@
 import React from 'react';
+import {registerBtnInStore} from '../../actions'
 
 class StartStop extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class StartStop extends React.Component {
             })
         };
 
-        this.props.store.dispatch({type: "REGISTER_START_BTN", newBtn: {name: this.props.carName, isOn: false}})
+        this.props.store.dispatch(registerBtnInStore(this.props.carName))
         this.props.store.subscribe(toggleOtherSSBtns)
     }
 

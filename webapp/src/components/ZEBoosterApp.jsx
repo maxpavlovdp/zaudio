@@ -2,6 +2,7 @@ import React from 'react';
 import CarSimulator from './CarSimulator.jsx';
 import CarSoundEngine from './../CarSoundEngine.js';
 import {Link} from 'react-router';
+import {REGISTER_START_BTN, BUTTON_CLICKED} from '../actions'
 
 import {createStore} from 'redux';
 
@@ -13,9 +14,9 @@ class ZEB extends React.Component {
 
     reduceFunc(state = {}, action) {
         switch (action.type) {
-            case 'REGISTER_START_BTN':
+            case REGISTER_START_BTN:
                 return [...state, action.newBtn]
-            case 'BUTTON_CLICKED':
+            case BUTTON_CLICKED:
                 var newState = []
                 state.forEach((element, index) => {
                     if (element.name === action.clickedBtn.name) {
