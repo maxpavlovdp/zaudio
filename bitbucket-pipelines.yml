@@ -13,7 +13,8 @@ pipelines:
           - npm install
           - npm install webpack -g
           - webpack -p
-          - npm test
+          - export CI=true
+          - npm test -- --coverage
   branches:
     master:
       - step:

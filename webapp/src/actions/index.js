@@ -7,8 +7,8 @@ export const registerBtnInStore = (carName) => ({
 })
 
 export const buttonStartClicked = (carName) => ({
-        type: "BUTTON_CLICKED",
-            clickedBtn: {name: carName, isOn: true}
+    type: "BUTTON_CLICKED",
+    clickedBtn: {name: carName, isOn: true}
 })
 
 export const buttonStopClicked = (carName) => ({
