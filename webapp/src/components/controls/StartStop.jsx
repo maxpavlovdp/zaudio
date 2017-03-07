@@ -12,8 +12,8 @@ class StartStop extends React.Component {
     }
 
     componentDidMount() {
-        let toggleOtherSSBtns = (store = this.props.store)=> {
-            let otherPlaying = store.getState().find(e => (e.isOn && e.name != this.props.carName))
+        let toggleOtherSSBtns = ()=> {
+            let otherPlaying = this.props.store.getState().ssButtonToggle.find(e => (e.isOn && e.name != this.props.carName))
 
             this.setState({
                 otherPlaying: otherPlaying ? true : false
