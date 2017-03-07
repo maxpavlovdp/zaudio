@@ -5,6 +5,7 @@ import {Link} from 'react-router'
 import {createStore} from 'redux'
 import reducers from '../reducers'
 import AppConstants from '../AppConstants'
+import __ZEBCONFIG__ from '../config/config'
 
 class ZEB extends React.Component {
     constructor(props) {
