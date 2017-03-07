@@ -22,16 +22,19 @@ pipelines:
            - cd ./webapp
            - npm install
            - npm install webpack -g
-           - npm test
            - webpack -p
+           - export CI=true
+           - npm test -- --coverage
            - ./deploy-to-git-hub-pages/deploy.bash
-    BOOST-108_MouseEnterLeaveUXBehaviour:
+    BOOST-109_PlayOneSoundAtTime:
       - step:
           script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-on-demand-branch/index.html
            - cd ./webapp
            - npm install
            - npm install webpack -g
            - webpack -p
+           - export CI=true
+           - npm test -- --coverage
            - cp ./src/config/prodConfig.js ./public/config.js
            - ./deploy-to-s3/deployToS3OnDemandBucket.sh
     BOOST-98_soundDesignDevelopment:
@@ -41,6 +44,8 @@ pipelines:
            - npm install
            - npm install webpack -g
            - webpack -p
+           - export CI=true
+           - npm test -- --coverage
            - cp ./src/config/prodConfig.js ./public/config.js
            - ./deploy-to-s3/deployToS3Boost-98Bucket.sh
     develop:
@@ -50,5 +55,7 @@ pipelines:
            - npm install
            - npm install webpack -g
            - webpack -p
+           - export CI=true
+           - npm test -- --coverage
            - cp ./src/config/devConfig.js ./public/config.js
            - ./deploy-to-s3/deployToS3DevelopBucket.sh
