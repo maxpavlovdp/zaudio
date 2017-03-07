@@ -3,7 +3,7 @@ var assert = require("assert");
 
 describe('CarSimulator', ()=> {
     it('Anti power should be 0 when speed is 0', ()=> {
-        // assert.equal(CarMovementCalculator.calculateAntiPower(0,1,1), 0);
+        assert.equal(CarMovementCalculator.calculateAntiPower(0,1,1), 0);
     })
 
     it('Acceleration should be 0.8333333333333334 m/c2 for speed V1=0 m/s, V2=5 m/s and t=5s', ()=>{
