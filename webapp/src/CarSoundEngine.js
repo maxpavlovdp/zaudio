@@ -89,12 +89,19 @@ class   CarSoundEngine {
 
             this.createSound(this.config.start, () => {
                 afterSrartSounds.forEach((sound) => {
-                    sound.gainNode.gain.value = 0;
-                    sound.audioSource.start();
-                    if(__ZEBCONFIG__.env === AppConstants.DEV) {
-                        console.log("start " + sound.link)
+                    var speedVolume = 'speed' in sound.volume && typeof sound.volume.speed == 'object' ? this.calculatePolyline(sound.volume.speed, 0) : 0,
+                        powerVolume = 'power' in sound.volume && typeof sound.volume.power == 'object' ? this.calculatePolyline(sound.volume.power, 0) : 0,
+                        defVolume = 'def' in sound.volume && typeof sound.volume.def == 'object' ? this.calculatePolyline(sound.volume.def, 0) : 0,
+                        volume = speedVolume + powerVolume + defVolume;
+
+                    if(volume > 0) {
+                        sound.gainNode.gain.value = volume;
+                        sound.audioSource.start();
+                        if (__ZEBCONFIG__.env === AppConstants.DEV) {
+                            console.log("start " + sound.link)
+                        }
+                        sound.started = true;
                     }
-                    sound.started = true;
                 });
                 this.status = 'started';
                 resolve();
@@ -109,27 +116,34 @@ class   CarSoundEngine {
         });
     }
 
+    softStop(sound){
+        sound.gainNode.gain.value = 0.1;
+        setTimeout(function(){
+            sound.audioSource.stop();
+            sound.started = false;
+            delete sound.audioSource;
+        }, 500);
+    }
+
     stop() {
         if(this.status == 'started') {
             return new Promise((resolve, reject) => {
 
                 for (let o in this.config) {
-                    if (typeof this.config[o] == 'object' && 'audioSource' in this.config[o]) {
-                        this.config[o].audioSource.stop();
+                    if (typeof this.config[o] == 'object' && 'audioSource' in this.config[o] && this.config[o].started) {
+                        this.softStop(this.config[o]);
                         if (__ZEBCONFIG__.env === AppConstants.DEV) {
                             console.log("stop " + this.config[o].link)
                         }
-                        this.config[o].started = false;
-                        delete this.config[o].audioSource;
                     } else if (this.config[o] instanceof Array) {
                         this.config[o].forEach((el) => {
                             if ('audioSource' in el) {
-                                el.started = false;
-                                el.audioSource.stop();
-                                if (__ZEBCONFIG__.env === AppConstants.DEV) {
-                                    console.log("stop " + el.link);
+                                if (el.started) {
+                                    this.softStop(el);
+                                    if (__ZEBCONFIG__.env === AppConstants.DEV) {
+                                        console.log("stop " + el.link);
+                                    }
                                 }
-                                delete el.audioSource;
                             }
                         });
                     }

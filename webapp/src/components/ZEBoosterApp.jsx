@@ -1,10 +1,7 @@
 import React from 'react';
-import CarSimulator from './CarSimulator.jsx';
-import CarSoundEngine from './../CarSoundEngine.js';
-import {Link} from 'react-router';
-import {REGISTER_START_BTN, BUTTON_CLICKED} from '../actions'
-
-import {createStore} from 'redux';
+import CarSimulator from './CarSimulator.jsx'
+import CarSoundEngine from './../CarSoundEngine.js'
+import {Link} from 'react-router'
 
 class ZEB extends React.Component {
     constructor(props) {
@@ -29,17 +26,19 @@ class ZEB extends React.Component {
         }
     }
 
-    render() {
-        return <div>
-            <Link to={'/focusGroup'}>Focus Group</Link>
-            <CarSimulator store={this.store} name={"V4 Example"}
-                          soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4)}/>
-            <CarSimulator store={this.store} name={"V3"}
-                          soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
-            <CarSimulator store={this.store} name={"V2"}
-                          soundgen={new CarSoundEngine(require("../sounds/v2/schemeV2.jsx").ssv2)}/>
-            <CarSimulator store={this.store} name={"V1"}
-                          soundgen={new CarSoundEngine(require("../sounds/v1/schemeV1.jsx").ssv1)}/>
+    return <div>
+<Link to={'/focusGroup'}>Focus Group</Link>
+<CarSimulator store={this.store} name={"V4"}
+soundgen={new CarSoundEngine(require("../sounds/v4/v4Scheme.jsx").ssv4)}/>
+<CarSimulator store={this.store} name={"V4 Example"}
+soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4)}/>
+<CarSimulator store={this.store} name={"V3"}
+soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
+<CarSimulator store={this.store} name={"V2"}
+soundgen={new CarSoundEngine(require("../sounds/v2/schemeV2.jsx").ssv2)}/>
+<CarSimulator store={this.store} name={"V1"}
+soundgen={new CarSoundEngine(require("../sounds/v1/schemeV1.jsx").ssv1)}/>
+render() {
         </div>
     }
 }
