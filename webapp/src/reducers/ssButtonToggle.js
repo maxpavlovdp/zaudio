@@ -1,10 +1,10 @@
-import {REGISTER_START_BTN, BUTTON_CLICKED} from '../actions'
+import {REGISTER_START_BTN, ENGINE_ON_OFF} from '../actions'
 
 const ssButtonToggle = (state = {}, action) => {
     switch (action.type) {
         case REGISTER_START_BTN:
             return [...state, action.newBtn]
-        case BUTTON_CLICKED:
+        case ENGINE_ON_OFF:
             var newState = []
             state.forEach((element, index) => {
                 if (element.name === action.clickedBtn.name) {

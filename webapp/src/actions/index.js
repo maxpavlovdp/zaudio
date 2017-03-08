@@ -1,5 +1,5 @@
 export const REGISTER_START_BTN = "REGISTER_START_BTN"
-export const BUTTON_CLICKED = "BUTTON_CLICKED"
+export const ENGINE_ON_OFF = "ENGINE_ON_OFF"
 
 export const registerBtnInStore = (carName) => ({
     type: REGISTER_START_BTN,
@@ -7,11 +7,11 @@ export const registerBtnInStore = (carName) => ({
 })
 
 export const buttonStartClicked = (carName) => ({
-    type: "BUTTON_CLICKED",
+    type: "ENGINE_ON_OFF",
     clickedBtn: {name: carName, isOn: true}
 })
 
 export const buttonStopClicked = (carName) => ({
-    type: "BUTTON_CLICKED",
+    type: "ENGINE_ON_OFF",
     clickedBtn: {name: carName, isOn: false}
 })

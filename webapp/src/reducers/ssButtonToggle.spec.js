@@ -20,7 +20,7 @@ describe('ssButtonToggle reducer tests', () => {
                     {name: 'Btn 2', isOn: false}
                 ]
             },
-            {type: 'BUTTON_CLICKED', clickedBtn: {name: 'Btn 2', isOn: true}}
+            {type: 'ENGINE_ON_OFF', clickedBtn: {name: 'Btn 2', isOn: true}}
         );
         expect(state).toEqual({
             ssButtonToggle: [
