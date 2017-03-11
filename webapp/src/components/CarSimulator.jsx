@@ -100,18 +100,17 @@ class CarSimulator extends React.Component {
         } else {
             this.setState({
                 carStatus: 'stopping',
-                power: 0,
-                pedalIsEnable: false
+                pedalIsEnable: false,
+                power: 0
             });
             this._pedal.updatePedalPos(0)
+            this.updateSpeedAfterStop()
+
             this.s.then(sg => {
                 sg.stop().then(() => {
                     clearInterval(this.state.timer);
                     this.setState({
-                        speed: 0,
-                        power: 0,
                         carState: {},
-                        pedalIsEnable: false,
                         timer: null,
                         carStatus: 'stopped'
                     });
@@ -120,6 +119,23 @@ class CarSimulator extends React.Component {
                 });
             });
         }
+    }
+
+    updateSpeedAfterStop() {
+        var stopSoundLength = 2200
+        var updateInterval = 1000 / 30
+        var speedChangeStep = this.state.speed/(stopSoundLength/updateInterval)
+        var timer = setInterval(()=> {
+            stopSoundLength = stopSoundLength - updateInterval
+            if (stopSoundLength > 0) {
+                this.setState({
+                    speed: this.state.speed - speedChangeStep
+                })
+            } else {
+                clearInterval(timer)
+            }
+
+        }, updateInterval)
     }
 
     handleSpeed(power) {
