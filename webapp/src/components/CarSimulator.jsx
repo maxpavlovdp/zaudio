@@ -12,6 +12,8 @@ import Pedal from './controls/Pedal.jsx';
 import VolumeInputRange from './controls/VolumeControl';
 import StartStop from './controls/StartStop.jsx';
 
+import {buttonStartClicked, buttonStopClicked} from '../actions'
+
 import CarMathUtil from '../CarMovementCalcutator';
 
 import './CarSimulator.less';
@@ -112,6 +114,8 @@ class CarSimulator extends React.Component {
                         timer: null,
                         carStatus: 'stopped'
                     });
+
+                    this.props.store.dispatch(buttonStopClicked(this.props.name))
                 });
             });
         }
@@ -126,9 +130,11 @@ class CarSimulator extends React.Component {
 
     render() {
         return <div className="car">
+            <h1>{this.props.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
-                <StartStop speedChange={this.handleStartStop} carStatus={this.state.carStatus}/>
+                <StartStop carName={this.props.name} store={this.props.store} speedChange={this.handleStartStop}
+                           carStatus={this.state.carStatus}/>
                 <Pedal ref={(pedal) => {
                     this._pedal = pedal;
                 }}
@@ -137,10 +143,8 @@ class CarSimulator extends React.Component {
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
-            {
-                __ZEBCONFIG__.env == 'DEV' ?
-                    <SoundBar soundgen={this.props.soundgen} speed={this.state.speed}
-                              carState={this.state.carState}/> : ''
+            {__ZEBCONFIG__.env == 'DEV' ?
+                <SoundBar soundgen={this.props.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''
             }
         </div>
     }
