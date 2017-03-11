@@ -1,4 +1,4 @@
-var CarMovementCalculator = require("../src/CarMovementCalcutator")
+var CarMovementCalculator = require("./CarMovementCalcutator")
 var assert = require("assert");
 
 describe('CarSimulator', ()=> {
