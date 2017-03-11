@@ -126,7 +126,7 @@ class CarSimulator extends React.Component {
 
     updateSpeedAfterStop() {
         // Better to set to real "engineOff" sound length. Can be implemented if will be needed.
-        var stopSoundLength = 3000
+        var stopSoundLength = 4000
         var speedChangeStep = this.state.speed/(stopSoundLength/UPDATE_INTERVAL)
         var timer = setInterval(()=> {
             stopSoundLength = stopSoundLength - UPDATE_INTERVAL
