@@ -18,6 +18,9 @@ import CarMathUtil from '../CarMovementCalcutator';
 
 import './CarSimulator.less';
 
+const FPS = 30
+const UPDATE_INTERVAL = 1000 / FPS;
+
 class CarSimulator extends React.Component {
     constructor(props) {
         super(props);
@@ -73,7 +76,7 @@ class CarSimulator extends React.Component {
                         }
 
                         let newSpeed = CarMathUtil.msToKmH(speed + def / fps);
-                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000 / fps)
+                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, UPDATE_INTERVAL)
 
                         let carState = {
                             speed: newSpeed,
@@ -89,7 +92,7 @@ class CarSimulator extends React.Component {
 
                         //this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
                         this.props.soundgen.handleSound(carState);
-                    }, 1000 / fps);
+                    }, UPDATE_INTERVAL);
 
                     this.setState({
                         pedalIsEnable: true,
@@ -122,12 +125,12 @@ class CarSimulator extends React.Component {
     }
 
     updateSpeedAfterStop() {
-        var stopSoundLength = 2200
-        var updateInterval = 1000 / 30
-        var speedChangeStep = this.state.speed/(stopSoundLength/updateInterval)
+        // Better to set to real "engineOff" sound length. Can be implemented if will be needed.
+        var stopSoundLength = 3000
+        var speedChangeStep = this.state.speed/(stopSoundLength/UPDATE_INTERVAL)
         var timer = setInterval(()=> {
-            stopSoundLength = stopSoundLength - updateInterval
-            if (stopSoundLength > 0) {
+            stopSoundLength = stopSoundLength - UPDATE_INTERVAL
+            if (stopSoundLength > 0 && this.state.speed > 0) {
                 this.setState({
                     speed: this.state.speed - speedChangeStep
                 })
@@ -135,7 +138,7 @@ class CarSimulator extends React.Component {
                 clearInterval(timer)
             }
 
-        }, updateInterval)
+        }, UPDATE_INTERVAL)
     }
 
     handleSpeed(power) {
