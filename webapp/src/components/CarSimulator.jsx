@@ -44,6 +44,7 @@ class CarSimulator extends React.Component {
             this.setState({
                 carStatus: 'starting'
             });
+            this.props.store.dispatch(buttonStartClicked(this.props.name))
             this.s.then(sg => {
                 sg.start().then(() => {
                     this.setState({
