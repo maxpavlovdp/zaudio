@@ -59,7 +59,7 @@ class CarSimulator extends React.Component {
                         this.updateCarState(this.state.carSpecs);
 
                         //this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
-                        this.props.soundgen.handleSound(carState);
+                        this.props.soundgen.handleSound(this.state.carState);
                     }, UPDATE_INTERVAL);
 
                     this.setState({
@@ -113,7 +113,6 @@ class CarSimulator extends React.Component {
         }
 
         let newSpeed = CarMathUtil.msToKmH(speed + def / FPS);
-        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000 / FPS)
 
         let carState = {
             speed: newSpeed,
@@ -124,6 +123,7 @@ class CarSimulator extends React.Component {
 
         this.setState({
             speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
+            acceleration: -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, UPDATE_INTERVAL),
             carState: carState
         });
     }
