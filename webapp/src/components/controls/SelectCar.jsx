@@ -5,6 +5,14 @@ class SelectCar extends React.Component {
         super(props)
     }
 
+    handleSelect() {
+
+    }
+
+    componentDidMount() {
+        console.log(this.props.store.getState().ssButtonToggle)
+    }
+
     render() {
         return (
             <div>

@@ -15,8 +15,11 @@ import StartStop from './controls/StartStop.jsx';
 import {buttonStartClicked, buttonStopClicked} from '../actions'
 
 import CarMathUtil from '../CarMovementCalcutator';
+import {teslaModelS}  from '../config/carParams'
 
 import './CarSimulator.less';
+
+const FPS = 30
 
 class CarSimulator extends React.Component {
     constructor(props) {
@@ -27,6 +30,7 @@ class CarSimulator extends React.Component {
             speed: 0,
             power: 0,
             carState: {},
+            carSpecs: teslaModelS,
             chargeBattery: 0,
             acceleration: 0,
             pedalIsEnable: false,
@@ -50,46 +54,12 @@ class CarSimulator extends React.Component {
                     this.setState({
                         carStatus: 'started'
                     });
-                    var fps = 30;
                     var timer = setInterval(() => {
-                        const Mass = 2590;
-                        let speed = CarMathUtil.kmHToMs(this.state.speed),
-                            power = this.state.power * 8 / (speed + 1),
-                            antiPower = CarMathUtil.calculateAntiPower(speed, power, Mass),
-                            recuperationPower = 0,
-                            def = (power - antiPower) / Mass;
-
-                        if (def < -0.01501) {
-                            recuperationPower = -def * 50000 + 3000;
-                            def = (power - antiPower - recuperationPower) / Mass;
-
-                            this.setState({
-                                chargeBattery: -recuperationPower
-                            })
-                        } else {
-                            this.setState({
-                                chargeBattery: this.state.power
-                            })
-                        }
-
-                        let newSpeed = CarMathUtil.msToKmH(speed + def / fps);
-                        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000 / fps)
-
-                        let carState = {
-                            speed: newSpeed,
-                            def: def,
-                            power: this.state.power,
-                            recuperationPower: recuperationPower
-                        }
-
-                        this.setState({
-                            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
-                            carState: carState
-                        });
+                        this.updateCarState(this.state.carSpecs);
 
                         //this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
-                        this.props.soundgen.handleSound(carState);
-                    }, 1000 / fps);
+                        this.props.soundgen.handleSound(this.state.carState);
+                    }, 1000 / FPS);
 
                     this.setState({
                         pedalIsEnable: true,
@@ -119,10 +89,46 @@ class CarSimulator extends React.Component {
         }
     }
 
+    updateCarState(carSpecs) {
+        let speed = CarMathUtil.kmHToMs(this.state.speed),
+            power = this.state.power * 8 / (speed + 1),
+            antiPower = CarMathUtil.calculateAntiPower(speed, power, carSpecs.weight),
+            recuperationPower = 0,
+            def = (power - antiPower) / carSpecs.weight;
+
+        if (def < -0.01501) {
+            recuperationPower = -def * 50000 + 3000;
+            def = (power - antiPower - recuperationPower) / carSpecs.weight;
+
+            this.setState({
+                chargeBattery: -recuperationPower
+            })
+        } else {
+            this.setState({
+                chargeBattery: this.state.power
+            })
+        }
+
+        let newSpeed = CarMathUtil.msToKmH(speed + def / FPS);
+        this.state.acceleration = -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, 1000 / FPS)
+
+        let carState = {
+            speed: newSpeed,
+            def: def,
+            power: this.state.power,
+            recuperationPower: recuperationPower
+        }
+
+        this.setState({
+            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
+            carState: carState
+        });
+    }
+
     handleSpeed(power) {
         var easing = BezierEasing(0.64, 0.18, 0.89, 0.28);
         this.setState({
-            power: easing(power) * 35000
+            power: easing(power) * this.state.carSpecs.maxMotorPower
         });
     }
 

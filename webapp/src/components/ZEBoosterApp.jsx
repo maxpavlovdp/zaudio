@@ -23,7 +23,7 @@ class ZEB extends React.Component {
         return (
             <div>
                 <Link to={'/focusGroup'}>Focus Group</Link>
-                <SelectCar/>
+                <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} name={"V4"}
                               soundgen={new CarSoundEngine(require("../sounds/v4/v4Scheme.jsx").ssv4)}/>
                 <CarSimulator store={this.store} name={"V4 Example"}
