@@ -7,11 +7,11 @@ export const registerBtnInStore = (carName) => ({
 })
 
 export const buttonStartClicked = (carName) => ({
-    type: "ENGINE_ON_OFF",
+    type: ENGINE_ON_OFF,
     clickedBtn: {name: carName, isOn: true}
 })
 
 export const buttonStopClicked = (carName) => ({
-    type: "ENGINE_ON_OFF",
+    type: ENGINE_ON_OFF,
     clickedBtn: {name: carName, isOn: false}
 })
