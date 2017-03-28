@@ -4,6 +4,7 @@
 
 //https://en.wikipedia.org/wiki/Tesla_Model_S#Specifications
 const teslaModelS = {
+    id: "teslaModelS",
     weight: 2200, // kg
     // maxMotorPower: 581, //kWt
     maxMotorPower: 35000, //fake to use old logic
@@ -13,6 +14,7 @@ const teslaModelS = {
 module.exports.teslaModelS = teslaModelS
 
 const teslaModel3 = {
+    id: "teslaModel3",
     weight: 1800, // kg
     maxMotorPower: 300, //kWt
     dragCoef: 0.21, // Cd

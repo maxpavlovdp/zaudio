@@ -1,16 +1,15 @@
 import React from 'react';
+import {registerCarModelInStore} from '../../actions'
+import {teslaModelS} from '../../config/carParams.js'
 
 class SelectCar extends React.Component {
     constructor(props) {
         super(props)
     }
 
-    handleSelect() {
-
-    }
-
     componentDidMount() {
-        console.log(this.props.store.getState().ssButtonToggle)
+        this.props.store.dispatch(registerCarModelInStore(teslaModelS))
+        console.log(this.props.store.getState().carSelect.carModel)
     }
 
     render() {

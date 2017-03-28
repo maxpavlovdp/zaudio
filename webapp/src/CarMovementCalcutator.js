@@ -2,9 +2,9 @@
  * Created by Max Pavlov on 11/18/16.
  */
 
-var calculateAntiPower = function (currentSpeed, currentPower, mass) {
+var calculateAntiPower = function (currentSpeed, currentPower, mass, dragCoef, frontArea) {
     if(currentSpeed == 0) return 0
-    return 0.24 * 1.29 * 2.34 * Math.pow(currentSpeed, 2) + 0.015 * mass + 0.08 * currentPower
+    return dragCoef * 1.29 * frontArea * Math.pow(currentSpeed, 2) + 0.015 * mass + 0.08 * currentPower
 }
 module.exports.calculateAntiPower = calculateAntiPower;
 
