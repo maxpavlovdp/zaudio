@@ -18,7 +18,7 @@ export const buttonStopClicked = (carName) => ({
     clickedBtn: {name: carName, isOn: false}
 })
 
-export const registerCarModelInStore = (carModel) =>({
+export const setCarModelInStore = (carModel) =>({
     type: REGISTER_CAR_MODEL,
     carModel: {carModel: carModel}
 })
