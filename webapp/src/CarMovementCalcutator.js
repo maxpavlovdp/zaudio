@@ -6,7 +6,8 @@
 // http://www.carshistory.ru/avtomobil/hodovaya_chast/sily_deystvuuschie_na_dvizhuschiysya_avtomob/1074.html
 
 let calculateAntiPower = function (currentSpeed, mass, dragCoef, frontArea) {
-    return (frontArea*Math.pow(currentSpeed,2)) + (0.015 * mass)
+    if (currentSpeed == 0) return 0
+    return ((frontArea * Math.pow(currentSpeed, 2)) + (0.015 * mass))
 }
 module.exports.calculateAntiPower = calculateAntiPower;
 
