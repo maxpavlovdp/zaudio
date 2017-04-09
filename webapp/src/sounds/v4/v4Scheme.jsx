@@ -17,7 +17,7 @@ var soundSchemeV4 = {
         {
             link: V4_IDLING,
             margins: {
-                speed: [0, 240]
+                speed: [0, 241]
             },
             pbr: {
                 speed: [[0, 1], [240, 2.5]]
@@ -31,7 +31,7 @@ var soundSchemeV4 = {
         {
             link: V4_0_30,
             margins: {
-                speed: [0, 240]
+                speed: [0, 241]
             },
             pbr: {
                 speed: [[0, 0], [10, 1], [240, 2.2]]
@@ -44,7 +44,7 @@ var soundSchemeV4 = {
         {
             link: V4_30_60,
             margins: {
-                speed: [30, 240]
+                speed: [30, 241]
             },
             pbr: {
                 speed: [[0, 0], [35, 1], [240, 1.9]]
@@ -57,7 +57,7 @@ var soundSchemeV4 = {
         {
             link: V4_60_100,
             margins: {
-                speed: [60, 240]
+                speed: [60, 241]
             },
             pbr: {
                 speed: [[0, 0], [60, 1], [240, 2.2]]
@@ -70,7 +70,7 @@ var soundSchemeV4 = {
         {
             link: V4_100_160,
             margins: {
-                speed: [100, 240]
+                speed: [100, 241]
             },
             pbr: {
                 speed: [[0, 0], [100, 1], [240, 1.5]]
@@ -83,7 +83,7 @@ var soundSchemeV4 = {
         {
             link: V4_160_240,
             margins: {
-                speed: [160, 240]
+                speed: [160, 241]
             },
             pbr: {
                 speed: [[0, 0], [160, 1], [240, 1.5]]
@@ -96,7 +96,7 @@ var soundSchemeV4 = {
         {
             link: V4_RECUPERATION,
             margins: {
-                speed: [10, 240]
+                speed: [10, 241]
             },
             pbr: {
                 speed: [[0, 1], [240, 1.7]]

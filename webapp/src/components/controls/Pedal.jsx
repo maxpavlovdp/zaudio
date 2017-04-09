@@ -16,6 +16,12 @@ class Pedal extends React.Component {
         }
     }
 
+    updatePedalPos(pedalPos) {
+        this.setState({
+            gas: pedalPos
+        })
+    }
+
     componentWillReceiveProps(nextProps) {
         if (this.state.isEnable != nextProps.isEnable) {
             this.setState({

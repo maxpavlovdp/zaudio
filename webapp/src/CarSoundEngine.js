@@ -89,10 +89,14 @@ class   CarSoundEngine {
 
             this.createSound(this.config.start, () => {
                 afterSrartSounds.forEach((sound) => {
-                    var speedVolume = 'speed' in sound.volume && typeof sound.volume.speed == 'object' ? this.calculatePolyline(sound.volume.speed, 0) : 0,
-                        powerVolume = 'power' in sound.volume && typeof sound.volume.power == 'object' ? this.calculatePolyline(sound.volume.power, 0) : 0,
-                        defVolume = 'def' in sound.volume && typeof sound.volume.def == 'object' ? this.calculatePolyline(sound.volume.def, 0) : 0,
-                        volume = speedVolume + powerVolume + defVolume;
+                    if('version' in this.config && this.config.version >= 4) {
+                        var speedVolume = 'speed' in sound.volume && typeof sound.volume.speed == 'object' ? this.calculatePolyline(sound.volume.speed, 0) : 0,
+                            powerVolume = 'power' in sound.volume && typeof sound.volume.power == 'object' ? this.calculatePolyline(sound.volume.power, 0) : 0,
+                            defVolume = 'def' in sound.volume && typeof sound.volume.def == 'object' ? this.calculatePolyline(sound.volume.def, 0) : 0,
+                            volume = speedVolume + powerVolume + defVolume;
+                    } else {
+                        volume = 0;
+                    }
 
                     if(volume > 0) {
                         sound.gainNode.gain.value = volume;
