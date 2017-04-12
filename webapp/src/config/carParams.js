@@ -8,8 +8,7 @@ let carModels = {
         key: "teslaModelS",
         name: "Tesla Model S",
         weight: 2200, // kg
-        // maxMotorPower: 581, //kWt
-        maxMotorPower: 35000, //kWt
+        maxMotorPower: 581, //kWt
         dragCoef: 0.24, // Cd
         frontArea: 2.34 // m2
     },
@@ -17,8 +16,7 @@ let carModels = {
         key: "teslaModel3",
         name: "Tesla Model 3",
         weight: 1800, // kg
-        // maxMotorPower: 300, //kWt
-        maxMotorPower: 11000, //kWt
+        maxMotorPower: 300, //kWt
         dragCoef: 0.21, // Cd
         frontArea: 2.00 // m2
     }
