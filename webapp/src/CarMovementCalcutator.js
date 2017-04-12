@@ -6,10 +6,16 @@
  */
 
 // Returns antipower in in newtons (kg*m/s^2)
-let calculateAntiPower = function (currentSpeed, mass, dragCoef, frontArea) {
+let calculateAntiPower = function (currentSpeed, mass, dragCoef, frontArea, withMagic) {
     if (currentSpeed == 0) return 0
-    return airResistance(frontArea, currentSpeed, dragCoef)
+    let result = airResistance(frontArea, currentSpeed, dragCoef)
         + wheelRotationResistance(mass)
+    if (withMagic) {
+        return result + magicResistanceCoef(currentSpeed)
+    } else {
+        return result
+    }
+
 }
 module.exports.calculateAntiPower = calculateAntiPower;
 
@@ -19,16 +25,34 @@ let airResistance = function (frontArea, currentSpeed, dragCoef) {
 let wheelRotationResistance = function (mass) {
     return 0.015 * mass
 }
+// Magic numbers :)
+let magicResistanceCoef = function (speed) {
+    return speed * 90
+}
+let magicAccCoef = function (speed) {
+    let speedInKMh = msToKmH(speed)
+    if (speedInKMh < 100) {
+        return (speedInKMh + 1) / 100
+    } else {
+        return 1
+    }
+}
 
 let calculateNewSpeed = function (currentSpeedInMS, resPower, weight, dt) {
     return currentSpeedInMS + (resPower / weight) * dt;
 };
 module.exports.calculateNewSpeed = calculateNewSpeed
 
-let kWtToNewton = function (power, currentSpeedInMS) {
-    return power * 1000 / (currentSpeedInMS + 0.1);
+// power in kWt
+let motorMaxPowerToTractionPower = function (power, currentSpeedInMS, withMagic) {
+    let result = power * 1000 / (currentSpeedInMS + 0.1)
+    if (withMagic) {
+        return result * magicAccCoef(currentSpeedInMS)
+    } else {
+        return result
+    }
 };
-module.exports.kWtToNewton = kWtToNewton
+module.exports.motorMaxPowerToTractionPower = motorMaxPowerToTractionPower
 
 let calculateAcceleration = function (V1, V2, t) {
     return (V2 - V1) / t

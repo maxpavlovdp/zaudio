@@ -95,11 +95,11 @@ class CarSimulator extends React.Component {
     updateCarState(carSpecs) {
         let currentSpeedInMS = cCalc.kmHToMs(this.state.speed),
             power = this.state.power,
-            antiPower = cCalc.calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea),
+            antiPower = cCalc.calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true),
             recuperationPower = 0,
             def = (power - antiPower) / carSpecs.weight;
 
-        let resultPower = cCalc.kWtToNewton(power, currentSpeedInMS) - antiPower
+        let resultPower = cCalc.motorMaxPowerToTractionPower(power, currentSpeedInMS, true) - antiPower
         let newSpeed = cCalc.msToKmH(cCalc.calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, (1 / FPS)))
 
         let carState = {

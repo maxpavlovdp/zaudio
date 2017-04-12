@@ -1,32 +1,40 @@
-var CarMovementCalculator = require("./CarMovementCalcutator")
+var cCalc = require("./CarMovementCalcutator")
 var assert = require("assert");
 
 describe('CarMovementCalcutator.js', () => {
     it('Anti power should be 0 when speed is 0', () => {
-        assert.equal(CarMovementCalculator.calculateAntiPower(0, 1, 1), 0);
+        assert.equal(cCalc.calculateAntiPower(0, 1, 1), 0);
     })
 
     it('Anti power for Model S should be 176 newtons (17 kg) when speed is 58 km/h (16 m/s)', () => {
-        assert.equal(CarMovementCalculator.calculateAntiPower(16, 2200, 0.24, 2.34), 176.7696);
+        assert.equal(cCalc.calculateAntiPower(16, 2200, 0.24, 2.34), 176.7696);
     })
 
     it('Anti power for Model S should be 2554 newtons (255 kg) when speed is 240 km/h (67 m/s)', () => {
-        assert.equal(CarMovementCalculator.calculateAntiPower(67, 2200, 0.24, 2.34), 2554.0224);
+        assert.equal(cCalc.calculateAntiPower(cCalc.kmHToMs(240), 2200, 0.24, 2.34), 2529.0000000000005);
+    })
+
+    it('Traction power for Model S on speed 60 km/h is 3465 kg', () => {
+        assert.equal(cCalc.motorMaxPowerToTractionPower(581, cCalc.kmHToMs(60)), 34652.0874751491)
+    })
+
+    it('Traction power for Model S on speed 240 km/h is 8701 kg', () => {
+        assert.equal(cCalc.motorMaxPowerToTractionPower(581, cCalc.kmHToMs(240)), 8701.947079380929)
     })
 
     it('Acceleration should be 0.83 m/c2 for speed V1=0 m/s, V2=5 m/s and t=5s', () => {
-        assert.equal(CarMovementCalculator.calculateAcceleration(0, 5, 6), 0.8333333333333334)
+        assert.equal(cCalc.calculateAcceleration(0, 5, 6), 0.8333333333333334)
     })
 
     it('16 m/s equals to 57.6 km/h', () => {
-        assert.equal(CarMovementCalculator.msToKmH(16), 57.6)
+        assert.equal(cCalc.msToKmH(16), 57.6)
     })
 
     it('57.6 km/h equals 16 m/s', () => {
-        assert.equal(CarMovementCalculator.kmHToMs(57.6), 16)
+        assert.equal(cCalc.kmHToMs(57.6), 16)
     })
 
     it('240 km/h equals 66.66666666666667 m/s', () => {
-        assert.equal(CarMovementCalculator.kmHToMs(240), 66.66666666666667)
+        assert.equal(cCalc.kmHToMs(240), 66.66666666666667)
     })
 })
