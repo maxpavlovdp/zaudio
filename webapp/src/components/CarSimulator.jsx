@@ -58,7 +58,7 @@ class CarSimulator extends React.Component {
                     let timer = setInterval(() => {
                         let carModel = this.props.store.getState().carSelect.carModel
 
-                        let newCarState = this.updateCarState(carModel, this.state.power, this.state.speed);
+                        let newCarState = cCalc.updateCarState(carModel, this.state.power, this.state.speed, 1 / FPS);
                         this.props.soundgen.handleSound(newCarState);
 
                         this.setState({
@@ -96,22 +96,6 @@ class CarSimulator extends React.Component {
                     this.props.store.dispatch(buttonStopClicked(this.props.name))
                 });
             });
-        }
-    }
-
-    updateCarState(carSpecs, power, speed) {
-        let currentSpeedInMS = cCalc.kmHToMs(speed),
-            recuperationPower = 0,
-            def = (power - antiPower) / carSpecs.weight;
-
-        let antiPower = cCalc.calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true)
-        let resultPower = cCalc.motorMaxPowerToTractionPower(power, currentSpeedInMS, true) - antiPower
-        let newSpeed = cCalc.msToKmH(cCalc.calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, (1 / FPS)))
-
-        return {
-            speed: newSpeed,
-            def: def,
-            recuperationPower: recuperationPower
         }
     }
 
