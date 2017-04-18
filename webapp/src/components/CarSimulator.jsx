@@ -58,8 +58,15 @@ class CarSimulator extends React.Component {
                     let timer = setInterval(() => {
                         let carModel = this.props.store.getState().carSelect.carModel
 
-                        this.updateCarState(carModel);
-                        this.props.soundgen.handleSound(this.state.carState);
+                        let newCarState = this.updateCarState(carModel, this.state.power, this.state.speed);
+                        this.props.soundgen.handleSound(newCarState);
+
+                        this.setState({
+                            speed: newCarState.speed > 240 ? 240 : newCarState.speed < 0 ? 0 : newCarState.speed,
+                            acceleration: -cCalc.calculateAcceleration(this.state.speed, newCarState.speed, 1 / FPS),
+                            chargeBattery: newCarState.recuperationPower,
+                            carState: newCarState
+                        });
                     }, UPDATE_INTERVAL);
 
                     this.setState({
@@ -92,28 +99,20 @@ class CarSimulator extends React.Component {
         }
     }
 
-    updateCarState(carSpecs) {
-        let currentSpeedInMS = cCalc.kmHToMs(this.state.speed),
-            power = this.state.power,
-            antiPower = cCalc.calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true),
+    updateCarState(carSpecs, power, speed) {
+        let currentSpeedInMS = cCalc.kmHToMs(speed),
             recuperationPower = 0,
             def = (power - antiPower) / carSpecs.weight;
 
+        let antiPower = cCalc.calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true)
         let resultPower = cCalc.motorMaxPowerToTractionPower(power, currentSpeedInMS, true) - antiPower
         let newSpeed = cCalc.msToKmH(cCalc.calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, (1 / FPS)))
 
-        let carState = {
+        return {
             speed: newSpeed,
             def: def,
-            power: this.state.power,
             recuperationPower: recuperationPower
         }
-
-        this.setState({
-            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
-            acceleration: -cCalc.calculateAcceleration(this.state.speed, newSpeed, 1 / FPS),
-            carState: carState
-        });
     }
 
     updateSpeedAfterStop() {
