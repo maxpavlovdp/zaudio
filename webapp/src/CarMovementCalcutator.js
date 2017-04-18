@@ -11,7 +11,7 @@ let calculateAntiPower = function (currentSpeed, mass, dragCoef, frontArea, with
     let result = airResistance(frontArea, currentSpeed, dragCoef)
         + wheelRotationResistance(mass)
     if (withMagic) {
-        return result + magicResistanceCoef(currentSpeed)
+        return result * magicResistanceCoef(currentSpeed)
     } else {
         return result
     }
@@ -27,14 +27,19 @@ let wheelRotationResistance = function (mass) {
 }
 // Magic numbers :)
 let magicResistanceCoef = function (speed) {
-    return speed * 90
+    let speedInKMh = msToKmH(speed)
+    if (speedInKMh > 100) {
+        return (speedInKMh + 20) / 100
+    } else {
+        return 1
+    }
 }
 let magicAccCoef = function (speed) {
     let speedInKMh = msToKmH(speed)
     if (speedInKMh < 100) {
-        return (speedInKMh + 1) / 100
+        return ((speedInKMh + 1) / 100) * 0.8
     } else {
-        return 1
+        return 0.8
     }
 }
 
