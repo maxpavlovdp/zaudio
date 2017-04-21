@@ -59,6 +59,49 @@ describe('CarMovementCalcutator.js', () => {
             dragCoef: 0.24, // Cd
             frontArea: 2.34 // m2
         }
-        assert.equal(cCalc.updateCarState(teslaModelS, teslaModelS.maxMotorPower, 200, 2).speed, 214.6141483075918 )
+        assert.equal(cCalc.updateCarState(teslaModelS, teslaModelS.maxMotorPower, 200, 2).speed, 214.6141483075918)
     })
+
+    it('for model S new speed after 5 sec full deceleration from 100 will be 86 km/h', () => {
+        let teslaModelS = {
+            key: "teslaModelS",
+            name: "Tesla Model S",
+            weight: 2200, // kg
+            maxMotorPower: 581, //kWt
+            dragCoef: 0.24, // Cd
+            frontArea: 2.34, // m2
+            regenCoef: 1.5, //
+            maxRegPower: 70 // Kwt
+        }
+
+        assert.equal(cCalc.updateCarState(teslaModelS, 0, 100, 2).speed, 86.14728461176131)
+    })
+
+    it('deceleration is bigger when regen max power is bigger which leads to less speed', () => {
+        let teslaModelS1 = {
+            key: "teslaModelS",
+            name: "Tesla Model S",
+            weight: 2200, // kg
+            maxMotorPower: 581, //kWt
+            dragCoef: 0.24, // Cd
+            frontArea: 2.34, // m2
+            regenCoef: 1.5, //
+            maxRegPower: 70 // Kwt
+        }
+
+        let teslaModelS2 = {
+            key: "teslaModelS",
+            name: "Tesla Model S",
+            weight: 2200, // kg
+            maxMotorPower: 581, //kWt
+            dragCoef: 0.24, // Cd
+            frontArea: 2.34, // m2
+            regenCoef: 1.5, //
+            maxRegPower: 150 // Kwt
+        }
+
+        assert.equal(cCalc.updateCarState(teslaModelS1, 0, 100, 2).speed > cCalc.updateCarState(teslaModelS2, 0, 100, 2).speed, true)
+    })
+
+
 })
