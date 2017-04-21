@@ -8,9 +8,15 @@ class ModeIndicator extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        console.log(this.props.store.getState().carSelect.carModel.maxRegPower)
+    }
+
+
+
     render() {
         return (
-            <input disabled="true" className="mode-indicator" value={this.props.chargeBattery} type="range" min="-16000" max="35000" step="0.01"/>
+            <input disabled="true" className="mode-indicator" value={this.props.chargeBattery * 4} type="range" min="-280" max="500" step="0.01"/>
         )
     }
 }

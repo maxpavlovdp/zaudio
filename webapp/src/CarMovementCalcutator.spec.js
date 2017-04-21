@@ -15,11 +15,11 @@ describe('CarMovementCalcutator.js', () => {
     })
 
     it('Traction power for Model S on speed 60 km/h is 3465 kg', () => {
-        assert.equal(cCalc.motorMaxPowerToTractionPower(581, cCalc.kmHToMs(60)), 34652.0874751491)
+        assert.equal(cCalc.motorPowerToTractionForce(581, cCalc.kmHToMs(60)), 34652.0874751491)
     })
 
     it('Traction power for Model S on speed 240 km/h is 8701 kg', () => {
-        assert.equal(cCalc.motorMaxPowerToTractionPower(581, cCalc.kmHToMs(240)), 8701.947079380929)
+        assert.equal(cCalc.motorPowerToTractionForce(581, cCalc.kmHToMs(240)), 8701.947079380929)
     })
 
     it('Acceleration should be 0.83 m/c2 for speed V1=0 m/s, V2=5 m/s and t=5s', () => {

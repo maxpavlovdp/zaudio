@@ -3,11 +3,13 @@
  *
  * All methods operate with system SI
  * https://en.wikipedia.org/wiki/International_System_of_Units
+ *
+ * video with real dynamyc: https://www.youtube.com/watch?v=6TXAZstjkDg
  */
 
 // Returns antipower in in newtons (kg*m/s^2)
 let calculateAntiPower = function (currentSpeed, mass, dragCoef, frontArea, withMagic) {
-    if (currentSpeed == 0) return 0
+    if (currentSpeed === 0) return 0
     let result = airResistance(frontArea, currentSpeed, dragCoef)
         + wheelRotationResistance(mass)
     if (withMagic) {
@@ -25,7 +27,8 @@ let airResistance = function (frontArea, currentSpeed, dragCoef) {
 let wheelRotationResistance = function (mass) {
     return 0.015 * mass
 }
-// Magic numbers :)
+
+// Magic coef emulate real dynamic
 let magicResistanceCoef = function (speed) {
     let speedInKMh = msToKmH(speed)
     if (speedInKMh > 100) {
@@ -46,10 +49,10 @@ let magicAccCoef = function (speed) {
 let calculateNewSpeed = function (currentSpeedInMS, resPower, weight, dt) {
     return currentSpeedInMS + (resPower / weight) * dt;
 };
-module.exports.calculateNewSpeed = calculateNewSpeed
 
 // power in kWt
-let motorMaxPowerToTractionPower = function (power, currentSpeedInMS, withMagic) {
+// returns newton
+let motorPowerToTractionForce = function (power, currentSpeedInMS, withMagic) {
     let result = power * 1000 / (currentSpeedInMS + 0.1)
     if (withMagic) {
         return result * magicAccCoef(currentSpeedInMS)
@@ -57,7 +60,14 @@ let motorMaxPowerToTractionPower = function (power, currentSpeedInMS, withMagic)
         return result
     }
 };
-module.exports.motorMaxPowerToTractionPower = motorMaxPowerToTractionPower
+module.exports.motorPowerToTractionForce = motorPowerToTractionForce
+
+
+// force in newtons
+// returns power in kWt
+let forceToPower = function (force, speedInMS) {
+    return force * speedInMS / 1000
+}
 
 let calculateAcceleration = function (V1, V2, t) {
     return (V2 - V1) / t
@@ -74,19 +84,36 @@ let kmHToMs = function (speedInKmH) {
 }
 module.exports.kmHToMs = kmHToMs;
 
-let updateCarState = function (carSpecs, power, speed, updateIntervalInSec) {
-    let currentSpeedInMS = kmHToMs(speed),
-        recuperationPower = 0,
-        def = (power - antiPower) / carSpecs.weight;
+// This method operates not only with system SI units
+let addRegenToDecc = function (speedKmh, resultPower, carSpecs, currentSpeedInMS) {
+    if (speedKmh < 50) {
+        resultPower = resultPower - (speedKmh / 50) * carSpecs.regenCoef * motorPowerToTractionForce(carSpecs.maxRegPower, currentSpeedInMS, false)
+    } else {
+        resultPower = resultPower - carSpecs.regenCoef * motorPowerToTractionForce(carSpecs.maxRegPower, currentSpeedInMS, false)
+    }
+    return resultPower;
+};
+let updateCarState = function (carSpecs, powerKwt, speedKmh, updateIntervalInSec) {
+    let currentSpeedInMS = kmHToMs(speedKmh),
+        batteryCharge = -powerKwt
 
     let antiPower = calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true)
-    let resultPower = motorMaxPowerToTractionPower(power, currentSpeedInMS, true) - antiPower
+    let resultPower = motorPowerToTractionForce(powerKwt, currentSpeedInMS, true) - antiPower
+
+    if (resultPower < 0) {
+        resultPower = addRegenToDecc(speedKmh, resultPower, carSpecs, currentSpeedInMS);
+
+        batteryCharge = -forceToPower(resultPower, currentSpeedInMS)
+        batteryCharge = batteryCharge < carSpecs.maxRegPower ? batteryCharge : carSpecs.maxRegPower
+    }
+
     let newSpeed = msToKmH(calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, updateIntervalInSec))
+
 
     return {
         speed: newSpeed,
-        def: def,
-        recuperationPower: recuperationPower
+        def: resultPower / carSpecs.weight,
+        recuperationPower: -batteryCharge
     }
 }
 module.exports.updateCarState = updateCarState

@@ -10,7 +10,9 @@ let carModels = {
         weight: 2200, // kg
         maxMotorPower: 581, //kWt
         dragCoef: 0.24, // Cd
-        frontArea: 2.34 // m2
+        frontArea: 2.34, // m2
+        regenCoef: 1.5, //
+        maxRegPower: 70 // Kwt
     },
     teslaModel3: {
         key: "teslaModel3",
@@ -18,7 +20,9 @@ let carModels = {
         weight: 1800, // kg
         maxMotorPower: 300, //kWt
         dragCoef: 0.21, // Cd
-        frontArea: 2.00 // m2
+        frontArea: 2.00, // m2
+        regenCoef: 1.5, //
+        maxRegPower: 70 // Kwt
     }
 }
 
