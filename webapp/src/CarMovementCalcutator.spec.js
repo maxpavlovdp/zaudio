@@ -37,4 +37,28 @@ describe('CarMovementCalcutator.js', () => {
     it('240 km/h equals 66.66666666666667 m/s', () => {
         assert.equal(cCalc.kmHToMs(240), 66.66666666666667)
     })
+
+    it('for model S new speed after 2 sec full acceleration from 0 will be 152 km/h', () => {
+        let teslaModelS = {
+            key: "teslaModelS",
+            name: "Tesla Model S",
+            weight: 2200, // kg
+            maxMotorPower: 581, //kWt
+            dragCoef: 0.24, // Cd
+            frontArea: 2.34 // m2
+        }
+        assert.equal(cCalc.updateCarState(teslaModelS, teslaModelS.maxMotorPower, 0, 2).speed, 152.11636363636364)
+    })
+
+    it('for model S new speed after 2 sec full acceleration from 200 will be 214 km/h', () => {
+        let teslaModelS = {
+            key: "teslaModelS",
+            name: "Tesla Model S",
+            weight: 2200, // kg
+            maxMotorPower: 581, //kWt
+            dragCoef: 0.24, // Cd
+            frontArea: 2.34 // m2
+        }
+        assert.equal(cCalc.updateCarState(teslaModelS, teslaModelS.maxMotorPower, 200, 2).speed, 214.6141483075918 )
+    })
 })

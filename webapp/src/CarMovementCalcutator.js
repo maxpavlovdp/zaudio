@@ -74,14 +74,14 @@ let kmHToMs = function (speedInKmH) {
 }
 module.exports.kmHToMs = kmHToMs;
 
-let updateCarState = function (carSpecs, power, speed, updateInterval) {
+let updateCarState = function (carSpecs, power, speed, updateIntervalInSec) {
     let currentSpeedInMS = kmHToMs(speed),
         recuperationPower = 0,
         def = (power - antiPower) / carSpecs.weight;
 
     let antiPower = calculateAntiPower(currentSpeedInMS, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea, true)
     let resultPower = motorMaxPowerToTractionPower(power, currentSpeedInMS, true) - antiPower
-    let newSpeed = msToKmH(calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, updateInterval))
+    let newSpeed = msToKmH(calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, updateIntervalInSec))
 
     return {
         speed: newSpeed,
