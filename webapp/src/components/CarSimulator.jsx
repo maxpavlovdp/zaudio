@@ -63,7 +63,7 @@ class CarSimulator extends React.Component {
 
                         this.setState({
                             speed: newCarState.speed > 240 ? 240 : newCarState.speed < 0 ? 0 : newCarState.speed,
-                            acceleration: -cCalc.calculateAcceleration(this.state.speed, newCarState.speed, 1 / FPS),
+                            acceleration: cCalc.calculateAcceleration(this.state.speed, newCarState.speed, 1 / FPS),
                             chargeBattery: newCarState.recuperationPower,
                             carState: newCarState
                         });

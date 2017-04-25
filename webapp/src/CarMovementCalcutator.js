@@ -86,10 +86,10 @@ module.exports.kmHToMs = kmHToMs;
 
 // This method operates not only with system SI units
 let addRegenToDecc = function (speedKmh, resultPower, carSpecs, currentSpeedInMS) {
-    if (speedKmh < 50) {
-        resultPower = resultPower - (speedKmh / 50) * carSpecs.regenCoef * motorPowerToTractionForce(carSpecs.maxRegPower, currentSpeedInMS, false)
+    if (speedKmh < carSpecs.regenDecrSpeed) {
+        resultPower = resultPower - (speedKmh / carSpecs.regenDecrSpeed) * motorPowerToTractionForce(carSpecs.maxRegenPower, currentSpeedInMS, false)
     } else {
-        resultPower = resultPower - carSpecs.regenCoef * motorPowerToTractionForce(carSpecs.maxRegPower, currentSpeedInMS, false)
+        resultPower = resultPower - motorPowerToTractionForce(carSpecs.maxRegenPower, currentSpeedInMS, false)
     }
     return resultPower;
 };
@@ -104,7 +104,9 @@ let updateCarState = function (carSpecs, powerKwt, speedKmh, updateIntervalInSec
         resultPower = addRegenToDecc(speedKmh, resultPower, carSpecs, currentSpeedInMS);
 
         batteryCharge = -forceToPower(resultPower, currentSpeedInMS)
-        batteryCharge = batteryCharge < carSpecs.maxRegPower ? batteryCharge : carSpecs.maxRegPower
+        batteryCharge = batteryCharge < carSpecs.maxRegenPower ? batteryCharge : carSpecs.maxRegenPower
+        // console.log(batteryCharge < carSpecs.maxRegenPower)
+        // console.log(batteryCharge)
     }
 
     let newSpeed = msToKmH(calculateNewSpeed(currentSpeedInMS, resultPower, carSpecs.weight, updateIntervalInSec))

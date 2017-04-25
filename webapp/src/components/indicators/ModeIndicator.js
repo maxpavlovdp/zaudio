@@ -3,20 +3,28 @@
  */
 import React from 'react';
 
+const regCoef = 1
 class ModeIndicator extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {}
     }
 
     componentDidMount() {
-        console.log(this.props.store.getState().carSelect.carModel.maxRegPower)
+        this.setState({
+            maxMotorPower: this.props.store.getState().carSelect.carModel.maxMotorPower,
+            maxRegenPower: this.props.store.getState().carSelect.carModel.maxRegenPower
+        })
     }
-
-
 
     render() {
         return (
-            <input disabled="true" className="mode-indicator" value={this.props.chargeBattery * 4} type="range" min="-280" max="500" step="0.01"/>
+            <div>
+                <input disabled="true" className="mode-indicator"
+                       value={this.props.chargeBattery < 0 ? this.props.chargeBattery * regCoef : this.props.chargeBattery }
+                       type="range"
+                       min={-this.state.maxRegenPower * regCoef} max={this.state.maxMotorPower} step="0.01"/>
+            </div>
         )
     }
 }

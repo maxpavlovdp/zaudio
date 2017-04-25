@@ -1,5 +1,5 @@
-var cCalc = require("./CarMovementCalcutator")
-var assert = require("assert");
+let cCalc = require("./CarMovementCalcutator")
+let assert = require("assert");
 
 describe('CarMovementCalcutator.js', () => {
     it('Anti power should be 0 when speed is 0', () => {
@@ -71,7 +71,7 @@ describe('CarMovementCalcutator.js', () => {
             dragCoef: 0.24, // Cd
             frontArea: 2.34, // m2
             regenCoef: 1.5, //
-            maxRegPower: 70 // Kwt
+            maxRegenPower: 70 // Kwt
         }
 
         assert.equal(cCalc.updateCarState(teslaModelS, 0, 100, 2).speed, 86.14728461176131)
@@ -86,7 +86,7 @@ describe('CarMovementCalcutator.js', () => {
             dragCoef: 0.24, // Cd
             frontArea: 2.34, // m2
             regenCoef: 1.5, //
-            maxRegPower: 70 // Kwt
+            maxRegenPower: 70 // Kwt
         }
 
         let teslaModelS2 = {
@@ -97,11 +97,9 @@ describe('CarMovementCalcutator.js', () => {
             dragCoef: 0.24, // Cd
             frontArea: 2.34, // m2
             regenCoef: 1.5, //
-            maxRegPower: 150 // Kwt
+            maxRegenPower: 150 // Kwt
         }
 
         assert.equal(cCalc.updateCarState(teslaModelS1, 0, 100, 2).speed > cCalc.updateCarState(teslaModelS2, 0, 100, 2).speed, true)
     })
-
-
 })

@@ -11,8 +11,10 @@ let carModels = {
         maxMotorPower: 581, //kWt
         dragCoef: 0.24, // Cd
         frontArea: 2.34, // m2
-        regenCoef: 1.5, //
-        maxRegPower: 70 // Kwt
+        // real speed is 50, but to show regen indicator longer time we set 100
+        regenDecrSpeed: 100, // km/h
+        // to have more fun in UX experience regen is 7 times more then real
+        maxRegenPower: 70 * 7 // Kwt
     },
     teslaModel3: {
         key: "teslaModel3",
@@ -21,8 +23,10 @@ let carModels = {
         maxMotorPower: 300, //kWt
         dragCoef: 0.21, // Cd
         frontArea: 2.00, // m2
-        regenCoef: 1.5, //
-        maxRegPower: 70 // Kwt
+        // real speed is 50, but to show regen indicator longer time we set 100
+        regenDecrSpeed: 100, // km/h
+        // to have more fun in UX experience regen is 7 times more then real
+        maxRegenPower: 70 * 7 // Kwt
     }
 }
 
