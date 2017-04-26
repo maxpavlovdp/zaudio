@@ -14,7 +14,7 @@ import StartStop from './controls/StartStop.jsx';
 
 import {buttonStartClicked, buttonStopClicked} from '../actions'
 
-import CarMathUtil from '../CarMovementCalcutator';
+import cCalc from '../CarMovementCalcutator';
 
 import './CarSimulator.less';
 
@@ -53,10 +53,20 @@ class CarSimulator extends React.Component {
                     this.setState({
                         carStatus: 'started'
                     });
+
+                    // 30 times per second we update car state.
                     let timer = setInterval(() => {
-                        this.updateCarState(this.props.store.getState().carSelect.carModel);
-                        //this.props.soundgen.setPlaybackRate(newSpeed, def, this.state.power, recuperationPower);
-                        this.props.soundgen.handleSound(this.state.carState);
+                        let carModel = this.props.store.getState().carSelect.carModel
+
+                        let newCarState = cCalc.updateCarState(carModel, this.state.power, this.state.speed, 1 / FPS);
+                        this.props.soundgen.handleSound(newCarState);
+
+                        this.setState({
+                            speed: newCarState.speed > 240 ? 240 : newCarState.speed < 0 ? 0 : newCarState.speed,
+                            acceleration: cCalc.calculateAcceleration(this.state.speed, newCarState.speed, 1 / FPS),
+                            chargeBattery: newCarState.recuperationPower,
+                            carState: newCarState
+                        });
                     }, UPDATE_INTERVAL);
 
                     this.setState({
@@ -89,47 +99,11 @@ class CarSimulator extends React.Component {
         }
     }
 
-    updateCarState(carSpecs) {
-        let speed = CarMathUtil.kmHToMs(this.state.speed),
-            power = this.state.power,
-            antiPower = CarMathUtil.calculateAntiPower(speed, carSpecs.weight, carSpecs.dragCoef, carSpecs.frontArea),
-            recuperationPower = 0,
-            def = (power - antiPower) / carSpecs.weight;
-
-        if (def < -0.01501) {
-            recuperationPower = -def * 50000 + 3000;
-            def = (power - antiPower - recuperationPower) / carSpecs.weight;
-
-            this.setState({
-                chargeBattery: -recuperationPower
-            })
-        } else {
-            this.setState({
-                chargeBattery: this.state.power
-            })
-        }
-
-        let newSpeed = CarMathUtil.msToKmH(speed + def / FPS);
-
-        let carState = {
-            speed: newSpeed,
-            def: def,
-            power: this.state.power,
-            recuperationPower: recuperationPower
-        }
-
-        this.setState({
-            speed: newSpeed > 240 ? 240 : newSpeed < 0 ? 0 : newSpeed,
-            acceleration: -CarMathUtil.calculateAcceleration(this.state.speed, newSpeed, UPDATE_INTERVAL),
-            carState: carState
-        });
-    }
-
     updateSpeedAfterStop() {
         // Better to set to real "engineOff" sound length. Can be implemented if will be needed.
-        var stopSoundLength = 4000
-        var speedChangeStep = this.state.speed / (stopSoundLength / UPDATE_INTERVAL)
-        var timer = setInterval(() => {
+        let stopSoundLength = 4000
+        let speedChangeStep = this.state.speed / (stopSoundLength / UPDATE_INTERVAL)
+        let timer = setInterval(() => {
             stopSoundLength = stopSoundLength - UPDATE_INTERVAL
             if (stopSoundLength > 0 && this.state.speed > 0) {
                 this.setState({
@@ -160,7 +134,7 @@ class CarSimulator extends React.Component {
                     this._pedal = pedal;
                 }}
                        isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
-                <ModeIndicator chargeBattery={this.state.chargeBattery}/>
+                <ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>
                 <AccelerationIndicator acceleration={this.state.acceleration}/>
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>

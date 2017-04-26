@@ -1,19 +1,22 @@
 import React from 'react';
 
+const regCoef = 2
 class AccelerationIndicator extends React.Component {
     constructor(props) {
         super(props)
-    }
-
-
-    componentWillReceiveProps() {
-        // console.log(this.props.acceleration)
+        this.state = {}
     }
 
     render() {
         return (
-            <input disabled="true" className="acc-indicator" value={this.props.acceleration} type="range" min="-0.13579986591548"
-                   max="0.08666827213334584" step="0.01"/>
+            <div>
+                <input disabled="true" className="acc-indicator"
+                       value={this.props.acceleration >= 0 ? this.props.acceleration : this.props.acceleration * regCoef}
+                       type="range"
+                       min={-10 * regCoef}
+                       max="40" step="0.01"/>
+            </div>
+
         );
     }
 }
