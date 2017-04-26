@@ -11,7 +11,7 @@ const soundSchemeV1 = {
         {
             link: acceleration,
             speed: {
-                margins: [0, 140],
+                margins: [0, 241],
                 volume: [[0, 1], [240, 1.5]]
             },
             loop: true
