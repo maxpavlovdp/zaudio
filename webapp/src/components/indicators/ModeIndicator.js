@@ -11,9 +11,11 @@ class ModeIndicator extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            maxMotorPower: this.props.store.getState().carSelect.carModel.maxMotorPower,
-            maxRegenPower: this.props.store.getState().carSelect.carModel.maxRegenPower
+        this.props.store.subscribe(() => {
+            this.setState({
+                maxMotorPower: this.props.store.getState().carSelect.carModel.maxMotorPower,
+                maxRegenPower: this.props.store.getState().carSelect.carModel.maxRegenPower
+            })
         })
     }
 
