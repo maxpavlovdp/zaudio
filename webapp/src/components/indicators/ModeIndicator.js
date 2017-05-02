@@ -3,7 +3,6 @@
  */
 import React from 'react';
 
-const regCoef = 1
 class ModeIndicator extends React.Component {
     constructor(props) {
         super(props)
@@ -23,9 +22,9 @@ class ModeIndicator extends React.Component {
         return (
             <div>
                 <input disabled="true" className="mode-indicator"
-                       value={this.props.chargeBattery < 0 ? this.props.chargeBattery * regCoef : this.props.chargeBattery }
+                       value={this.props.chargeBattery < 0 ? this.props.chargeBattery : this.props.chargeBattery }
                        type="range"
-                       min={-this.state.maxRegenPower * regCoef} max={this.state.maxMotorPower} step="0.01"/>
+                       min={-this.state.maxRegenPower} max={this.state.maxMotorPower} step="0.01"/>
             </div>
         )
     }
