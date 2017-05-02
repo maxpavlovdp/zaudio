@@ -115,7 +115,8 @@ let updateCarState = function (carSpecs, powerKwt, speedKmh, updateIntervalInSec
     return {
         speed: newSpeed,
         def: resultPower / carSpecs.weight,
-        recuperationPower: -batteryCharge
+        recuperationPower: batteryCharge,
+        power: powerKwt
     }
 }
 module.exports.updateCarState = updateCarState
