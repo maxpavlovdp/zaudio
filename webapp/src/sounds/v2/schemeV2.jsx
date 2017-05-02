@@ -13,7 +13,8 @@ var soundSchemeV2 = {
         {
             link: accelerationLoop,
             speed: {
-                margins: [0, 250]
+                margins: [0, 250],
+                volume: [[0, 0.2], [250, 1]]
             },
             defMargins: [0, 30],
             loop: true
@@ -45,7 +46,8 @@ var soundSchemeV2 = {
         {
             link: recuperationLoop,
             speed: {
-                margins: [0, 250]
+                margins: [0, 250],
+                volume: [[0, 0.1], [250, 1]]
             },
             recuperation: true,
             loop: true
