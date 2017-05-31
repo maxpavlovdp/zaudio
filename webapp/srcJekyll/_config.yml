@@ -17,7 +17,7 @@ markdown    : kramdown
 highlighter : pygments
 
 # SEO settings
-title: dotX
+title: Nobody Should Know Yet
 description: "A free Jekyll theme for download"
 keywords: "Jekyll, theme, free, download, SEO, blog, web"
 
