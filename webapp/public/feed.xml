@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dotX</title>
+    <description>A free Jekyll theme for download</description>
+    <link>http://nandomoreira.me/</link>
+    <atom:link href="http://nandomoreira.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 31 May 2017 22:33:02 +0200</pubDate>
+    <lastBuildDate>Wed, 31 May 2017 22:33:02 +0200</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+  </channel>
+</rss>

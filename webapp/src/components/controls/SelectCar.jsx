@@ -21,13 +21,7 @@ class SelectCar extends React.Component {
 
     render() {
         return (
-            <div>
-                <p> Chose your car:
-                    <select onChange={this.handleChange}>
-                        {options}
-                    </select>
-                </p>
-            </div>
+            <select onChange={this.handleChange}>{options}</select>
         )
     }
 }

@@ -11,7 +11,7 @@ ze-booster.iml
 # All npm temp files
 **/node_modules
 
-public/config.js
+webapp/public/config.js
 
 # IntelliJ
 /out/
@@ -22,8 +22,5 @@ public/config.js
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
+#Jekyll
+webapp/srcJekyll/.jekyll-metadata

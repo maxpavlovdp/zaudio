@@ -135,7 +135,7 @@ class CarSimulator extends React.Component {
                 }}
                        isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>
-                <AccelerationIndicator acceleration={this.state.acceleration}/>
+                {/*<AccelerationIndicator acceleration={this.state.acceleration}/>*/}
                 <VolumeInputRange soundgen={this.props.soundgen}/>
             </div>
             {__ZEBCONFIG__.env == 'DEV' ?
