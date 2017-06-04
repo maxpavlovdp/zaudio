@@ -19,13 +19,16 @@ import cCalc from '../CarMovementCalcutator';
 import './CarSimulator.less';
 
 const FPS = 30
-const UPDATE_INTERVAL = 1000 / FPS;
+const UPDATE_INTERVAL = 1000 / FPS
+const WHEEL_COEF = 800
 
 class CarSimulator extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSpeed = this.handleSpeed.bind(this);
-        this.handleStartStop = this.handleStartStop.bind(this);
+        this.handleSpeed = this.handleSpeed.bind(this)
+        this.handleStartStop = this.handleStartStop.bind(this)
+        this.handleWheel = this.handleWheel.bind(this)
+
         this.state = {
             speed: 0,
             power: 0,
@@ -125,20 +128,19 @@ class CarSimulator extends React.Component {
     }
 
     handleWheel(e) {
-        e.preventDefault()
-
-        const WHEEL_COEF = 800
-
-        var newPedalPos = this.state.pedalPos += -e.deltaY / WHEEL_COEF
-
-        if (newPedalPos > 1) newPedalPos = 1
-        if (newPedalPos < 0) newPedalPos = 0
-
-        this.setState({
-            pedalPos: newPedalPos
-        })
+        if(this.state.carStatus !== 'stopped') {
+            e.preventDefault()
+        }
 
         if (this.state.pedalIsEnable) {
+            let newPedalPos = this.state.pedalPos += -e.deltaY / WHEEL_COEF
+
+            if (newPedalPos > 1) newPedalPos = 1
+            if (newPedalPos < 0) newPedalPos = 0
+
+            this.setState({
+                pedalPos: newPedalPos
+            })
             this.handleSpeed(newPedalPos)
             this._pedal.updatePedalPos(newPedalPos)
         }
