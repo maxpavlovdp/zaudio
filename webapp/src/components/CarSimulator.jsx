@@ -34,7 +34,8 @@ class CarSimulator extends React.Component {
             acceleration: 0,
             pedalIsEnable: false,
             timer: null,
-            carStatus: 'stopped'
+            carStatus: 'stopped',
+            pedalPos: 0
         };
     }
 
@@ -123,8 +124,28 @@ class CarSimulator extends React.Component {
         });
     }
 
+    handleWheel(e) {
+        e.preventDefault()
+
+        const WHEEL_COEF = 800
+
+        var newPedalPos = this.state.pedalPos += -e.deltaY / WHEEL_COEF
+
+        if (newPedalPos > 1) newPedalPos = 1
+        if (newPedalPos < 0) newPedalPos = 0
+
+        this.setState({
+            pedalPos: newPedalPos
+        })
+
+        if (this.state.pedalIsEnable) {
+            this.handleSpeed(newPedalPos)
+            this._pedal.updatePedalPos(newPedalPos)
+        }
+    }
+
     render() {
-        return <div className="car">
+        return <div className="car" onWheel={this.handleWheel}>
             <h1>{this.props.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">

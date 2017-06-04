@@ -250,7 +250,7 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 button:disabled, input[type="button"]:disabled, input[type="reset"]:disabled, input[type="submit"]:disabled,
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background-color: #3db565;
 }
 button:disabled:hover, input[type="button"]:disabled:hover, input[type="reset"]:disabled:hover, input[type="submit"]:disabled:hover,
 .button:disabled:hover {

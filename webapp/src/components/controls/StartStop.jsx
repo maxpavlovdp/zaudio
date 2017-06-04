@@ -1,6 +1,18 @@
 import React from 'react';
 import {registerBtnInStore} from '../../actions'
 
+const smallStopButton = {
+    /* display: block; */
+    height: '45px',
+    width: '80px',
+    borderRadius: '16px',
+    fontSize: '19px',
+    position: 'absolute',
+    marginTop: '27%',
+    left: '41%',
+    padding: 0
+}
+
 class StartStop extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +24,7 @@ class StartStop extends React.Component {
     }
 
     componentDidMount() {
-        let toggleOtherSSBtns = ()=> {
+        let toggleOtherSSBtns = () => {
             let otherPlaying = this.props.store.getState().ssButtonToggle.find(e => (e.isOn && e.name != this.props.carName))
 
             this.setState({
@@ -36,6 +48,7 @@ class StartStop extends React.Component {
 
     render() {
         return <button className="start-stop-button"
+                       style={this.state.isOn ? smallStopButton : {}}
                        disabled={this.props.carStatus == 'starting' || this.props.carStatus == 'stopping' || this.state.otherPlaying}
                        onClick={this.handleClick}>{this.state.isOn ? 'Stop' : 'Start'}</button>
     }
