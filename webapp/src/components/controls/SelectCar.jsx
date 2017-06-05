@@ -21,7 +21,9 @@ class SelectCar extends React.Component {
 
     render() {
         return (
-            <select onChange={this.handleChange}>{options}</select>
+            <center>
+                <select onChange={this.handleChange}>{options}</select>
+            </center>
         )
     }
 }
