@@ -21,6 +21,6 @@ ze-booster.iml
 atlassian-ide-plugin.xml
 
 #Jekyll
-webapp/srcJekyll/.jekyll-metadata
+webapp/srcJekyll/.sass-cache
 webapp/public/feed.xml
 webapp/public/config.js
