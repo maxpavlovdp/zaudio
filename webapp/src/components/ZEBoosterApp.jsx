@@ -1,6 +1,7 @@
 import React from 'react'
 import CarSimulator from './CarSimulator.jsx'
 import CarSoundEngine from './../CarSoundEngine.js'
+import {Link} from 'react-router'
 import {createStore} from 'redux'
 import reducers from '../reducers'
 import AppConstants from '../AppConstants'
@@ -21,6 +22,7 @@ class ZEB extends React.Component {
     render() {
         return (
             <div>
+                {/*<Link to={'/focusGroup'}>Focus Group</Link>*/}
                 <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} name={"V4.1"}
                               soundgen={new CarSoundEngine(require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1)}/>
