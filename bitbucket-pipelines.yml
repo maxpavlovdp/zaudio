@@ -26,7 +26,7 @@ pipelines:
            - export CI=true
            - npm test -- --coverage
            - ./deploy-to-git-hub-pages/deploy.bash
-    BOOST-108_MouseBehaviour:
+    BOOST-181_otherPagesOnS3:
       - step:
           script: # Deploy to aws s3 https://s3.eu-central-1.amazonaws.com/zas-on-demand-branch/index.html
            - cd ./webapp
