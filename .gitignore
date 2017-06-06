@@ -11,8 +11,6 @@ ze-booster.iml
 # All npm temp files
 **/node_modules
 
-webapp/public/config.js
-
 # IntelliJ
 /out/
 
@@ -24,3 +22,5 @@ atlassian-ide-plugin.xml
 
 #Jekyll
 webapp/srcJekyll/.jekyll-metadata
+webapp/public/feed.xml
+webapp/public/config.js
