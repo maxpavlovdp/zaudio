@@ -19,13 +19,16 @@ import cCalc from '../CarMovementCalcutator';
 import './CarSimulator.less';
 
 const FPS = 30
-const UPDATE_INTERVAL = 1000 / FPS;
+const UPDATE_INTERVAL = 1000 / FPS
+const WHEEL_COEF = 800
 
 class CarSimulator extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSpeed = this.handleSpeed.bind(this);
-        this.handleStartStop = this.handleStartStop.bind(this);
+        this.handleSpeed = this.handleSpeed.bind(this)
+        this.handleStartStop = this.handleStartStop.bind(this)
+        this.handleWheel = this.handleWheel.bind(this)
+
         this.state = {
             speed: 0,
             power: 0,
@@ -34,7 +37,8 @@ class CarSimulator extends React.Component {
             acceleration: 0,
             pedalIsEnable: false,
             timer: null,
-            carStatus: 'stopped'
+            carStatus: 'stopped',
+            pedalPos: 0
         };
     }
 
@@ -123,20 +127,39 @@ class CarSimulator extends React.Component {
         });
     }
 
+    handleWheel(e) {
+        if(this.state.carStatus !== 'stopped') {
+            e.preventDefault()
+        }
+
+        if (this.state.pedalIsEnable) {
+            let newPedalPos = this.state.pedalPos += -e.deltaY / WHEEL_COEF
+
+            if (newPedalPos > 1) newPedalPos = 1
+            if (newPedalPos < 0) newPedalPos = 0
+
+            this.setState({
+                pedalPos: newPedalPos
+            })
+            this.handleSpeed(newPedalPos)
+            this._pedal.updatePedalPos(newPedalPos)
+        }
+    }
+
     render() {
-        return <div className="car">
+        return <div className="car" onWheel={this.handleWheel}>
             <h1>{this.props.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
-                <StartStop carName={this.props.name} store={this.props.store} speedChange={this.handleStartStop}
-                           carStatus={this.state.carStatus}/>
                 <Pedal ref={(pedal) => {
                     this._pedal = pedal;
                 }}
                        isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
                 <ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>
-                <AccelerationIndicator acceleration={this.state.acceleration}/>
+                {/*<AccelerationIndicator acceleration={this.state.acceleration}/>*/}
                 <VolumeInputRange soundgen={this.props.soundgen}/>
+                <StartStop carName={this.props.name} store={this.props.store} speedChange={this.handleStartStop}
+                           carStatus={this.state.carStatus}/>
             </div>
             {__ZEBCONFIG__.env == 'DEV' ?
                 <SoundBar soundgen={this.props.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''

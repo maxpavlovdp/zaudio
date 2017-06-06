@@ -25,7 +25,7 @@ class SoundBar extends React.Component {
                             var x = speedMargins[0] * scale;
                             var soundName = sound.link.match(/\/([\w\+\-]+)\./)[1];
                             var content = <g key={soundName + Math.floor(Math.random()*1000000)}>
-                                    <rect x={x + 5} y={y} width={width} height="30" fill={sound.started ? 'skyblue' : 'lightgrey'} stroke="black" strokeWidth="1" />
+                                    <rect x={x + 5} y={y} width={width} height="30" fill={sound.started ? 'skyblue' : 'black'} stroke="black" strokeWidth="1" />
                                     <foreignObject x={x + 5} y={y + 5} >
                                         <div style={{
                                             position: 'relative',
