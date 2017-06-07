@@ -2,15 +2,14 @@ import React from 'react';
 import {registerBtnInStore} from '../../actions'
 
 const smallStopButton = {
-    /* display: block; */
-    height: '45px',
-    width: '80px',
-    borderRadius: '16px',
-    fontSize: '19px',
+    height: '80px',
+    width: '83px',
+    borderRadius: '50%',
+    fontSize: '23px',
     position: 'absolute',
     marginTop: '27%',
-    left: '41%',
-    padding: 0
+    left: '40%',
+    padding: '0px'
 }
 
 class StartStop extends React.Component {

@@ -160,7 +160,7 @@ class CarSimulator extends React.Component {
                     this._pedal = pedal;
                 }}
                        isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
-                <ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>
+                {/*<ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>*/}
                 {/*<AccelerationIndicator acceleration={this.state.acceleration}/>*/}
                 <VolumeInputRange soundgen={this.soundgen}/>
                 <StartStop carName={this.props.scheme.name} store={this.props.store} speedChange={this.handleStartStop}
