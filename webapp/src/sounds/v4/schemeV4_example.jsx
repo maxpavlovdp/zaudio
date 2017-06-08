@@ -9,6 +9,7 @@ let engineOnSampleV3 = require("../v3/engineOnSampleV3_fix.ogg"),
     recuperationLoopV2 = require("../v2/recuperationLoop.ogg");
 
 var soundSchemeV4 = {
+    name : 'V4 Example',
     version : 4,
     start: {
         link: engineOnSampleV3

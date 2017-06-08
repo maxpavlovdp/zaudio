@@ -17,6 +17,8 @@ import {buttonStartClicked, buttonStopClicked} from '../actions'
 import cCalc from '../CarMovementCalcutator';
 
 import './CarSimulator.less';
+import CarSoundEngine from '../CarSoundEngine.js'
+
 
 const FPS = 30
 const UPDATE_INTERVAL = 1000 / FPS
@@ -28,6 +30,9 @@ class CarSimulator extends React.Component {
         this.handleSpeed = this.handleSpeed.bind(this)
         this.handleStartStop = this.handleStartStop.bind(this)
         this.handleWheel = this.handleWheel.bind(this)
+        this.soundgen = new CarSoundEngine(this.props.scheme)
+        // console.log(this.soundgen)
+        // console.log(this.props.soundgen)
 
         this.state = {
             speed: 0,
@@ -43,7 +48,7 @@ class CarSimulator extends React.Component {
     }
 
     componentDidMount() {
-        this.s = this.props.soundgen.init()
+        this.s = this.soundgen.init()
     }
 
     handleStartStop(status) {
@@ -51,7 +56,7 @@ class CarSimulator extends React.Component {
             this.setState({
                 carStatus: 'starting'
             });
-            this.props.store.dispatch(buttonStartClicked(this.props.name))
+            this.props.store.dispatch(buttonStartClicked(this.props.scheme.name))
             this.s.then(sg => {
                 sg.start().then(() => {
                     this.setState({
@@ -63,7 +68,7 @@ class CarSimulator extends React.Component {
                         let carModel = this.props.store.getState().carSelect.carModel
 
                         let newCarState = cCalc.updateCarState(carModel, this.state.power, this.state.speed, 1 / FPS);
-                        this.props.soundgen.handleSound(newCarState);
+                        this.soundgen.handleSound(newCarState);
 
                         this.setState({
                             speed: newCarState.speed > 240 ? 240 : newCarState.speed < 0 ? 0 : newCarState.speed,
@@ -97,7 +102,7 @@ class CarSimulator extends React.Component {
                         carStatus: 'stopped'
                     });
 
-                    this.props.store.dispatch(buttonStopClicked(this.props.name))
+                    this.props.store.dispatch(buttonStopClicked(this.props.scheme.name))
                 });
             });
         }
@@ -148,21 +153,21 @@ class CarSimulator extends React.Component {
 
     render() {
         return <div className="car" onWheel={this.handleWheel}>
-            <h1>{this.props.name}</h1>
+            <h1>{this.props.scheme.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
                 <Pedal ref={(pedal) => {
                     this._pedal = pedal;
                 }}
                        isEnable={this.state.pedalIsEnable} speedHandler={this.handleSpeed}/>
-                <ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>
+                {/*<ModeIndicator store={this.props.store} chargeBattery={this.state.chargeBattery}/>*/}
                 {/*<AccelerationIndicator acceleration={this.state.acceleration}/>*/}
-                <VolumeInputRange soundgen={this.props.soundgen}/>
-                <StartStop carName={this.props.name} store={this.props.store} speedChange={this.handleStartStop}
+                <VolumeInputRange soundgen={this.soundgen}/>
+                <StartStop carName={this.props.scheme.name} store={this.props.store} speedChange={this.handleStartStop}
                            carStatus={this.state.carStatus}/>
             </div>
             {__ZEBCONFIG__.env == 'DEV' ?
-                <SoundBar soundgen={this.props.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''
+                <SoundBar soundgen={this.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''
             }
         </div>
     }

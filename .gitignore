@@ -2,9 +2,6 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 #All idea files
-.idea/**
-ze-booster.iml
-
 # All logs
 **/*.log
 
@@ -24,3 +21,6 @@ atlassian-ide-plugin.xml
 webapp/srcJekyll/.sass-cache
 webapp/public/feed.xml
 webapp/public/config.js
+.idea/
+webapp/coverage/
+webapp/srcJekyll/source/_posts/

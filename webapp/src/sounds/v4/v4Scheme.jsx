@@ -9,6 +9,7 @@ let V4_0_30 = require("./V4_0-30.ogg"),
     V4_RECUPERATION = require("./V4_RECUPERATION.ogg");
 
 var soundSchemeV4 = {
+    name: 'V4',
     version: 4,
     start: {
         link: V4_ENG_ON
