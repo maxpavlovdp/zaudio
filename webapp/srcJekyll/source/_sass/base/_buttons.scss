@@ -23,6 +23,7 @@
   &:focus {
     background-color: shade($primary-color, 20%);
     color: $white-color;
+    outline: none;
   }
 
   &:disabled {
