@@ -133,7 +133,7 @@ class CarSimulator extends React.Component {
     }
 
     handleWheel(e) {
-        if(this.state.carStatus !== 'stopped') {
+        if (this.state.carStatus !== 'stopped') {
             e.preventDefault()
         }
 
@@ -153,6 +153,9 @@ class CarSimulator extends React.Component {
 
     render() {
         return <div className="car" onWheel={this.handleWheel}>
+            <br/>
+            <br/>
+            <br/>
             <h1>{this.props.scheme.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">
@@ -169,6 +172,7 @@ class CarSimulator extends React.Component {
             {__ZEBCONFIG__.env == 'DEV' ?
                 <SoundBar soundgen={this.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''
             }
+            <button>Pimp Your Car</button> <button>Buy ZE Sound</button>
         </div>
     }
 }
