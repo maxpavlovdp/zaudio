@@ -2,16 +2,11 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 #All idea files
-.idea/**
-ze-booster.iml
-
 # All logs
 **/*.log
 
 # All npm temp files
 **/node_modules
-
-public/config.js
 
 # IntelliJ
 /out/
@@ -22,8 +17,10 @@ public/config.js
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
+#Jekyll
+webapp/srcJekyll/.sass-cache
+webapp/public/feed.xml
+webapp/public/config.js
+.idea/
+webapp/coverage/
+webapp/srcJekyll/source/_posts/

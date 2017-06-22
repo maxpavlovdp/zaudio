@@ -4,6 +4,7 @@
 let acceleration = require("./acceleration.ogg"),
     engineOn = require("./engineOn.ogg");
 const soundSchemeV1 = {
+    name: "V1",
     start: {
         link: engineOn
     },

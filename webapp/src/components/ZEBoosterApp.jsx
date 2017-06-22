@@ -1,7 +1,6 @@
 import React from 'react'
 import CarSimulator from './CarSimulator.jsx'
 import CarSoundEngine from './../CarSoundEngine.js'
-import {Link} from 'react-router'
 import {createStore} from 'redux'
 import reducers from '../reducers'
 import AppConstants from '../AppConstants'
@@ -22,20 +21,13 @@ class ZEB extends React.Component {
     render() {
         return (
             <div>
-                <Link to={'/focusGroup'}>Focus Group</Link>
                 <SelectCar store={this.store}/>
-                <CarSimulator store={this.store} name={"V4.1"}
-                              soundgen={new CarSoundEngine(require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1)}/>
-                <CarSimulator store={this.store} name={"V4"}
-                              soundgen={new CarSoundEngine(require("../sounds/v4/v4Scheme.jsx").ssv4)}/>
-                <CarSimulator store={this.store} name={"V4 Example"}
-                              soundgen={new CarSoundEngine(require("../sounds/v4/schemeV4_example.jsx").ssv4example)}/>
-                <CarSimulator store={this.store} name={"V3"}
-                              soundgen={new CarSoundEngine(require("../sounds/v3/schemeV3.jsx").ssv3)}/>
-                <CarSimulator store={this.store} name={"V2"}
-                              soundgen={new CarSoundEngine(require("../sounds/v2/schemeV2.jsx").ssv2)}/>
-                <CarSimulator store={this.store} name={"V1"}
-                              soundgen={new CarSoundEngine(require("../sounds/v1/schemeV1.jsx").ssv1)}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v4/schemeV4_example.jsx").ssv4example}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>
             </div>
         )
     }

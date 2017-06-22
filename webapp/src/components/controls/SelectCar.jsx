@@ -22,11 +22,7 @@ class SelectCar extends React.Component {
     render() {
         return (
             <div>
-                <p> Chose your car:
-                    <select onChange={this.handleChange}>
-                        {options}
-                    </select>
-                </p>
+                <label style={{display: 'inline'}}>Chose your car:</label> <select style={{display: 'inline'}} onChange={this.handleChange}>{options}</select>
             </div>
         )
     }

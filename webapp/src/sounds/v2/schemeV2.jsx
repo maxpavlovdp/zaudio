@@ -6,6 +6,7 @@ let acceleration100FunLoop = require("./acceleration100_FunLoop.ogg"),
     idlingLoop = require("./idlingLoop.ogg"),
     recuperationLoop = require("./recuperationLoop.ogg");
 var soundSchemeV2 = {
+    name: "V2",
     start: {
         link: engineOnSample
     },
