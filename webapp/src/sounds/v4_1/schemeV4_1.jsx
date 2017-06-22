@@ -1,20 +1,20 @@
 let V4Acc0_30 = require("./V4Acc0_30.ogg"),
     V4Acc30_60 = require("./V4Acc30_60.ogg"),
     V4Acc60_100 = require("./V4Acc60_100.ogg"),
-    V4Acc100_160 = require("./V4Acc100-160.ogg"),
-    V4Acc160_240 = require("./V4Acc160-240.ogg"),
+    V4Acc100_160 = require("./V4Acc100_160.ogg"),
+    V4Acc160_240 = require("./V4Acc160_240.ogg"),
     V4EngOff = require("./V4EngOff.ogg"),
     V4EngOn = require("./V4EngOn.ogg"),
     V4IdlingLoop = require("./V4IdlingLoop.ogg"),
     V4Rec0_30 = require("./V4Rec0_30.ogg"),
     V4Rec30_60 = require("./V4Rec30_60.ogg"),
     V4Rec60_100 = require("./V4Rec60_100.ogg"),
-    V4Rec100_160 = require("./V4Rec100-160.ogg"),
-    V4Rec160_240 = require("./V4Rec160-240.ogg");
+    V4Rec100_160 = require("./V4Rec100_160.ogg"),
+    V4Rec160_240 = require("./V4Rec160_240.ogg");
 
 
 let soundSchemeV4_1 = {
-    name: "V4.1",
+    name: "GT",
     version: 4,
     start: {
         link: V4EngOn
