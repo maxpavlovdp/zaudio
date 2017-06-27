@@ -17,7 +17,7 @@ markdown    : kramdown
 highlighter : pygments
 
 # SEO settings
-title: Nobody Should Know Yet
+title: Z-Audio Platform
 description: "A free Jekyll theme for download"
 keywords: "Zero Emission, EV, electric cars, artificial noise, pedestrian safety, tesla, arkamys"
 
