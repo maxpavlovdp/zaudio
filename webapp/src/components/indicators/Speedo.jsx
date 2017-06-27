@@ -305,7 +305,7 @@ class Speedometer extends React.Component {
                          points='289.362,155.001 293.258,150.675 306.108,145.806 292.895,149.556 287.202,148.347 	'/>
                 <path d='M259.993,84.044'/>
             </g>
-            <foreignObject className="center-origin" style={{transform: 'rotate(' + this.props.speed * 1.125 + 'deg)'}}>
+            <foreignObject className="center-origin" style={{transform: 'translateX(-12px) translateY(-13px) rotate(' + this.props.speed * 1.125 + 'deg)'}}>
                 <svg>
                     <path className="pointer"
                           d="M3.234817813765183 0C3.234817813765183 0 0 2.7025000000000006 0 2.7025000000000006 0 2.7025000000000006 10.507422402159243 11.5 10.507422402159243 11.5 10.507422402159243 11.5 0 20.2975 0 20.2975 0 20.2975 3.234817813765183 23 3.234817813765183 23 3.234817813765183 23 17 11.5 17 11.5 17 11.5 3.234817813765183 0 3.234817813765183 0"></path>
