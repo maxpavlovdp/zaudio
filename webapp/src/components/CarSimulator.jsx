@@ -155,7 +155,6 @@ class CarSimulator extends React.Component {
         return <div className="car" onWheel={this.handleWheel}>
             <br/>
             <br/>
-            <br/>
             <h1>{this.props.scheme.name}</h1>
             <Speedometer speed={this.state.speed}/>
             <div className="controls">

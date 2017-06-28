@@ -9,7 +9,7 @@ let engOn = require("./SW_ENG_ON.ogg"),
     recup3 = require("./SW_RECUP_3.ogg");
 
 let schemeFuturistic = {
-    name: "Futuristic",
+    name: "Star Wars",
     version: 4,
     start: {
         link: engOn
