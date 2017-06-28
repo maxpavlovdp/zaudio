@@ -17,29 +17,29 @@ markdown    : kramdown
 highlighter : pygments
 
 # SEO settings
-title: Nobody Should Know Yet
-description: "A free Jekyll theme for download"
-keywords: "Jekyll, theme, free, download, SEO, blog, web"
+title: Z-Audio Platform
+description: "Platform to create artificial sounds for electric cars"
+keywords: "Zero Emission, EV, electric cars, artificial noise, pedestrian safety, tesla, arkamys"
 
 # Site settings
-url: http://nandomoreira.me
+url: http://z-audio.shop
 baseurl: ""
 
 # Author settings
 author:
-  name      : Fernando Moreira
-  job       : Frontend Engineer
-  bio       : "Enthusiast performance, responsive design and usability, always looking for the best project and good coffee."
+  name      : Max Pavlov
+  job       : Java Engineer
+  bio       : "Self starter and Zero Emission Enthusiast"
   thumb     : /images/author.jpg
-  email     : nandomoreira.me@gmail.com
-  url       : http://nandomoreira.me
-  github    : http://github.com/nandomoreirame
-  twitter   : http://twitter.com/nandomoreirame
-  facebook  : http://facebook.com/fernando.dev
-  linkedin  : http://linkedin.com/in/nandomoreirame
+  email     : maxpavlov.dp@gmail.com
+  url       : http://facebook.com/zeBoosterLab
+  github    : http://github.com/maxpavlovdp
+  twitter   : http://twitter.com/pavlov_mv_
+  facebook  : http://www.facebook.com/MaxPavlovDP
+  linkedin  : http://www.linkedin.com/in/max-pavlov-5590023b
 
 # google_analytics: UA-52446115-1
 repo: http://github.com/nandomoreirame/dotX
 
 # comments
-disqus_shortname: "fernandomoreira"
+disqus_shortname: "maxp"

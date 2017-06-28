@@ -172,7 +172,7 @@ class CarSimulator extends React.Component {
             {__ZEBCONFIG__.env == 'DEV' ?
                 <SoundBar soundgen={this.soundgen} speed={this.state.speed} carState={this.state.carState}/> : ''
             }
-            <button>Pimp Your Car</button> <button>Buy ZE Sound</button>
+            <a href="/sketches" className="button">Pimp Your Car</a> &nbsp;<a href="/buySound" className="button">Buy ZE Sound</a>
         </div>
     }
 }
