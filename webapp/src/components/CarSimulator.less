@@ -52,8 +52,48 @@
     border-radius: 50%;
     font-size: 64px;
 
-    position: absolute;
-    margin-top: -62%;
+    //position: absolute;
+    //margin-top: -62%;
     left: 0%;
+  }
+
+  .start-btn {
+    position: relative;
+    top: -250px;
+    left: -4px;
+  }
+
+  .stop-btn {
+    position: relative;
+    top: -10px;
+    left: -14px;
+  }
+
+  .stop-btn-hover{
+    opacity: 0;
+  }
+
+  .stop-btn:hover .stop-btn-hover{
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .stop-btn:hover .stop-btn-active{
+    opacity: 0;
+  }
+
+  .start-btn-hover{
+    opacity: 0;
+  }
+
+  .start-btn:hover .start-btn-hover{
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .start-btn:hover .start-btn-active{
+    opacity: 0;
   }
 }
