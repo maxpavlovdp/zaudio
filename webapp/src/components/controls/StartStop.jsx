@@ -11,7 +11,7 @@ const smallStopButton = {
     left: '40%',
     padding: '0px'
 }
-
+//
 class StartStop extends React.Component {
     constructor(props) {
         super(props);
