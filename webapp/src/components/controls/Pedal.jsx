@@ -4,14 +4,16 @@ class Pedal extends React.Component {
     constructor(props) {
         super(props);
         this.handleSpeed = this.handleSpeed.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
+
         this.state = {
             isEnable: this.props.isEnable,
             pedalPos: 0
         };
     }
 
-    handleSpeed(e) {
-        let pedalPosition = e.target.value;
+    handleSpeed(pedalPosition) {
         if ('speedHandler' in this.props && typeof this.props.speedHandler === 'function') {
             this.props.speedHandler(pedalPosition);
         }
@@ -35,10 +37,18 @@ class Pedal extends React.Component {
         }
     }
 
+    handleMouseDown() {
+        this.handleSpeed(1);
+    }
+
+    handleMouseUp() {
+        this.handleSpeed(0);
+    }
+
     render() {
         return(
-        <div>
-             <svg className="pedal" style={{transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
+        <div onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+             <svg className="pedal" style={{cursor: 'pointer', transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
                  <rect x="-1172.791" y="-257.597" display="none" fill="#2BB259" width="1638.165" height="942.46"/>
                  <g>
                      <path fill="#6D6E71" stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M34.339,128.534h14.775
