@@ -57,3 +57,55 @@
     left: 0%;
   }
 }
+
+/* Reset `button` and button-style `input` default styles */
+button.info-button {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+a.info-button {
+  position: fixed;
+  z-index: 30;
+  right: 11%;
+  top: 20px;
+  height: 54px;
+  width: 54px;
+  background-color: #3cc76a;
+  border-radius: 50%;
+  overflow: hidden;
+  //text-indent: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+a.info-button span {
+  position:absolute;
+  top: 14px;
+  //left: 0;
+  z-index: 50000;
+  //content: 'info';
+  color: #fff;
+}
+
+a.info-button:active, a.info-button:focus, a.info-button:hover {
+  text-decoration: none;
+  color: rgba(60, 199, 106, 0);;
+}
+
+a.info-button span:hover {
+  //top: 13px;
+  letter-spacing: 1.2px;
+  left: 12px;
+}
+
