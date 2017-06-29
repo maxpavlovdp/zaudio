@@ -23,14 +23,15 @@ class ZEB extends React.Component {
             <div>
                 <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/daily/schemeDaily.jsx").schemeDaily}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
 
-                <CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v4/schemeV4_example.jsx").ssv4example}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>
+
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v4/schemeV4_example.jsx").ssv4example}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>*/}
             </div>
         )
     }

@@ -6,10 +6,10 @@ permalink: /mission/
 ---
 
 ###Our Mission:###
-   > To speedup replacement of internal combustion engine cars by electric cars and decrease amount of CO2 on our planet.  
+   > Boost transition from ICE to electric cars.  
 
 ###Our Vision:###
-   > Popularization of an electric cars by creating new personality and fun factor for racing and expensive electric cars.
+   > A popularization of the electric cars by creating a new personality and fun factor for racing and expensive electric cars.
    
-   > Increase pedestrian safety by differing potentially danger manually driven car from autopilot driven car. Especially its important for blind people.
+   > Increase pedestrian safety by differentiating potentially danger manually driven car from autopilot driven car. Especially its important for blind people.
 
