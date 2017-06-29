@@ -48,7 +48,7 @@ class Pedal extends React.Component {
     render() {
         return(
         <div onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
-             <svg className="pedal" style={{transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
+             <svg className="pedal" style={{cursor: 'pointer', transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
                  <rect x="-1172.791" y="-257.597" display="none" fill="#2BB259" width="1638.165" height="942.46"/>
                  <g>
                      <path fill="#6D6E71" stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M34.339,128.534h14.775
