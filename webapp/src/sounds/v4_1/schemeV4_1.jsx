@@ -14,7 +14,7 @@ let V4Acc0_30 = require("./V4Acc0_30.ogg"),
 
 
 let soundSchemeV4_1 = {
-    name: "GT",
+    name: "Sport",
     version: 4,
     start: {
         link: V4EngOn
