@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from 'react-modal'
+
 
 class Pedal extends React.Component {
     constructor(props) {
@@ -7,10 +9,22 @@ class Pedal extends React.Component {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
 
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
         this.state = {
             isEnable: this.props.isEnable,
-            pedalPos: 0
+            pedalPos: 0,
+            showModal: false
         };
+    }
+
+    handleOpenModal() {
+        this.setState({showModal: true});
+    }
+
+    handleCloseModal() {
+        this.setState({showModal: false});
     }
 
     handleSpeed(pedalPosition) {
@@ -60,7 +74,7 @@ class Pedal extends React.Component {
                          <stop  offset="0.5845" style={{stopColor: '#7B7C7F'}}/>
                          <stop  offset="1" style={{stopColor: '#696A6D'}}/>
                      </radialGradient>
-                     <path fill="url(#SVGID_1_)" style={{cursor: 'pointer'}} stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M111.277,114.74L90.115,30.534
+                     <path fill="url(#SVGID_1_)" onMouseEnter={this.handleOpenModal} style={{cursor: 'pointer'}} stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M111.277,114.74L90.115,30.534
                      c-1.972-7.842-10.2-14.259-18.287-14.259H39.843c-8.086,0-13.091,6.417-11.119,14.259L43.956,91.15l5.525,21.985l0.404,1.604
                      C51.856,122.582,60.085,129,68.171,129h31.987C108.245,129,113.249,122.582,111.277,114.74z M42.148,41.317
                      c-0.752-2.998-0.752-2.998-0.752-2.998c1.726-1.335,9.752-2.428,17.839-2.428h3.059c8.088,0,16.663,1.093,19.061,2.428
@@ -78,6 +92,23 @@ class Pedal extends React.Component {
                  </g>
              </svg>
 
+            <Modal
+                isOpen={this.state.showModal}
+                contentLabel="Info"
+                style={{
+                    overlay: {
+                        zIndex: 100
+                    },
+                    content: {
+                        zIndex: 100
+                    }
+                }}
+            >
+
+                <p>To control pedal use mouse wheel or left button</p>
+
+                <button onClick={this.handleCloseModal}>Ok</button>
+            </Modal>
         </div>
         )}
 }

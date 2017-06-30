@@ -1,12 +1,10 @@
 import React from 'react'
 import CarSimulator from './CarSimulator.jsx'
-import CarSoundEngine from './../CarSoundEngine.js'
 import {createStore} from 'redux'
 import reducers from '../reducers'
 import AppConstants from '../AppConstants'
 import __ZEBCONFIG__ from '../config/config'
 import SelectCar from './controls/SelectCar.jsx'
-import InfoModal from './controls/InfoModal.jsx'
 
 class ZEB extends React.Component {
     constructor(props) {
@@ -37,8 +35,6 @@ class ZEB extends React.Component {
     render() {
         return (
             <div>
-                <InfoModal/>
-
                 <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/daily/schemeDaily.jsx").schemeDaily}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
