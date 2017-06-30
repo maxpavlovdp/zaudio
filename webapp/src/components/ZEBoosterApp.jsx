@@ -6,10 +6,18 @@ import reducers from '../reducers'
 import AppConstants from '../AppConstants'
 import __ZEBCONFIG__ from '../config/config'
 import SelectCar from './controls/SelectCar.jsx'
+import InfoModal from './controls/InfoModal.jsx'
 
 class ZEB extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            showModal: false
+        };
+
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
 
         if (__ZEBCONFIG__.env === AppConstants.DEV) {
             this.store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -18,19 +26,30 @@ class ZEB extends React.Component {
         }
     }
 
+    handleOpenModal () {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal () {
+        this.setState({ showModal: false });
+    }
+
     render() {
         return (
             <div>
+                <InfoModal/>
+
                 <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/daily/schemeDaily.jsx").schemeDaily}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
 
-                <CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v4/schemeV4_example.jsx").ssv4example}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>
+
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v4/schemeV4_example.jsx").ssv4example}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>*/}
+                {/*<CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>*/}
             </div>
         )
     }

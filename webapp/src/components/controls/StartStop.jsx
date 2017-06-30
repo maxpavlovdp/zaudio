@@ -7,7 +7,7 @@ const smallStopButton = {
     borderRadius: '50%',
     fontSize: '23px',
     position: 'absolute',
-    marginTop: '2%',
+    marginTop: '1%',
     left: '40%',
     padding: '0px'
 }
