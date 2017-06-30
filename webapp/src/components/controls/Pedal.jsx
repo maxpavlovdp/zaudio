@@ -118,7 +118,7 @@ class Pedal extends React.Component {
                     }
                 }}
             >
-                <p>To control pedal use mouse wheel or push the left button</p>
+                <p>To control pedal use mouse wheel or just push the left button</p>
                 <button className="ok-button" onClick={this.handleCloseModal}>Ok</button>
             </Modal>
         </div>
