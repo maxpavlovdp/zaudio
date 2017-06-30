@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal'
+import cookie from 'react-cookie';
 
 
 class Pedal extends React.Component {
@@ -20,7 +21,11 @@ class Pedal extends React.Component {
     }
 
     handleOpenModal() {
-        this.setState({showModal: true});
+        let firstVisit = !cookie.load('notFirstVisit');
+        if (firstVisit) {
+            cookie.save('notFirstVisit', true, {path: '/'})
+            this.setState({showModal: true});
+        }
     }
 
     handleCloseModal() {
@@ -100,14 +105,17 @@ class Pedal extends React.Component {
                         zIndex: 100
                     },
                     content: {
-                        zIndex: 100
+                        zIndex: 100,
+                        height: '200px',
+                        width: '400px',
+                        textAlign: 'center',
+                        display: 'inline-block',
+                        margin: 'auto'
                     }
                 }}
             >
-
                 <p>To control pedal use mouse wheel or push the left button</p>
-
-                <button onClick={this.handleCloseModal}>Ok</button>
+                <button className="ok-button" onClick={this.handleCloseModal}>Ok</button>
             </Modal>
         </div>
         )}
