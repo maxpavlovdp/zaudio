@@ -48,7 +48,7 @@ class Pedal extends React.Component {
     render() {
         return(
         <div onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
-             <svg className="pedal" style={{cursor: 'pointer', transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
+             <svg className="pedal" style={{transformOrigin: '50% 140px', transform: 'perspective(250px) rotateX(' + this.state.pedalPos*50 +  'deg)'}} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 140 140" enableBackground="new 0 0 140 140" xmlSpace="preserve">
                  <rect x="-1172.791" y="-257.597" display="none" fill="#2BB259" width="1638.165" height="942.46"/>
                  <g>
                      <path fill="#6D6E71" stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M34.339,128.534h14.775
@@ -60,7 +60,7 @@ class Pedal extends React.Component {
                          <stop  offset="0.5845" style={{stopColor: '#7B7C7F'}}/>
                          <stop  offset="1" style={{stopColor: '#696A6D'}}/>
                      </radialGradient>
-                     <path fill="url(#SVGID_1_)" stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M111.277,114.74L90.115,30.534
+                     <path fill="url(#SVGID_1_)" style={{cursor: 'pointer'}} stroke="#BCBEC0" strokeWidth="2" strokeMiterlimit="10" d="M111.277,114.74L90.115,30.534
                      c-1.972-7.842-10.2-14.259-18.287-14.259H39.843c-8.086,0-13.091,6.417-11.119,14.259L43.956,91.15l5.525,21.985l0.404,1.604
                      C51.856,122.582,60.085,129,68.171,129h31.987C108.245,129,113.249,122.582,111.277,114.74z M42.148,41.317
                      c-0.752-2.998-0.752-2.998-0.752-2.998c1.726-1.335,9.752-2.428,17.839-2.428h3.059c8.088,0,16.663,1.093,19.061,2.428
