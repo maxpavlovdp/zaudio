@@ -13,35 +13,37 @@ class InfoModal extends React.Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    handleOpenModal () {
-        this.setState({ showModal: true });
+    handleOpenModal() {
+        this.setState({showModal: true});
     }
 
-    handleCloseModal () {
-        this.setState({ showModal: false });
+    handleCloseModal() {
+        this.setState({showModal: false});
     }
 
     render() {
-        return(<div>
-                    <a onClick={this.handleOpenModal} className="info-button"><span>info</span>Info</a>
-                    <Modal
-                        isOpen={this.state.showModal}
-                        contentLabel="Info"
-                        style={{
-                            overlay: {
-                                zIndex: 100
-                            },
-                            content: {
-                                zIndex: 100
-                            }
-                        }}
-                    >
-                        <h1>Info</h1>
-                        <p>Same Text</p>
-                        <button onClick={this.handleCloseModal}>Ok</button>
-                    </Modal>
+        return (<div>
+                <a onClick={this.handleOpenModal} className="info-button"><span>info</span>Info</a>
+                <Modal
+                    isOpen={this.state.showModal}
+                    contentLabel="Info"
+                    style={{
+                        overlay: {
+                            zIndex: 100
+                        },
+                        content: {
+                            zIndex: 100
+                        }
+                    }}
+                >
+
+                    <p>To control pedal use mouse wheel or left button</p>
+
+                    <button onClick={this.handleCloseModal}>Ok</button>
+                </Modal>
             </div>
-        )}
+        )
+    }
 }
 
 export default InfoModal
