@@ -5,6 +5,8 @@ import reducers from '../reducers'
 import AppConstants from '../AppConstants'
 import __ZEBCONFIG__ from '../config/config'
 import SelectCar from './controls/SelectCar.jsx'
+import Modal from 'react-modal'
+
 
 class ZEB extends React.Component {
     constructor(props) {
@@ -14,7 +16,6 @@ class ZEB extends React.Component {
             showModal: false
         };
 
-        this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
 
         if (__ZEBCONFIG__.env === AppConstants.DEV) {
@@ -24,12 +25,17 @@ class ZEB extends React.Component {
         }
     }
 
-    handleOpenModal () {
-        this.setState({ showModal: true });
+    handleCloseModal() {
+        this.setState({showModal: false});
     }
 
-    handleCloseModal () {
-        this.setState({ showModal: false });
+    componentDidMount() {
+        let is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+        if (!is_chrome) {
+            this.setState({
+                showModal: true
+            })
+        }
     }
 
     render() {
@@ -38,7 +44,8 @@ class ZEB extends React.Component {
                 <SelectCar store={this.store}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/daily/schemeDaily.jsx").schemeDaily}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
+                <CarSimulator store={this.store}
+                              scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
 
 
                 {/*<CarSimulator store={this.store} scheme={require("../sounds/v4/v4Scheme.jsx").ssv4}/>*/}
@@ -46,6 +53,27 @@ class ZEB extends React.Component {
                 {/*<CarSimulator store={this.store} scheme={require("../sounds/v3/schemeV3.jsx").ssv3}/>*/}
                 {/*<CarSimulator store={this.store} scheme={require("../sounds/v2/schemeV2.jsx").ssv2}/>*/}
                 {/*<CarSimulator store={this.store} scheme={require("../sounds/v1/schemeV1.jsx").ssv1}/>*/}
+
+                <Modal
+                    isOpen={this.state.showModal}
+                    contentLabel="Info Chrome"
+                    style={{
+                        overlay: {
+                            zIndex: 100
+                        },
+                        content: {
+                            zIndex: 100,
+                            height: '200px',
+                            width: '400px',
+                            textAlign: 'center',
+                            display: 'inline-block',
+                            margin: 'auto'
+                        }
+                    }}
+                >
+                    <p>Please Use Chrome Browser Only</p>
+                    <button className="ok-button" onClick={this.handleCloseModal}>Ok</button>
+                </Modal>
             </div>
         )
     }
