@@ -23,8 +23,8 @@ class Pedal extends React.Component {
     handleOpenModal() {
         let firstVisit = !cookie.load('notFirstVisit');
         if (firstVisit) {
-            cookie.save('notFirstVisit', true, {path: '/'})
-            this.setState({showModal: true});
+            cookie.save('notFirstVisit', true, {path: 'z-audio.shop/'})
+            // this.setState({showModal: true});
         }
     }
 
@@ -67,6 +67,7 @@ class Pedal extends React.Component {
             this.handleSpeed(0);
         }
     }
+
 
     render() {
         return(
