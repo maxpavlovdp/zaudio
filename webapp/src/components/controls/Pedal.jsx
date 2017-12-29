@@ -68,7 +68,6 @@ class Pedal extends React.Component {
         }
     }
 
-
     render() {
         return(
         <div onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} style={{cursor: this.state.isEnable? 'pointer': ""}}>

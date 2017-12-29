@@ -6,7 +6,7 @@ permalink: /mission/
 ---
 
 ###Our Mission:###
-   > Boost transition from ICE to electric cars.  
+   > Boost transition from ICE to electric cars in a fancy way.  
 
 ###Our Vision:###
    > A popularization of the electric cars by creating a new personality and fun factor for racing and expensive electric cars.
