@@ -1,0 +1,18 @@
+{
+  "Statement":[
+    {
+      "Sid":"PublicReadGetObject",
+      "Effect":"Allow",
+      "Principal":"*",
+      "Action":"s3:*",
+      "Resource":"arn:aws:s3:::www.z-audio.shop/*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": [
+            "0.0.0.0/0"
+          ]
+        }
+      }
+    }
+  ]
+}
