@@ -14,5 +14,3 @@ cp ./src/config/prodConfig.js ./public/config.js
 
 
 sh ./deploy-to-s3/deployToMaster.sh
-
-
