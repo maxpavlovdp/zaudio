@@ -42,10 +42,10 @@ class ZEB extends React.Component {
         return (
             <div>
                 <SelectCar store={this.store}/>
+                <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
                 <CarSimulator store={this.store}
                               scheme={require("../sounds/futuristic/schemeFuturistic.jsx").schemeFuturistic}/>
                 <CarSimulator store={this.store} scheme={require("../sounds/daily/schemeDaily.jsx").schemeDaily}/>
-                <CarSimulator store={this.store} scheme={require("../sounds/v4_1/schemeV4_1.jsx").soundSchemeV4_1}/>
 
 
 
