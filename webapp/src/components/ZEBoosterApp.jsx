@@ -30,12 +30,12 @@ class ZEB extends React.Component {
     }
 
     componentDidMount() {
-        let is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-        if (!is_chrome) {
-            this.setState({
-                showModal: true
-            })
-        }
+        // var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        // if (!isChrome) {
+        //     this.setState({
+        //         showModal: true
+        //     })
+        // }
     }
 
     render() {

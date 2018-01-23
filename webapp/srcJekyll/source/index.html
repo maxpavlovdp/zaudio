@@ -3,6 +3,13 @@ layout: custom
 body_class: home-intro
 ---
 
+<script>
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    if(!isChrome) {
+        alert("Please use only chrome browser: https://www.google.com/chrome/")
+    }
+</script>
+
 <section style="display: inherit" class="intro">
     {% include navbar.html %}
     <div class="intro-in">
