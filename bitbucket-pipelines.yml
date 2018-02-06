@@ -19,6 +19,7 @@ pipelines:
     master:
       - step:
            script: # Deploy to git hub pages https://maxpavlovdp.github.io/jetaudio/#/
+           - cd ./webapp
            - ./buildAndDeployMaster.sh
     BOOST-108_MouseBehaviour:
       - step:
