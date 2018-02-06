@@ -21,7 +21,7 @@ pipelines:
            script: # Deploy to git hub pages https://maxpavlovdp.github.io/jetaudio/#/
            - cd ./webapp
            - apt-get install gem
-           - gem install jekyll bundler
+           - gem install -f jekyll bundler
            - ./buildAndDeployMaster.sh
     BOOST-108_MouseBehaviour:
       - step:
