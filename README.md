@@ -1,6 +1,11 @@
 - Website: https://maxpavlovdp.github.io/zaudio/
 - Jira: https://esound.myjetbrains.com/youtrack/agiles/87-0/91-1
 
+We use ENV NODE_VERSION=4.5.0
+To run project on local machine please:
+1.  sh run-setup.sh
+2.  sh run-npm-hot-redeploy-dev.sh
+
 Our Mission:
 Boost transition from ICE to electric cars.
 

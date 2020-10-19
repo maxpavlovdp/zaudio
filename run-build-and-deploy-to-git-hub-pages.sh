@@ -1,3 +1,4 @@
+cd "$(dirname "$0")"
 sh ./webapp/srcJekyll/deploy.sh
 sh ./webapp/runBuild.sh
 cp -R ./webapp/public/* ./docs/
