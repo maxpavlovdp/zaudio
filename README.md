@@ -1,5 +1,4 @@
-
-- Website: https://maxpavlovdp.github.io/jetaudio/
+- Website: https://maxpavlovdp.github.io/zaudio/
 - Jira: https://esound.myjetbrains.com/youtrack/agiles/87-0/91-1
 
 Our Mission:
