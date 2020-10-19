@@ -24,3 +24,4 @@ webapp/public/config.js
 .idea/
 webapp/coverage/
 webapp/srcJekyll/source/_posts/
+webapp/public/
