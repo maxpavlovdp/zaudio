@@ -1,4 +1,4 @@
-- Website: https://maxpavlovdp.github.io/zaudio/ (old: https://maxpavlovdp.github.io/jetaudio/)
+- Website:https://maxpavlovdp.github.io/jetaudio/ (Alfa: https://maxpavlovdp.github.io/zaudio/ )
 - Jira: https://esound.myjetbrains.com/youtrack/agiles/87-0/91-1
 
 We use ENV NODE_VERSION=4.5.0
